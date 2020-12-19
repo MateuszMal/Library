@@ -1,20 +1,21 @@
 package view;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class JavaFxInterface extends Application {
 	
 	@Override
-	public void start(Stage primaryStage) {
-		StackPane stackPane = new StackPane();
-		Button okButton = new Button("OK");
-		stackPane.getChildren().add(okButton);
+	public void start(Stage primaryStage) throws Exception{
 		
-		Scene scene = new Scene(stackPane, 600, 600);
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(this.getClass().getResource("./fxml/StackPaneWindow.fxml"));
+		StackPane stackPane = loader.load();
+		
+		Scene scene = new Scene(stackPane);
 		
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Library");
