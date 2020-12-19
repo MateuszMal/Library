@@ -7,17 +7,19 @@ public class Client {
 	private String name;
 	private String surName;
 	private String email;
+	private long id;
 	private Address address;
 	private long telNumber;
 	private ArrayList<Book> listOfRentalBooks;
 	
-	public Client(String name, String surName, String email, Address address, long telNumber) {
+	public Client(String name, String surName, String email, Address address, long telNumber, long id) {
 		super();
 		this.name = name;
 		this.surName = surName;
 		this.email = email;
 		this.address = address;
 		this.telNumber = telNumber;
+		this.id = id;
 	}
 	
 	public String getName() {

@@ -1,10 +1,17 @@
 package main;
 
-public class Main {
+import javafx.application.Application;
+import view.JavaFxInterface;
+
+
+public class Main  {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		
+		System.out.println("Hello, Library");
+		Application.launch(JavaFxInterface.class, args);
 	}
+
+
 
 }
