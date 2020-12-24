@@ -40,16 +40,7 @@ public class BookControler implements Initializable {
 	}
 	
 	public void onBackButton(ActionEvent event) {
-//		try {
-//			BorderPane newLoadedPane;
-//			Button tempButton = (Button) event.getSource();
-//			newLoadedPane = FXMLLoader.load(getClass().getResource("./fxml/StackPaneWindow.fxml"));
-//			bookBorderPane.getChildren().clear();
-//			bookBorderPane.getChildren().add(newLoadedPane);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//	}
+
 		fxmlUtils.fxmlLoader(event, "../view/fxml/StackPaneWindow.fxml", bookBorderPane);
 	}
 }
