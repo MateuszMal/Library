@@ -1,48 +1,41 @@
 package view;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import utils.FxmlUtils;
 
-public class BookControler implements Initializable {
+public class RentController implements Initializable {
 
 	private FxmlUtils fxmlUtils = new FxmlUtils();
-
+	
 	private InterfaceController interfaceController;
 
-	@FXML
-	private BorderPane bookBorderPane;
 
 	@FXML
-	private Button allBooksButton;
+	private BorderPane rentBorderPane;
+
 	@FXML
-	private Button authorButton;
+	private Button rentBookButton;
 	@FXML
-	private Button titleButton;
+	private Button returnButton;
 	@FXML
-	private Button rentButton;
-	@FXML
-	private Button backButton;
+	private Button rentBackButton;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 
 	}
+	
+	public void onRentBackButton(ActionEvent event) {
 
-	public void onBackButton(ActionEvent event) {
-
-		fxmlUtils.fxmlLoader(event, "../view/fxml/StackPaneWindow.fxml", bookBorderPane);
+		fxmlUtils.fxmlLoader(event, "../view/fxml/StackPaneWindow.fxml", rentBorderPane);
 	}
-	
-	
+
 }

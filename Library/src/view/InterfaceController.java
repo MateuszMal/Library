@@ -36,6 +36,11 @@ public class InterfaceController implements Initializable {
 		fxmlUtils.fxmlLoader(event, "../view/fxml/BookBorderpane.fxml", borderPane);
 	}
 	
+	public void onRentButton(ActionEvent event) {
+
+		fxmlUtils.fxmlLoader(event, "../view/fxml/RentBorderPane.fxml", borderPane);
+	}
+	
 	@FXML
 	public void onExitButton(ActionEvent event) {
 		final Node source = (Node)event.getSource();

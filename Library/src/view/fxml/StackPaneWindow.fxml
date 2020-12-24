@@ -33,7 +33,7 @@
                <VBox.margin>
                   <Insets bottom="2.0" top="12.0" />
                </VBox.margin></Button>
-            <Button fx:id="rentButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="134.0" style="-fx-background-color: rgb(0,128,255);" text="Wypożyczenia" textFill="WHITE">
+            <Button fx:id="rentButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onRentButton" prefHeight="32.0" prefWidth="134.0" style="-fx-background-color: rgb(0,128,255);" text="Wypożyczenia" textFill="WHITE">
                <VBox.margin>
                   <Insets bottom="2.0" />
                </VBox.margin>
