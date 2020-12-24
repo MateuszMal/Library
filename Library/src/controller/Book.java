@@ -10,7 +10,7 @@ public class Book {
 	private Date rentalDate;
 	private Date returnDate;
 	private String category;
-	
+
 	public Book(String title, Author author) {
 		this.title = title;
 		this.author = author;
@@ -45,6 +45,5 @@ public class Book {
 		return "Book [title=" + title + ", author=" + author + ", availability=" + available + ", rentalDate="
 				+ rentalDate + ", returnDate=" + returnDate + ", category=" + category + "]";
 	};
-	
-	
+
 }

@@ -11,7 +11,7 @@ public class Client {
 	private Address address;
 	private long telNumber;
 	private ArrayList<Book> listOfRentalBooks;
-	
+
 	public Client(String name, String surName, String email, Address address, long telNumber, long id) {
 		super();
 		this.name = name;
@@ -21,7 +21,7 @@ public class Client {
 		this.telNumber = telNumber;
 		this.id = id;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -29,7 +29,7 @@ public class Client {
 	public String getSurName() {
 		return surName;
 	}
-	
+
 	public String getEmail() {
 		return email;
 	}
@@ -45,27 +45,27 @@ public class Client {
 	public ArrayList<Book> getListOfRentalBooks() {
 		return listOfRentalBooks;
 	}
+
 	public void setListOfRentalBooks(ArrayList<Book> listOfRentalBooks) {
 		this.listOfRentalBooks = listOfRentalBooks;
 	}
-	
+
 	private void addBook(Book book) {
 		listOfRentalBooks.add(book);
 	}
-	
+
 	private void removeBook(Book book) {
 		listOfRentalBooks.remove(book);
 	}
-	
+
 	private void removeBook(int i) {
 		listOfRentalBooks.remove(i);
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Client [name=" + name + ", surName=" + surName + ", email=" + email + ", address=" + address
 				+ ", telNumber=" + telNumber + ", listOfRentalBooks=" + listOfRentalBooks + "]";
 	}
-	
-	
+
 }

@@ -9,7 +9,7 @@ public class RentalBook {
 	private Date rentDateTime;
 	private Date endDateTime;
 	int rentalLength;
-	
+
 	public RentalBook(Book book, Client client, Date date) {
 		this.book = book;
 		this.client = client;
