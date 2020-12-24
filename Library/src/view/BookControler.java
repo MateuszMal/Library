@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,8 +14,11 @@ import javafx.scene.layout.BorderPane;
 
 public class BookControler implements Initializable {
 
-	@FXML
+	
 	private InterfaceController interfaceController;
+	
+	@FXML
+	private BorderPane bookBorderPane;
 	
 	@FXML
 	private Button allBooksButton;
@@ -33,7 +37,15 @@ public class BookControler implements Initializable {
 		
 	}
 	
-	public void onBackButton() {
-		System.out.println("Wroc");
+	public void onBackButton(ActionEvent event) {
+		try {
+			BorderPane newLoadedPane;
+			Button tempButton = (Button) event.getSource();
+			newLoadedPane = FXMLLoader.load(getClass().getResource("./fxml/StackPaneWindow.fxml"));
+			bookBorderPane.getChildren().clear();
+			bookBorderPane.getChildren().add(newLoadedPane);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
