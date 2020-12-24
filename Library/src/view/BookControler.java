@@ -11,10 +11,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import utils.FxmlUtils;
 
 public class BookControler implements Initializable {
 
-	
+	private FxmlUtils fxmlUtils = new FxmlUtils();
+
 	private InterfaceController interfaceController;
 	
 	@FXML
@@ -38,14 +40,16 @@ public class BookControler implements Initializable {
 	}
 	
 	public void onBackButton(ActionEvent event) {
-		try {
-			BorderPane newLoadedPane;
-			Button tempButton = (Button) event.getSource();
-			newLoadedPane = FXMLLoader.load(getClass().getResource("./fxml/StackPaneWindow.fxml"));
-			bookBorderPane.getChildren().clear();
-			bookBorderPane.getChildren().add(newLoadedPane);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			BorderPane newLoadedPane;
+//			Button tempButton = (Button) event.getSource();
+//			newLoadedPane = FXMLLoader.load(getClass().getResource("./fxml/StackPaneWindow.fxml"));
+//			bookBorderPane.getChildren().clear();
+//			bookBorderPane.getChildren().add(newLoadedPane);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
+		fxmlUtils.fxmlLoader(event, "../view/fxml/StackPaneWindow.fxml", bookBorderPane);
 	}
 }

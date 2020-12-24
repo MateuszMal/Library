@@ -10,13 +10,15 @@ import javafx.scene.layout.Pane;
 
 public class FxmlUtils {
 
-	public static Pane fxmlLoader(String fxmlPath) {
-		FXMLLoader loader = new FXMLLoader(FxmlUtils.class.getResource(fxmlPath));
+	public void fxmlLoader(ActionEvent event, String fxmlPath, Pane pane) {
 		try {
-			return loader.load();
+			BorderPane newLoadedPane;
+			Button tempButton = (Button) event.getSource();
+			newLoadedPane = FXMLLoader.load(getClass().getResource(fxmlPath));
+			pane.getChildren().clear();
+			pane.getChildren().add(newLoadedPane);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return null;
 	}
 }

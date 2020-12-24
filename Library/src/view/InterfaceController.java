@@ -13,10 +13,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import utils.FxmlUtils;
 
 public class InterfaceController implements Initializable {
 	// Chyba trzeba zmienic na StackPaneWindowController
 
+	private FxmlUtils fxmlUtils = new FxmlUtils();
 	@FXML
 	private BorderPane borderPane;
 	@FXML
@@ -43,16 +45,16 @@ public class InterfaceController implements Initializable {
 //	}
 	@FXML
 	public void onBookButton(ActionEvent event) {
-		try {
-			BorderPane newLoadedPane;
-			Button tempButton = (Button) event.getSource();
-			newLoadedPane = FXMLLoader.load(getClass().getResource("./fxml/BookBorderpane.fxml"));
-			borderPane.getChildren().clear();
-			borderPane.getChildren().add(newLoadedPane);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+//		try {
+//			BorderPane newLoadedPane;
+//			Button tempButton = (Button) event.getSource();
+//			newLoadedPane = FXMLLoader.load(getClass().getResource("./fxml/BookBorderpane.fxml"));
+//			borderPane.getChildren().clear();
+//			borderPane.getChildren().add(newLoadedPane);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+		fxmlUtils.fxmlLoader(event, "../view/fxml/BookBorderpane.fxml", borderPane);
 	}
 
 	@Override
