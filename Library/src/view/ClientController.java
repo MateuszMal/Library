@@ -17,9 +17,11 @@ public class ClientController implements Initializable {
 	private InterfaceController interfaceController;
 	
 	@FXML
+	// Wstrzykniecie controllera klasy potomnej
 	private AddClientController addClientController;
 	
 	@FXML
+	// Wstrzykniecie controllera klasy potomnej
 	private RemoveClientController removeClientController;
 	
 	@FXML
@@ -36,7 +38,8 @@ public class ClientController implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
+		// Ustawienie tego controllera jako rodzica 
+		
 		addClientController.setParentController(this);
 		removeClientController.setParentController(this);
 		

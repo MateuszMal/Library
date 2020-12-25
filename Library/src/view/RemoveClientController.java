@@ -27,6 +27,7 @@ public class RemoveClientController implements Initializable{
 	}
 
 	public void setParentController(ClientController clientController) {
+		// Ustawienie controlera rodzica 
 		this.clientController = clientController;
 	}
 	
@@ -34,6 +35,6 @@ public class RemoveClientController implements Initializable{
 	public void onRemoveControllBackButton(ActionEvent event) {
 		removeBorderPane.getChildren().clear();
 		this.clientController.onClientBackButton(event);
-		//fxmlUtils.fxmlLoader(event, "../view/fxml/StackPaneWindow.fxml", addBorderPane);
+
 	}
 }

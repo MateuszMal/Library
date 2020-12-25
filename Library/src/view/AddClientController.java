@@ -12,7 +12,6 @@ import utils.FxmlUtils;
 
 public class AddClientController implements Initializable {
 
-	//private FxmlUtils fxmlUtils = new FxmlUtils();
 	
 	@FXML
 	private ClientController clientController;
@@ -33,6 +32,7 @@ public class AddClientController implements Initializable {
 	}
 	
 	public void setParentController(ClientController clientController) {
+		// Ustawienie controlera rodzica
 		this.clientController = clientController;
 	}
 	
@@ -40,7 +40,7 @@ public class AddClientController implements Initializable {
 	public void clientControllBackButton(ActionEvent event) {
 		addBorderPane.getChildren().clear();
 		this.clientController.onClientBackButton(event);
-		//fxmlUtils.fxmlLoader(event, "../view/fxml/StackPaneWindow.fxml", addBorderPane);
+
 	}
 
 }
