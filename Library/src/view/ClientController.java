@@ -25,6 +25,10 @@ public class ClientController implements Initializable {
 	private RemoveClientController removeClientController;
 	
 	@FXML
+	// Wstrzykniecie controllera klasy potomnej
+	private InfoClientPaneController infoClientController;
+	
+	@FXML
 	private BorderPane clientBorderPane;
 	
 	@FXML
@@ -42,7 +46,7 @@ public class ClientController implements Initializable {
 		
 		addClientController.setParentController(this);
 		removeClientController.setParentController(this);
-		
+		infoClientController.setParentController(this);
 	}
 
 	public void onClientBackButton(ActionEvent event) {
