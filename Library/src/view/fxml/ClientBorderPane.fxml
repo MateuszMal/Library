@@ -28,7 +28,7 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <fx:include source="AddClientPane.fxml" />
+                              <fx:include source="AddClientPane.fxml" fx:id="addClient" />
                            </children></AnchorPane>
                   </content>
                 </Tab>
@@ -36,7 +36,7 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <fx:include source="RemoveClientPane.fxml" />
+                              <fx:include source="RemoveClientPane.fxml" fx:id="removeClient" />
                            </children></AnchorPane>
                   </content>
                 </Tab>

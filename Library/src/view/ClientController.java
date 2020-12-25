@@ -17,6 +17,12 @@ public class ClientController implements Initializable {
 	private InterfaceController interfaceController;
 	
 	@FXML
+	private AddClientController addClientController;
+	
+	@FXML
+	private RemoveClientController removeClientController;
+	
+	@FXML
 	private BorderPane clientBorderPane;
 	
 	@FXML
@@ -31,12 +37,13 @@ public class ClientController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
+		addClientController.setParentController(this);
+		removeClientController.setParentController(this);
 		
 	}
 
 	public void onClientBackButton(ActionEvent event) {
 
 		fxmlUtils.fxmlLoader(event, "../view/fxml/StackPaneWindow.fxml", clientBorderPane);
-		System.out.println("jestem");
 	}
 }
