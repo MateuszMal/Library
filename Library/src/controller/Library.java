@@ -5,11 +5,11 @@ import java.util.Date;
 
 public class Library {
 
-	private ArrayList<Book> BooksList;
-	private ArrayList<Author> AuthorList;
-	private ArrayList<Client> ClientList;
+	private ArrayList<Book> BooksList = new ArrayList<Book>();
+	private ArrayList<Author> AuthorList = new ArrayList<Author>();
+	private ArrayList<Client> ClientList = new ArrayList<Client>();
 	private RentalBook rentalBook;
-	private ArrayList<RentalBook> listOfRentals;
+	private ArrayList<RentalBook> listOfRentals = new ArrayList<RentalBook>();
 
 	public void addRent(RentalBook rent) {
 		listOfRentals.add(rent);

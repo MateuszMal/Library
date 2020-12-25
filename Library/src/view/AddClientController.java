@@ -3,6 +3,7 @@ package view;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import controller.LibraryController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 
 public class AddClientController implements Initializable {
 
+	private LibraryController libraryController = new LibraryController();
 	@FXML
 	private ClientController clientController;
 	@FXML
@@ -31,7 +33,7 @@ public class AddClientController implements Initializable {
 	@FXML
 	private TextField telephoneTextField;
 	@FXML
-	private TextField townTetxField;
+	private TextField townTextField;
 	@FXML
 	private TextField streetTextField;
 	@FXML
@@ -45,7 +47,18 @@ public class AddClientController implements Initializable {
 
 	@FXML
 	public void onClientControllAddButton(ActionEvent event) {
-
+		libraryController.addNewClient(nameTextField.getText(), lastNameTextField.getText(), 
+				emailTextField.getText(), streetTextField.getText(), nrTextField.getText(), 
+				townTextField.getText(), telephoneTextField.getText(), idTextField.getText());
+		nameTextField.clear();
+		lastNameTextField.clear();
+		emailTextField.clear();
+		emailTextField.clear();
+		idTextField.clear();
+		telephoneTextField.clear();
+		townTextField.clear();
+		streetTextField.clear();
+		nrTextField.clear();
 	}
 
 	public void setParentController(ClientController clientController) {
