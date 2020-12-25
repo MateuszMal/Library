@@ -27,7 +27,7 @@ public class RemoveClientController implements Initializable{
 	}
 
 	public void setParentController(ClientController clientController) {
-		// Ustawienie controlera rodzica 
+		// Ustawienie controllera rodzica 
 		this.clientController = clientController;
 	}
 	

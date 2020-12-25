@@ -30,6 +30,10 @@ public class Client {
 		return surName;
 	}
 
+	public long getId() {
+		return id;
+	}
+
 	public String getEmail() {
 		return email;
 	}
