@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import controller.LibraryController;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,7 +15,8 @@ import javafx.scene.layout.AnchorPane;
 
 public class AddClientController implements Initializable {
 
-	private LibraryController libraryController = new LibraryController();
+	private LibraryController libraryController;
+
 	@FXML
 	private ClientController clientController;
 	@FXML
@@ -39,17 +42,35 @@ public class AddClientController implements Initializable {
 	@FXML
 	private TextField nrTextField;
 
+	public AddClientController() {
+		this.libraryController = new LibraryController();
+	}
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-
+		// Sprawdza czy wpisywane sa cyfry. Jesli nie to nie zamienia na puste
+		idTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+			if(newValue.matches("\\d*")) return;
+			idTextField.setText(newValue.replaceAll("[^\\d]", ""));
+		});
+		
+		telephoneTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+			if(newValue.matches("\\d*")) return;
+			telephoneTextField.setText(newValue.replaceAll("[^\\d]", ""));
+		});
+		
+		nrTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+			if(newValue.matches("\\d*")) return;
+			nrTextField.setText(newValue.replaceAll("[^\\d]", ""));
+		});
+		
 	}
 
 	@FXML
 	public void onClientControllAddButton(ActionEvent event) {
-		libraryController.addNewClient(nameTextField.getText(), lastNameTextField.getText(), 
-				emailTextField.getText(), streetTextField.getText(), nrTextField.getText(), 
-				townTextField.getText(), telephoneTextField.getText(), idTextField.getText());
+		libraryController.addNewClient(nameTextField.getText(), lastNameTextField.getText(), emailTextField.getText(),
+				streetTextField.getText(), nrTextField.getText(), townTextField.getText(), telephoneTextField.getText(),
+				idTextField.getText());
 		nameTextField.clear();
 		lastNameTextField.clear();
 		emailTextField.clear();
@@ -71,6 +92,10 @@ public class AddClientController implements Initializable {
 		addBorderPane.getChildren().clear();
 		this.clientController.onClientBackButton(event);
 
+	}
+
+	public LibraryController getLibraryController() {
+		return libraryController;
 	}
 
 }

@@ -1,6 +1,8 @@
 package main;
 
+import controller.LibraryController;
 import javafx.application.Application;
+import view.AddClientController;
 import view.JavaFxInterface;
 
 public class Main {
