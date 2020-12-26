@@ -32,7 +32,7 @@
                         <Label layoutX="74.0" layoutY="40.0" text="Autor" />
                         <Label layoutX="277.0" layoutY="40.0" text="Tytuł" />
                         <Label layoutX="467.0" layoutY="40.0" text="Wypożyczone" />
-                        <CheckBox fx:id="bookAllCheckBox" layoutX="54.0" layoutY="66.0" mnemonicParsing="false" text="Wszystkie" />
+                        <CheckBox fx:id="bookAllCheckBox" layoutX="54.0" layoutY="66.0" mnemonicParsing="false" onAction="#onBookAllCheckView" text="Wszystkie" />
                         <Button fx:id="backButton" layoutX="479.0" layoutY="63.0" mnemonicParsing="false" onAction="#onBackButton" style="-fx-background-color: rgb(0,128,255);" text="Powrót" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
@@ -41,7 +41,7 @@
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
-                        <ListView layoutX="-2.0" prefHeight="225.0" prefWidth="600.0" style="-fx-background-color: rgb(204,229,255);" />
+                        <ListView fx:id="bookListView" layoutX="-2.0" prefHeight="225.0" prefWidth="600.0" style="-fx-background-color: rgb(204,229,255);" />
                      </children>
                   </AnchorPane>
               </items>

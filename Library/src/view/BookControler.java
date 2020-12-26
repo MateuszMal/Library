@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import utils.FxmlUtils;
@@ -36,6 +37,8 @@ public class BookControler implements Initializable {
 	@FXML
 	private CheckBox bookAllCheckBox;
 	@FXML
+	private ListView bookListView; 
+	@FXML
 	private Button backButton;
 
 	@Override
@@ -45,9 +48,15 @@ public class BookControler implements Initializable {
 	}
 
 	public void onBackButton(ActionEvent event) {
-
 		fxmlUtils.fxmlLoader(event, "../view/fxml/StackPaneWindow.fxml", bookBorderPane);
 	}
 	
-	
+	public void onBookAllCheckView(ActionEvent event) {
+		if(bookAllCheckBox.isSelected()) {
+			bookAuthorTextField.clear();
+			bookTitleTextField.clear();
+			rentBookTextField.clear();
+			// TODO Dodac wyswietlanie ksiazek
+		}
+	}
 }
