@@ -2,6 +2,7 @@ package view;
 
 import java.io.IOException;
 
+import controller.LibraryController;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +13,8 @@ import javafx.stage.Stage;
 
 public class JavaFxInterface extends Application {
 
+	LibraryController libraryController = new LibraryController();
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
@@ -21,8 +24,10 @@ public class JavaFxInterface extends Application {
 		loader.setLocation(this.getClass().getResource("./fxml/StackPaneWindow.fxml"));
 		BorderPane borderPane = loader.load();
 
-		//InterfaceController contr = loader.getController();
-
+//		InterfaceController contr = loader.getController();
+		
+		
+		
 		Scene scene = new Scene(borderPane);
 
 		primaryStage.setScene(scene);

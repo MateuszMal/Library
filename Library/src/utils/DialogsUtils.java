@@ -37,7 +37,7 @@ public class DialogsUtils {
 		Alert emptyField = new Alert(Alert.AlertType.INFORMATION);
 		emptyField.setTitle("Uwaga");
 		emptyField.setHeaderText("Nie mo¿esz wykonaæ!");
-		emptyField.setContentText("Niektóre pola s¹ puste. Uzupe³nij");
+		emptyField.setContentText("Niektóre pola s¹ puste. Uzupe³nij.");
 		emptyField.showAndWait();
 	}
 }

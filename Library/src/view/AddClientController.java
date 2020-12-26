@@ -46,11 +46,12 @@ public class AddClientController implements Initializable {
 	private TextField nrTextField;
 
 	public AddClientController() {
-		this.libraryController = new LibraryController();
+		//this.libraryController = new LibraryController();
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		
 		// Sprawdza czy wpisywane sa cyfry. Jesli nie to nie zamienia na puste
 		idTextField.textProperty().addListener((observable, oldValue, newValue) -> {
 			if (newValue.matches("\\d*"))
@@ -74,7 +75,9 @@ public class AddClientController implements Initializable {
 
 	@FXML
 	public void onClientControllAddButton(ActionEvent event) {
+		
 		if (isTextFieldsEmpty()) {
+			//libraryController = new LibraryController();
 			Optional<ButtonType> result = DialogsUtils.addClientConfirmationDialog();
 			if (result.get() == ButtonType.OK) {
 				libraryController.addNewClient(nameTextField.getText(), lastNameTextField.getText(),
@@ -88,16 +91,18 @@ public class AddClientController implements Initializable {
 				townTextField.clear();
 				streetTextField.clear();
 				nrTextField.clear();
+				System.out.println(libraryController.getLibrary().getClientList());
 			}
 		}
 		else DialogsUtils.emptyFields();
 	}
 
 	public boolean isTextFieldsEmpty() {
-		if (nameTextField.getText().trim().isEmpty() && lastNameTextField.getText().trim().isEmpty()
-				&& emailTextField.getText().trim().isEmpty() && idTextField.getText().trim().isEmpty()
-				&& telephoneTextField.getText().trim().isEmpty() && townTextField.getText().trim().isEmpty()
-				&& streetTextField.getText().trim().isEmpty() && nrTextField.getText().trim().isEmpty())
+		// Sprawdza czy wszystkie pola sa uzupelnione
+		if (nameTextField.getText().trim().isEmpty() || lastNameTextField.getText().trim().isEmpty()
+				|| emailTextField.getText().trim().isEmpty() || idTextField.getText().trim().isEmpty()
+				|| telephoneTextField.getText().trim().isEmpty() || townTextField.getText().trim().isEmpty()
+				|| streetTextField.getText().trim().isEmpty() || nrTextField.getText().trim().isEmpty())
 			return false;
 		else
 			return true;
@@ -115,8 +120,11 @@ public class AddClientController implements Initializable {
 
 	}
 
-	public LibraryController getLibraryController() {
-		return libraryController;
+	public void setLibraryController(LibraryController libController) {
+		this.libraryController = libController;
 	}
+//	public LibraryController getLibraryController() {
+//		return libraryController;
+//	}
 
 }

@@ -12,10 +12,11 @@ import utils.FxmlUtils;
 
 public class ClientController implements Initializable {
 
-	private FxmlUtils fxmlUtils = new FxmlUtils();
+	private FxmlUtils fxmlUtils;
 	
-	private InterfaceController interfaceController;
-	
+//	@FXML
+//	private InterfaceController interfaceController;
+		
 	@FXML
 	// Wstrzykniecie controllera klasy potomnej
 	private AddClientController addClientController;
@@ -40,6 +41,13 @@ public class ClientController implements Initializable {
 	@FXML
 	private Button clientBackButton;
 	
+	
+	
+	public ClientController() {
+		super();
+		this.fxmlUtils = new FxmlUtils();
+	}
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// Ustawienie tego controllera jako rodzica 
@@ -53,4 +61,12 @@ public class ClientController implements Initializable {
 
 		fxmlUtils.fxmlLoader(event, "../view/fxml/StackPaneWindow.fxml", clientBorderPane);
 	}
+//	public void setParentController(InterfaceController interfaceController) {
+//		// Ustawienie controlera rodzica
+//		this.interfaceController = interfaceController;
+//	}
+//	
+//	public InterfaceController getInterfaceController() {
+//		return interfaceController;
+//	}
 }

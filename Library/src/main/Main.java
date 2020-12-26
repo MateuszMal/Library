@@ -9,8 +9,8 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		System.out.println("Hello, Library");
+		//System.out.println("Hello, Library");
 		Application.launch(JavaFxInterface.class, args);
-	}
-
+	    Runtime.getRuntime().halt(0);	
+	    }
 }

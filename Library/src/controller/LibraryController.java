@@ -17,4 +17,10 @@ public class LibraryController {
 		library.addClient(client);
 	}
 
+	public Library getLibrary() {
+		return library;
+	}
+	
+	
+
 }

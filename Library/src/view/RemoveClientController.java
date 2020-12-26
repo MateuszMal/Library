@@ -13,7 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import utils.DialogsUtils;
 
-public class RemoveClientController implements Initializable{
+public class RemoveClientController implements Initializable {
 
 	@FXML
 	private ClientController clientController;
@@ -29,32 +29,46 @@ public class RemoveClientController implements Initializable{
 	private Button removeControllBackButton;
 	@FXML
 	private Button removeClientButton;
-	
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// Sprawdza czy wpisywane sa cyfry. Jesli nie to nie zamienia na puste
 		removeIdTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-			if(newValue.matches("\\d*")) return;
+			if (newValue.matches("\\d*"))
+				return;
 			removeIdTextField.setText(newValue.replaceAll("[^\\d]", ""));
 		});
 	}
 
 	public void setParentController(ClientController clientController) {
-		// Ustawienie controllera rodzica 
+		// Ustawienie controllera rodzica
 		this.clientController = clientController;
 	}
-	
+
+	public boolean isTetxtFieldsEmpty() {
+		// Sprawdza czy wszystkie pola sa uzupelnione
+		if (removeNameTextField.getText().trim().isEmpty() || removeLastNameTextField.getText().trim().isEmpty()
+				|| removeIdTextField.getText().trim().isEmpty())
+			return false;
+		else
+			return true;
+
+	}
+
 	@FXML
 	public void onRemoveClientButton(ActionEvent event) {
+		if(isTetxtFieldsEmpty()) {
 		Optional<ButtonType> result = DialogsUtils.removeClientConfirmationDialog();
-		if(result.get() == ButtonType.OK) {
+		if (result.get() == ButtonType.OK) {
 			// TODO Dodac usuwanie klienta
 			removeNameTextField.clear();
 			removeLastNameTextField.clear();
 			removeIdTextField.clear();
 		}
+		}
+		else DialogsUtils.emptyFields();
 	}
-	
+
 	@FXML
 	public void onRemoveControllBackButton(ActionEvent event) {
 		removeBorderPane.getChildren().clear();

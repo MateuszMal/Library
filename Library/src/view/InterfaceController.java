@@ -3,6 +3,7 @@ package view;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import controller.LibraryController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,7 +16,12 @@ import utils.FxmlUtils;
 
 public class InterfaceController implements Initializable {
 
-	private FxmlUtils fxmlUtils = new FxmlUtils();
+	private FxmlUtils fxmlUtils;
+	
+//	private LibraryController libraryController;
+//	@FXML
+//	// Wstrzyknieice controllera klasy potomnej
+//	private ClientController clientController;
 	@FXML
 	private BorderPane borderPane;
 	@FXML
@@ -30,6 +36,18 @@ public class InterfaceController implements Initializable {
 	private Button infoButton;
 	@FXML
 	private Button exitButton;
+	
+	public InterfaceController() {
+//		this.libraryController = new LibraryController();
+		this.fxmlUtils = new FxmlUtils();
+	}
+	
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+
+		//clientController.setParentController(this);
+	}
+
 
 	@FXML
 	public void onBookButton(ActionEvent event) {
@@ -59,9 +77,15 @@ public class InterfaceController implements Initializable {
 		stage.close();
 	}
 
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
+	
+	public FxmlUtils getFxmlUtils() {
+		return fxmlUtils;
 	}
+
+//	public LibraryController getLibraryController() {
+//		return libraryController;
+//	}
+	
+	
 
 }
