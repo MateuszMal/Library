@@ -19,7 +19,7 @@ import utils.FxmlUtils;
 public class BookControler implements Initializable {
 
 	private FxmlUtils fxmlUtils = new FxmlUtils();
-	
+
 	@FXML
 	private InterfaceController interfaceController;
 
@@ -37,7 +37,7 @@ public class BookControler implements Initializable {
 	@FXML
 	private CheckBox bookAllCheckBox;
 	@FXML
-	private ListView bookListView; 
+	private ListView bookListView;
 	@FXML
 	private Button backButton;
 
@@ -50,9 +50,9 @@ public class BookControler implements Initializable {
 	public void onBackButton(ActionEvent event) {
 		fxmlUtils.fxmlLoader(event, "../view/fxml/StackPaneWindow.fxml", bookBorderPane);
 	}
-	
+
 	public void onBookAllCheckView(ActionEvent event) {
-		if(bookAllCheckBox.isSelected()) {
+		if (bookAllCheckBox.isSelected()) {
 			bookAuthorTextField.clear();
 			bookTitleTextField.clear();
 			rentBookTextField.clear();

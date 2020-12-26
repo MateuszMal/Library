@@ -53,40 +53,54 @@ public class AddClientController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// Sprawdza czy wpisywane sa cyfry. Jesli nie to nie zamienia na puste
 		idTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-			if(newValue.matches("\\d*")) return;
+			if (newValue.matches("\\d*"))
+				return;
 			idTextField.setText(newValue.replaceAll("[^\\d]", ""));
 		});
-		
+
 		telephoneTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-			if(newValue.matches("\\d*")) return;
+			if (newValue.matches("\\d*"))
+				return;
 			telephoneTextField.setText(newValue.replaceAll("[^\\d]", ""));
 		});
-		
+
 		nrTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-			if(newValue.matches("\\d*")) return;
+			if (newValue.matches("\\d*"))
+				return;
 			nrTextField.setText(newValue.replaceAll("[^\\d]", ""));
 		});
-		
+
 	}
 
 	@FXML
 	public void onClientControllAddButton(ActionEvent event) {
-		
-		Optional<ButtonType> result = DialogsUtils.addClientConfirmationDialog();
-		if(result.get() == ButtonType.OK) {
-		libraryController.addNewClient(nameTextField.getText(), lastNameTextField.getText(), emailTextField.getText(),
-				streetTextField.getText(), nrTextField.getText(), townTextField.getText(), telephoneTextField.getText(),
-				idTextField.getText());
-		nameTextField.clear();
-		lastNameTextField.clear();
-		emailTextField.clear();
-		emailTextField.clear();
-		idTextField.clear();
-		telephoneTextField.clear();
-		townTextField.clear();
-		streetTextField.clear();
-		nrTextField.clear();
+		if (isTextFieldsEmpty()) {
+			Optional<ButtonType> result = DialogsUtils.addClientConfirmationDialog();
+			if (result.get() == ButtonType.OK) {
+				libraryController.addNewClient(nameTextField.getText(), lastNameTextField.getText(),
+						emailTextField.getText(), streetTextField.getText(), nrTextField.getText(),
+						townTextField.getText(), telephoneTextField.getText(), idTextField.getText());
+				nameTextField.clear();
+				lastNameTextField.clear();
+				emailTextField.clear();
+				idTextField.clear();
+				telephoneTextField.clear();
+				townTextField.clear();
+				streetTextField.clear();
+				nrTextField.clear();
+			}
 		}
+		else DialogsUtils.emptyFields();
+	}
+
+	public boolean isTextFieldsEmpty() {
+		if (nameTextField.getText().trim().isEmpty() && lastNameTextField.getText().trim().isEmpty()
+				&& emailTextField.getText().trim().isEmpty() && idTextField.getText().trim().isEmpty()
+				&& telephoneTextField.getText().trim().isEmpty() && townTextField.getText().trim().isEmpty()
+				&& streetTextField.getText().trim().isEmpty() && nrTextField.getText().trim().isEmpty())
+			return false;
+		else
+			return true;
 	}
 
 	public void setParentController(ClientController clientController) {
