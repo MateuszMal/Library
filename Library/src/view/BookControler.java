@@ -16,7 +16,8 @@ import utils.FxmlUtils;
 public class BookControler implements Initializable {
 
 	private FxmlUtils fxmlUtils = new FxmlUtils();
-
+	
+	@FXML
 	private InterfaceController interfaceController;
 
 	@FXML

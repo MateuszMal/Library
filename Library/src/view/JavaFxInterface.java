@@ -20,6 +20,8 @@ public class JavaFxInterface extends Application {
 		loader.setLocation(this.getClass().getResource("./fxml/StackPaneWindow.fxml"));
 		BorderPane borderPane = loader.load();
 
+		//InterfaceController contr = loader.getController();
+
 		Scene scene = new Scene(borderPane);
 
 		primaryStage.setScene(scene);
