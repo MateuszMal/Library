@@ -1,14 +1,17 @@
 package view;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import utils.DialogsUtils;
 
 public class RemoveClientController implements Initializable{
 
@@ -24,6 +27,8 @@ public class RemoveClientController implements Initializable{
 	private TextField removeIdTextField;
 	@FXML
 	private Button removeControllBackButton;
+	@FXML
+	private Button removeClientButton;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -37,6 +42,17 @@ public class RemoveClientController implements Initializable{
 	public void setParentController(ClientController clientController) {
 		// Ustawienie controllera rodzica 
 		this.clientController = clientController;
+	}
+	
+	@FXML
+	public void onRemoveClientButton(ActionEvent event) {
+		Optional<ButtonType> result = DialogsUtils.removeClientConfirmationDialog();
+		if(result.get() == ButtonType.OK) {
+			// TODO Dodac usuwanie klienta
+			removeNameTextField.clear();
+			removeLastNameTextField.clear();
+			removeIdTextField.clear();
+		}
 	}
 	
 	@FXML

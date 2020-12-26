@@ -1,6 +1,7 @@
 package view;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import controller.LibraryController;
@@ -10,8 +11,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import utils.DialogsUtils;
 
 public class AddClientController implements Initializable {
 
@@ -68,6 +71,9 @@ public class AddClientController implements Initializable {
 
 	@FXML
 	public void onClientControllAddButton(ActionEvent event) {
+		
+		Optional<ButtonType> result = DialogsUtils.addClientConfirmationDialog();
+		if(result.get() == ButtonType.OK) {
 		libraryController.addNewClient(nameTextField.getText(), lastNameTextField.getText(), emailTextField.getText(),
 				streetTextField.getText(), nrTextField.getText(), townTextField.getText(), telephoneTextField.getText(),
 				idTextField.getText());
@@ -80,6 +86,7 @@ public class AddClientController implements Initializable {
 		townTextField.clear();
 		streetTextField.clear();
 		nrTextField.clear();
+		}
 	}
 
 	public void setParentController(ClientController clientController) {

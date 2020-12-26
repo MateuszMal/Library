@@ -15,6 +15,7 @@ public class JavaFxInterface extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
+		// TODO czy ta klasa nie powinna miec LibraryController?
 		Stage stage = primaryStage;
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(this.getClass().getResource("./fxml/StackPaneWindow.fxml"));

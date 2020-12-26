@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import utils.DialogsUtils;
 import utils.FxmlUtils;
 
 public class InterfaceController implements Initializable {
@@ -48,7 +49,8 @@ public class InterfaceController implements Initializable {
 	
 	public void onInfoButton(ActionEvent event) {
 
-		fxmlUtils.fxmlLoader(event, "../view/fxml/InfoBorderPane.fxml", borderPane);
+		//fxmlUtils.fxmlLoader(event, "../view/fxml/InfoBorderPane.fxml", borderPane);
+		DialogsUtils.dialogAboutApp();
 	}
 	
 	@FXML
