@@ -49,7 +49,6 @@ public class InterfaceController implements Initializable {
 	
 	public void onInfoButton(ActionEvent event) {
 
-		//fxmlUtils.fxmlLoader(event, "../view/fxml/InfoBorderPane.fxml", borderPane);
 		DialogsUtils.dialogAboutApp();
 	}
 	

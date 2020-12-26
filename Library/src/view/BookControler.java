@@ -10,6 +10,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import utils.FxmlUtils;
 
@@ -26,11 +28,13 @@ public class BookControler implements Initializable {
 	@FXML
 	private Button allBooksButton;
 	@FXML
-	private Button authorButton;
+	private TextField bookAuthorTextField;
 	@FXML
-	private Button titleButton;
+	private TextField bookTitleTextField;
 	@FXML
-	private Button rentButton;
+	private TextField rentBookTextField;
+	@FXML
+	private CheckBox bookAllCheckBox;
 	@FXML
 	private Button backButton;
 
