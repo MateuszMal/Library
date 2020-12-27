@@ -20,7 +20,12 @@ public class Main {
 		// Proby. Do usuniecia
 		Author autor = new Author("Artur", "Nowak");
 		Book book = new Book("Jakas", autor);
+		Author autor1 = new Author("Artur1", "Nowak1");
+		Book book1 = new Book("Jakas1", autor);
+		libraryManager.getLibrary().addAuthor(autor);
+		libraryManager.getLibrary().addAuthor(autor1);
 		libraryManager.getLibrary().addBook(book);
+		libraryManager.getLibrary().addBook(book1);
 
 		//System.out.println("Hello, Library");
 		Application.launch(JavaFxInterface.class, args);

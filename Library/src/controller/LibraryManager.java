@@ -46,4 +46,37 @@ public class LibraryManager {
 		return library;
 	}
 
+	public boolean isAuthorInLibrary(String authorLastName) {
+		boolean result = false;
+		for (Author author : library.getAuthorList()) {
+			if (author.getSurName().equals(authorLastName)) {
+				System.out.println("Mam");
+				return result = true;
+			}
+		}
+		return result;
+	}
+
+	public Book getBookFromLibraryByTitle(String title) {
+		Book _book = null;
+		for (Book book : library.getBooksList()) {
+			if (book.getTitle().equals(title)) {
+				_book = book;
+			}
+		}
+		return _book;
+	}
+
+	public Book getBookFromLibraryByAuthor(String lastName) {
+		Book _book = null;
+		if (isAuthorInLibrary(lastName)) {
+			for (Book book : library.getBooksList()) {
+				if (book.getAuthor().getSurName().equals(lastName)) {
+					_book = book;
+					System.out.println("Mam");
+				}
+			}
+		}
+		return _book;
+	}
 }

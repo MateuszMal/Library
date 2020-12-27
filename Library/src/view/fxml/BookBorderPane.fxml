@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.SplitPane?>
@@ -26,17 +25,24 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="60.0" prefWidth="598.0" style="-fx-background-color: rgb(204,229,255);">
                      <children>
-                        <TextField fx:id="bookAuthorTextField" layoutX="14.0" layoutY="14.0" style="-fx-background-color: white;" />
-                        <TextField fx:id="bookTitleTextField" layoutX="216.0" layoutY="14.0" style="-fx-background-color: white;" />
-                        <TextField fx:id="rentBookTextField" layoutX="432.0" layoutY="14.0" style="-fx-background-color: white;" />
-                        <Label layoutX="74.0" layoutY="40.0" text="Autor" />
-                        <Label layoutX="277.0" layoutY="40.0" text="Tytuł" />
-                        <Label layoutX="467.0" layoutY="40.0" text="Wypożyczone" />
-                        <CheckBox fx:id="bookAllCheckBox" layoutX="54.0" layoutY="66.0" mnemonicParsing="false" onAction="#onBookAllCheckView" text="Wszystkie" />
-                        <Button fx:id="backButton" layoutX="479.0" layoutY="63.0" mnemonicParsing="false" onAction="#onBackButton" style="-fx-background-color: rgb(0,128,255);" text="Powrót" textFill="WHITE">
+                        <TextField fx:id="bookAuthorTextField" layoutX="74.0" layoutY="14.0" style="-fx-background-color: white;" />
+                        <TextField fx:id="bookTitleTextField" layoutX="74.0" layoutY="49.0" style="-fx-background-color: white;" />
+                        <Label layoutX="23.0" layoutY="18.0" text="Autor" />
+                        <Label layoutX="24.0" layoutY="53.0" text="Tytuł" />
+                        <Button fx:id="backButton" layoutX="472.0" layoutY="27.0" mnemonicParsing="false" onAction="#onBackButton" style="-fx-background-color: rgb(0,128,255);" text="Powrót" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font></Button>
+                        <Button fx:id="searchBookButton" layoutX="263.0" layoutY="27.0" mnemonicParsing="false" onAction="#onsearchBookButton" style="-fx-background-color: rgb(0,128,255);" text="Wyszukaj" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="allBookButton" layoutX="370.0" layoutY="27.0" mnemonicParsing="false" onAction="#onAllBookButton" style="-fx-background-color: rgb(0,128,255);" text="Wszystkie" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">

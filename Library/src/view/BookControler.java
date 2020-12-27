@@ -1,9 +1,11 @@
 package view;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import controller.Book;
 import controller.LibraryHolder;
 import controller.LibraryManager;
 import javafx.beans.value.ChangeListener;
@@ -35,19 +37,30 @@ public class BookControler implements Initializable {
 	private TextField bookAuthorTextField;
 	@FXML
 	private TextField bookTitleTextField;
-	@FXML
-	private TextField rentBookTextField;
-	@FXML
-	private CheckBox bookAllCheckBox;
+//	@FXML
+//	private TextField rentBookTextField;
+//	@FXML
+//	private CheckBox bookAllCheckBox;
 	@FXML
 	private ListView bookListView;
 	@FXML
 	private Button backButton;
+	@FXML
+	private Button searchBookButton;
+	@FXML
+	private Button allBookButton;
+	
 	private ObservableList<String> bookList;
+	private ObservableList<Book> tmpObsBookList;
+	private ArrayList<Book> tmpBookList;
+	private LibraryManager libManager;
 	
 	public void prepareList() {
+		// Ustawia uniwersalnego singletona i pobiera jego instncje
 		LibraryHolder libHolder = LibraryHolder.getInstance();
-		LibraryManager libManager = libHolder.getLIbManager();
+		libManager = libHolder.getLIbManager();
+		
+		// Przypisanie listy ksiazek do bookListView
 		List lista = libManager.getLibrary().getBooksList();
 		bookList = FXCollections.observableArrayList(lista);
 		bookListView.setItems(bookList);
@@ -72,17 +85,30 @@ public class BookControler implements Initializable {
 //		});
 
 	}
+	
+	public void onsearchBookButton() {
+		bookListView.getItems().removeAll(bookList);
+		tmpBookList = new ArrayList<Book>();
+		tmpBookList.add(libManager.getBookFromLibraryByTitle(bookTitleTextField.getText()));
+		tmpBookList.add(libManager.getBookFromLibraryByAuthor(bookAuthorTextField.getText()));
+		tmpObsBookList = FXCollections.observableArrayList(tmpBookList);
+		bookListView.setItems(tmpObsBookList);
+	}
 
 	public void onBackButton(ActionEvent event) {
 		fxmlUtils.fxmlLoader(event, "../view/fxml/StackPaneWindow.fxml", bookBorderPane);
 	}
-
-	public void onBookAllCheckView(ActionEvent event) {
-		if (bookAllCheckBox.isSelected()) {
-			bookAuthorTextField.clear();
-			bookTitleTextField.clear();
-			rentBookTextField.clear();
-			// TODO Dodac wyswietlanie ksiazek
-		}
+	
+	public void onAllBookButton(ActionEvent event) {
+		prepareList();
 	}
+
+//	public void onBookAllCheckView(ActionEvent event) {
+//		if (bookAllCheckBox.isSelected()) {
+//			bookAuthorTextField.clear();
+//			bookTitleTextField.clear();
+//			rentBookTextField.clear();
+//			// TODO Dodac wyswietlanie ksiazek
+//		}
+//	}
 }
