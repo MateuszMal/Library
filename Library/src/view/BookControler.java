@@ -48,7 +48,6 @@ public class BookControler implements Initializable {
 	private LibraryManager libManager;
 	
 	public void prepareList() {
-		// Ustawia uniwersalnego singletona i pobiera jego instncje
 		
 		// Przypisanie listy ksiazek do bookListView
 		List lista = libManager.getLibrary().getBooksList();
@@ -58,6 +57,8 @@ public class BookControler implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+		// Ustawia uniwersalnego singletona i pobiera jego instncje
 		LibraryHolder libHolder = LibraryHolder.getInstance();
 		libManager = libHolder.getLIbManager();
 		prepareList();

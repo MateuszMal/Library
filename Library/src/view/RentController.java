@@ -39,9 +39,18 @@ public class RentController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
+		// Ustawia uniwersalnego singletona i pobiera jego instncje
 		LibraryHolder libHolder = LibraryHolder.getInstance();
 		libManager = libHolder.getLIbManager();
+	}
+
+	public boolean isTextFieldEmpty() {
+		// Sprawdza czy wszystkie pola sa uzupelnione
+		if (rentTitleField.getText().trim().isEmpty() || rentClientNameField.getText().trim().isEmpty()
+				|| rentClientLastNameField.getText().trim().isEmpty())
+			return false;
+		else
+			return true;
 	}
 
 	public void onRentBackButton(ActionEvent event) {
@@ -50,11 +59,14 @@ public class RentController implements Initializable {
 	}
 
 	public void onAddRentButton() {
-		if (libManager.addRentToLibrary(rentClientNameField.getText(), rentClientLastNameField.getText(),
-				rentTitleField.getText())) {
-			DialogsUtils.successAction();
+		if (isTextFieldEmpty()) {
+			if (libManager.addRentToLibrary(rentClientNameField.getText(), rentClientLastNameField.getText(),
+					rentTitleField.getText())) {
+				DialogsUtils.successAction();
+			} else
+				DialogsUtils.infoDialog("Nie uda³o siê zrealizowaæ tego wypo¿yczenia");
 		} else
-			DialogsUtils.infoDialog("Nie uda³o siê zrealizowaæ tego wypo¿yczenia");
+			DialogsUtils.emptyFields();
 	}
 
 }
