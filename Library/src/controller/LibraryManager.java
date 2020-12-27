@@ -20,22 +20,20 @@ public class LibraryManager {
 		library.addClient(client);
 	}
 
-	public Client getClientFromLib(String name, String lastName, String id) {
-		long _id = Long.valueOf(id);
+	public Client getClientFromLib(String name, String lastName) {
 		Client _client = null;
 		for (Client client : library.getClientList()) {
-			if (client.getName().equals(name) && client.getSurName().equals(lastName) && client.getId() == _id) {
+			if (client.getName().equals(name) && client.getSurName().equals(lastName)) {
 				_client = client;
 			}
 		}
 		return _client;
 	}
 
-	public boolean isClientInLibrary(String name, String lastName, String id) {
+	public boolean isClientInLibrary(String name, String lastName) {
 		boolean result = false;
-		long _id = Long.valueOf(id);
 		for (Client client : library.getClientList()) {
-			if (client.getName().equals(name) && client.getSurName().equals(lastName) && client.getId() == _id) {
+			if (client.getName().equals(name) && client.getSurName().equals(lastName)) {
 				return result = true;
 			}
 		}
@@ -76,5 +74,25 @@ public class LibraryManager {
 			}
 		}
 		return _book;
+	}
+	
+	public boolean isBookInLibrary(String title) {
+		boolean result = false;
+		for (Book book : library.getBooksList()) {
+			if (book.getTitle().equals(title)) {
+				return result = true;
+			}
+		}
+		return result;
+	}
+	
+	public boolean addRentToLibrary(String name, String lastName, String title) {
+		if(isClientInLibrary(name, lastName) && isBookInLibrary(title)) {
+			Book book = getBookFromLibraryByTitle(title);
+			Client client = getClientFromLib(name, lastName);
+			RentalBook rent = new RentalBook(book, client);
+			return true;
+		}
+		else return false;
 	}
 }

@@ -3,6 +3,8 @@ package view;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import controller.LibraryHolder;
+import controller.LibraryManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,18 +12,18 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import utils.DialogsUtils;
 import utils.FxmlUtils;
 
 public class RentController implements Initializable {
 
 	private FxmlUtils fxmlUtils = new FxmlUtils();
-	
-	
+
 	private InterfaceController interfaceController;
 	@FXML
 	private BorderPane rentBorderPane;
 	@FXML
-	private TextField rentTitleField;	
+	private TextField rentTitleField;
 	@FXML
 	private TextField rentClientNameField;
 	@FXML
@@ -33,19 +35,26 @@ public class RentController implements Initializable {
 	@FXML
 	private Button rentBackButton;
 
+	private LibraryManager libManager;
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-
+		LibraryHolder libHolder = LibraryHolder.getInstance();
+		libManager = libHolder.getLIbManager();
 	}
-	
+
 	public void onRentBackButton(ActionEvent event) {
 
 		fxmlUtils.fxmlLoader(event, "../view/fxml/StackPaneWindow.fxml", rentBorderPane);
 	}
 
 	public void onAddRentButton() {
-		
+		if (libManager.addRentToLibrary(rentClientNameField.getText(), rentClientLastNameField.getText(),
+				rentTitleField.getText())) {
+			DialogsUtils.successAction();
+		} else
+			DialogsUtils.infoDialog("Nie uda³o siê zrealizowaæ tego wypo¿yczenia");
 	}
-	
+
 }
