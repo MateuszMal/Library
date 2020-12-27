@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.layout.Region;
 
 public class DialogsUtils {
 
@@ -40,4 +41,22 @@ public class DialogsUtils {
 		emptyField.setContentText("Niektóre pola s¹ puste. Uzupe³nij.");
 		emptyField.showAndWait();
 	}
+	
+	public static void successAction() {
+		Alert emptyField = new Alert(Alert.AlertType.INFORMATION);
+		emptyField.setTitle("Uwaga");
+		emptyField.setHeaderText("Uda³o siê.");
+		emptyField.setContentText("Ta czynnoœæ zakoñczy³a siê pomyœlnie.");
+		emptyField.showAndWait();
+	}
+	
+	public static void infoDialog(String string) {
+		Alert infoDialog = new Alert(Alert.AlertType.INFORMATION);
+		infoDialog.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+		infoDialog.setTitle("Info");
+		infoDialog.setHeaderText("Informacja");
+		infoDialog.setContentText(string);
+		infoDialog.showAndWait();
+	}
+	
 }

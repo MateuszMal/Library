@@ -99,6 +99,8 @@ public class AddClientController implements Initializable {
 				townTextField.clear();
 				streetTextField.clear();
 				nrTextField.clear();
+				
+				DialogsUtils.successAction();
 //				System.out.println(libManager.getLibrary().getClientList());
 			}
 		}
