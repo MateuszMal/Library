@@ -20,6 +20,7 @@ public class Client {
 		this.address = address;
 		this.telNumber = telNumber;
 		this.id = id;
+		listOfRentalBooks = new ArrayList<>();
 	}
 
 	public String getName() {
@@ -54,15 +55,15 @@ public class Client {
 		this.listOfRentalBooks = listOfRentalBooks;
 	}
 
-	private void addBook(Book book) {
+	public void addBook(Book book) {
 		listOfRentalBooks.add(book);
 	}
 
-	private void removeBook(Book book) {
+	public void removeBook(Book book) {
 		listOfRentalBooks.remove(book);
 	}
 
-	private void removeBook(int i) {
+	public void removeBook(int i) {
 		listOfRentalBooks.remove(i);
 	}
 

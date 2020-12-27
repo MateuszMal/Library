@@ -1,15 +1,23 @@
 package view;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import controller.LibraryHolder;
 import controller.LibraryManager;
+import controller.RentalBook;
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import utils.DialogsUtils;
@@ -17,6 +25,7 @@ import utils.FxmlUtils;
 
 public class RentController implements Initializable {
 
+	// TODO wyszukiwanie wypozyczen poprzez ctrl+F
 	private FxmlUtils fxmlUtils = new FxmlUtils();
 
 	private InterfaceController interfaceController;
@@ -34,15 +43,33 @@ public class RentController implements Initializable {
 	private Button addRentButton;
 	@FXML
 	private Button rentBackButton;
+	@FXML
+	private ListView rentListView;
 
 	private LibraryManager libManager;
+	private ObservableList<RentalBook> rentList;
+	private ListProperty<RentalBook> listProperty;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// Ustawia uniwersalnego singletona i pobiera jego instncje
 		LibraryHolder libHolder = LibraryHolder.getInstance();
 		libManager = libHolder.getLIbManager();
+		
+		// Wypisanie listy wypozyczen
+		List lista = libManager.getLibrary().getListOfRentals();
+		
+		// Bindowanie list (listproperty obserwuje zmiany w rentList
+		listProperty = new SimpleListProperty<>();
+		rentList = FXCollections.observableArrayList(lista);
+		listProperty.set(rentList);
+		
+		rentListView.itemsProperty().bindBidirectional(listProperty);
+		
+		
 	}
+	
+	
 
 	public boolean isTextFieldEmpty() {
 		// Sprawdza czy wszystkie pola sa uzupelnione

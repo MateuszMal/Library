@@ -13,8 +13,11 @@ public class RentalBook {
 	public RentalBook(Book book, Client client) {
 		this.book = book;
 		this.client = client;
+		this.client.addBook(book);
 		this.rentDateTime = new Date();
 		this.rentalLength = 0;
+		this.book.setRentalDate(this.rentDateTime);
+		this.book.setAvailable(false);
 	}
 
 	public Book getBook() {

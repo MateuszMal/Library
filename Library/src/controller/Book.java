@@ -1,6 +1,6 @@
 package controller;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Book {
 
@@ -23,17 +23,33 @@ public class Book {
 	public Author getAuthor() {
 		return author;
 	}
-
-	public boolean isAvailability() {
+	
+	public boolean isAvailable() {
 		return available;
 	}
 
-	private void setAvailability(boolean availability) {
-		this.available = availability;
+	public void setAvailable(boolean available) {
+		this.available = available;
 	}
 
-	public Date getBorrowDate() {
+	public Date getRentalDate() {
 		return rentalDate;
+	}
+
+	public void setRentalDate(Date rentalDate) {
+		this.rentalDate = rentalDate;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public void setReturnDate(Date returnDate) {
+		this.returnDate = returnDate;
 	}
 
 	public Date getReturnDate() {

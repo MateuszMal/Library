@@ -91,6 +91,7 @@ public class LibraryManager {
 			Book book = getBookFromLibraryByTitle(title);
 			Client client = getClientFromLib(name, lastName);
 			RentalBook rent = new RentalBook(book, client);
+			library.addRent(rent);
 			return true;
 		}
 		else return false;
