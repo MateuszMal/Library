@@ -1,18 +1,23 @@
 package view;
 
-import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import controller.LibraryHolder;
+import controller.LibraryManager;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.ComboBoxListCell;
 import javafx.scene.layout.BorderPane;
 import utils.FxmlUtils;
 
@@ -22,10 +27,8 @@ public class BookControler implements Initializable {
 
 	@FXML
 	private InterfaceController interfaceController;
-
 	@FXML
 	private BorderPane bookBorderPane;
-
 	@FXML
 	private Button allBooksButton;
 	@FXML
@@ -40,10 +43,33 @@ public class BookControler implements Initializable {
 	private ListView bookListView;
 	@FXML
 	private Button backButton;
+	private ObservableList<String> bookList;
+	
+	public void prepareList() {
+		LibraryHolder libHolder = LibraryHolder.getInstance();
+		LibraryManager libManager = libHolder.getLIbManager();
+		List lista = libManager.getLibrary().getBooksList();
+		bookList = FXCollections.observableArrayList(lista);
+		bookListView.setItems(bookList);
+	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
+		prepareList();
+		
+//		bookAllCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+//			@Override
+//			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+//				// TODO Auto-generated method stub
+//				if (newValue) {
+//					bookListView.;
+//					System.out.println("Jest");
+//				} else {
+//					bookListView.getItems().clear();
+//					System.out.println("nie ma");
+//				}
+//			}
+//		});
 
 	}
 

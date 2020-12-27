@@ -17,7 +17,7 @@ import utils.DialogsUtils;
 
 public class AddClientController implements Initializable {
 
-//	private LibraryManager libraryController;
+
 
 	@FXML
 	private ClientController clientController;
@@ -43,10 +43,6 @@ public class AddClientController implements Initializable {
 	private TextField streetTextField;
 	@FXML
 	private TextField nrTextField;
-
-//	public AddClientController() {
-//		//this.libraryController = new LibraryController();
-//	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -76,7 +72,7 @@ public class AddClientController implements Initializable {
 	public void onClientControllAddButton(ActionEvent event) {
 		
 		if (isTextFieldsEmpty()) {
-			//libraryController = new LibraryController();
+
 			// Ustawia uniwersalnego singletona i pobiera jego instncje
 			LibraryHolder libHolder = LibraryHolder.getInstance();
 			LibraryManager libManager = libHolder.getLIbManager();
@@ -101,7 +97,6 @@ public class AddClientController implements Initializable {
 				nrTextField.clear();
 				
 				DialogsUtils.successAction();
-//				System.out.println(libManager.getLibrary().getClientList());
 			}
 		}
 		else DialogsUtils.emptyFields();
@@ -128,14 +123,6 @@ public class AddClientController implements Initializable {
 		// Powrot do poprzedniego okna
 		addBorderPane.getChildren().clear();
 		this.clientController.onClientBackButton(event);
-
 	}
-
-//	public void setLibraryController(LibraryManager libController) {
-//		this.libraryController = libController;
-//	}
-//	public LibraryController getLibraryController() {
-//		return libraryController;
-//	}
 
 }

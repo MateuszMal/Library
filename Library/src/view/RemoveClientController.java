@@ -15,6 +15,7 @@ import utils.DialogsUtils;
 
 public class RemoveClientController implements Initializable {
 
+	// TODO dodac usuwanie klienta z listy biblioteki
 	@FXML
 	private ClientController clientController;
 	@FXML
@@ -57,6 +58,7 @@ public class RemoveClientController implements Initializable {
 
 	@FXML
 	public void onRemoveClientButton(ActionEvent event) {
+		// Jesli pola wpisu nie sa puste
 		if(isTetxtFieldsEmpty()) {
 		Optional<ButtonType> result = DialogsUtils.removeClientConfirmationDialog();
 		if (result.get() == ButtonType.OK) {
