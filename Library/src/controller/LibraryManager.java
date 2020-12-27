@@ -12,7 +12,7 @@ public class LibraryManager {
 	}
 
 	public void addNewClient(String name, String surName, String email, String street, String number, String town,
-			String telNumber, String id) {
+		String telNumber, String id) {
 		Address address = new Address(street, number, town);
 		long telephoneNumber = Long.valueOf(telNumber);
 		long _id = Long.valueOf(id);
@@ -50,7 +50,6 @@ public class LibraryManager {
 		boolean result = false;
 		for (Author author : library.getAuthorList()) {
 			if (author.getSurName().equals(authorLastName)) {
-				System.out.println("Mam");
 				return result = true;
 			}
 		}
@@ -73,7 +72,6 @@ public class LibraryManager {
 			for (Book book : library.getBooksList()) {
 				if (book.getAuthor().getSurName().equals(lastName)) {
 					_book = book;
-					System.out.println("Mam");
 				}
 			}
 		}

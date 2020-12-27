@@ -21,11 +21,15 @@ public class RentController implements Initializable {
 	@FXML
 	private BorderPane rentBorderPane;
 	@FXML
-	private TextField rentTextField;	
+	private TextField rentTitleField;	
 	@FXML
-	private TextField returnTextField;
+	private TextField rentClientNameField;
+	@FXML
+	private TextField rentClientLastNameField;
 	@FXML
 	private CheckBox allRentCheckBox;
+	@FXML
+	private Button addRentButton;
 	@FXML
 	private Button rentBackButton;
 
@@ -40,11 +44,8 @@ public class RentController implements Initializable {
 		fxmlUtils.fxmlLoader(event, "../view/fxml/StackPaneWindow.fxml", rentBorderPane);
 	}
 
-	public void onReturnTextField(ActionEvent event) {
-		if(allRentCheckBox.isSelected()) {
-			rentTextField.clear();
-			returnTextField.clear();
-			// TODO Dodac wyswietlanie wszystkich wypozyczen
-		}
+	public void onAddRentButton() {
+		
 	}
+	
 }
