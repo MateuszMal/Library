@@ -1,10 +1,10 @@
 package controller;
 
-public class LibraryController {
+public class LibraryManager {
 
 	private Library library;
 
-	public LibraryController() {
+	public LibraryManager() {
 		this.library = new Library();
 	}
 

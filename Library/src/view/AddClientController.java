@@ -4,9 +4,8 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import controller.LibraryController;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import controller.LibraryHolder;
+import controller.LibraryManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,7 +17,7 @@ import utils.DialogsUtils;
 
 public class AddClientController implements Initializable {
 
-	private LibraryController libraryController;
+//	private LibraryManager libraryController;
 
 	@FXML
 	private ClientController clientController;
@@ -45,9 +44,9 @@ public class AddClientController implements Initializable {
 	@FXML
 	private TextField nrTextField;
 
-	public AddClientController() {
-		//this.libraryController = new LibraryController();
-	}
+//	public AddClientController() {
+//		//this.libraryController = new LibraryController();
+//	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -78,11 +77,20 @@ public class AddClientController implements Initializable {
 		
 		if (isTextFieldsEmpty()) {
 			//libraryController = new LibraryController();
+			// Ustawia uniwersalnego singletona i pobiera jego instncje
+			LibraryHolder libHolder = LibraryHolder.getInstance();
+			LibraryManager libManager = libHolder.getLIbManager();
+			
+			// Przygotowanie okna dialogowego
 			Optional<ButtonType> result = DialogsUtils.addClientConfirmationDialog();
+			
+			// Jesli pola wpisu nie sa puste utworz nwego klienta
 			if (result.get() == ButtonType.OK) {
-				libraryController.addNewClient(nameTextField.getText(), lastNameTextField.getText(),
+				libManager.addNewClient(nameTextField.getText(), lastNameTextField.getText(),
 						emailTextField.getText(), streetTextField.getText(), nrTextField.getText(),
-						townTextField.getText(), telephoneTextField.getText(), idTextField.getText());
+				
+				// czyszcenie pol tekstowych		
+				townTextField.getText(), telephoneTextField.getText(), idTextField.getText());
 				nameTextField.clear();
 				lastNameTextField.clear();
 				emailTextField.clear();
@@ -91,7 +99,7 @@ public class AddClientController implements Initializable {
 				townTextField.clear();
 				streetTextField.clear();
 				nrTextField.clear();
-				System.out.println(libraryController.getLibrary().getClientList());
+//				System.out.println(libManager.getLibrary().getClientList());
 			}
 		}
 		else DialogsUtils.emptyFields();
@@ -115,14 +123,15 @@ public class AddClientController implements Initializable {
 
 	@FXML
 	public void clientControllBackButton(ActionEvent event) {
+		// Powrot do poprzedniego okna
 		addBorderPane.getChildren().clear();
 		this.clientController.onClientBackButton(event);
 
 	}
 
-	public void setLibraryController(LibraryController libController) {
-		this.libraryController = libController;
-	}
+//	public void setLibraryController(LibraryManager libController) {
+//		this.libraryController = libController;
+//	}
 //	public LibraryController getLibraryController() {
 //		return libraryController;
 //	}
