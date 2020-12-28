@@ -1,7 +1,6 @@
 package view;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -17,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -27,10 +27,13 @@ public class RentController implements Initializable {
 
 	// TODO wyszukiwanie wypozyczen poprzez ctrl+F
 	private FxmlUtils fxmlUtils = new FxmlUtils();
-
 	private InterfaceController interfaceController;
+	
+	// Glowny Pane
 	@FXML
 	private BorderPane rentBorderPane;
+	
+	// Zakladka Wypozycz ksiazke
 	@FXML
 	private TextField rentTitleField;
 	@FXML
@@ -38,17 +41,52 @@ public class RentController implements Initializable {
 	@FXML
 	private TextField rentClientLastNameField;
 	@FXML
-	private CheckBox allRentCheckBox;
-	@FXML
 	private Button addRentButton;
 	@FXML
 	private Button rentBackButton;
 	@FXML
+	private DatePicker remindCallendar;
+	
+	// Zakladka Zwroc ksiazke
+	@FXML
+	private TextField returnTitleField;
+	@FXML
+	private TextField returnClientNameField;
+	@FXML
+	private TextField returnClientLastNameField;
+	@FXML
+	private Button addReturnButton;
+	@FXML
+	private Button rentBackButton2;
+	
+	// Zakladka Pokaz wypozyczenia
+	@FXML
+	private TextField showTitle1Field;
+	@FXML
+	private TextField showLastNameField;
+	@FXML
+	private TextField showAuthorField;
+	@FXML
+	private Button showSearchButton;
+	@FXML
+	private Button showAllButton;
+	@FXML
+	private Button rentBackButton3;	
+	@FXML
 	private ListView rentListView;
 
+	// Listy do wyswietlania wypozyczen
 	private LibraryManager libManager;
 	private ObservableList<RentalBook> rentList;
 	private ListProperty<RentalBook> listProperty;
+	
+	public void onShowSearchButton() {
+		
+	}
+	
+	public void onshowAllButton() {
+		
+	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -64,13 +102,9 @@ public class RentController implements Initializable {
 		rentList = FXCollections.observableArrayList(lista);
 		listProperty.set(rentList);
 		
-		rentListView.itemsProperty().bindBidirectional(listProperty);
-		
-		
+		rentListView.itemsProperty().bindBidirectional(listProperty);		
 	}
 	
-	
-
 	public boolean isTextFieldEmpty() {
 		// Sprawdza czy wszystkie pola sa uzupelnione
 		if (rentTitleField.getText().trim().isEmpty() || rentClientNameField.getText().trim().isEmpty()
@@ -83,6 +117,10 @@ public class RentController implements Initializable {
 	public void onRentBackButton(ActionEvent event) {
 
 		fxmlUtils.fxmlLoader(event, "../view/fxml/StackPaneWindow.fxml", rentBorderPane);
+	}
+	
+	public void onReturnRentButton() {
+		
 	}
 
 	public void onAddRentButton() {
