@@ -108,8 +108,8 @@ public class LibraryManager {
 	}
 
 	// Zmienic zeby wyszukiwalo w wypozyczeniach
-	public boolean isRentInLibrary(String bookTitle, String clientLastName) {
-		if (isBookInLibrary(bookTitle) && isClientInLibrary(clientLastName))
+	public boolean isRentInLibrary(String bookTitle, String clientName,String clientLastName) {
+		if (isBookInLibrary(bookTitle) && isClientInLibrary(clientName ,clientLastName))
 			return true;
 		else
 			return false;
@@ -144,4 +144,37 @@ public class LibraryManager {
 		}
 		return null;
 	}
+	
+	public RentalBook getRentByClient(String clientLastName, String title) {
+		if (isClientInLibrary(clientLastName) && isBookInLibrary(title)) {
+			for (RentalBook rent : library.getListOfRentals()) {
+				if (rent.getClient().getSurName().equals(clientLastName)
+						&& rent.getBook().getTitle().equals(title))
+					return rent;
+			}
+		}
+		return null;
+	}
+	
+	public boolean returnRent(String clientName, String clientLastName, String title) {
+		if(isRentInLibrary(title, clientName, clientLastName)) {
+			// Znajdz klienta, ksiazke, wypo¿yczenie
+			Client client = getClientFromLib(clientName, clientLastName);
+			Book book = getBookFromLibraryByTitle(title);
+			RentalBook rent = getRentByClient(clientLastName, title);
+			library.removeRent(rent);
+			return true;
+		}		
+		return false;
+	}
 }
+
+
+
+
+
+
+
+
+
+

@@ -84,31 +84,36 @@ public class RentController implements Initializable {
 	private ArrayList<RentalBook> tmpList;
 
 	public void onShowSearchButton() {
+
+		// TODO nie wyswietlac null jesli jest puste
+		// TODO Jesli rent == rent nie wyswietlac tych samych
+
 		// Czyszczenie listy wyswietlania
 		rentListView.getItems().removeAll(rentList);
-		
+
 		// Tymczasowa lista
 		tmpList = new ArrayList<RentalBook>();
 		tmpList.add(libManager.getRentByAuthor(showAuthorField.getText()));
 		tmpList.add(libManager.getRentByClient(showLastNameField.getText()));
 		tmpList.add(libManager.getRentByTitle(showTitle1Field.getText()));
-		
+
 		tmpRentList = FXCollections.observableArrayList(tmpList);
-		
+
 		rentListView.setItems(tmpRentList);
 	}
-	
+
 	public void prepareList() {
-List lista = libManager.getLibrary().getListOfRentals();
-		
+		// Przygotowanie list do wyswietlania
+		List lista = libManager.getLibrary().getListOfRentals();
+
 		listProperty = new SimpleListProperty<>();
 		rentList = FXCollections.observableArrayList(lista);
-		
+
 		listProperty.set(rentList);
 	}
-	
+
 	public void onshowAllButton() {
-		
+
 		List lista = libManager.getLibrary().getListOfRentals();
 
 		// Bindowanie list (listproperty obserwuje zmiany w rentList
@@ -125,15 +130,24 @@ List lista = libManager.getLibrary().getListOfRentals();
 		// Ustawia uniwersalnego singletona i pobiera jego instncje
 		LibraryHolder libHolder = LibraryHolder.getInstance();
 		libManager = libHolder.getLIbManager();
-		
+
 		prepareList();
 
 	}
 
-	public boolean isTextFieldEmpty() {
+	public boolean isTextFieldEmptyRent() {
 		// Sprawdza czy wszystkie pola sa uzupelnione
 		if (rentTitleField.getText().trim().isEmpty() || rentClientNameField.getText().trim().isEmpty()
 				|| rentClientLastNameField.getText().trim().isEmpty())
+			return false;
+		else
+			return true;
+	}
+
+	public boolean isTextFieldEmptyReturn() {
+		// Sprawdza czy wszystkie pola sa uzupelnione
+		if (returnTitleField.getText().trim().isEmpty() || returnClientNameField.getText().trim().isEmpty()
+				|| returnClientLastNameField.getText().trim().isEmpty())
 			return false;
 		else
 			return true;
@@ -145,16 +159,23 @@ List lista = libManager.getLibrary().getListOfRentals();
 	}
 
 	public void onReturnRentButton() {
-
+		if (isTextFieldEmptyReturn()) {
+			if (libManager.returnRent(returnClientNameField.getText(), returnClientLastNameField.getText(),
+					returnTitleField.getText())) {
+				DialogsUtils.successAction();
+			} else
+				DialogsUtils.infoDialog("Nie uda³o siê zrealizowaæ tego zwrotu.");
+		} else
+			DialogsUtils.emptyFields();
 	}
 
 	public void onAddRentButton() {
-		if (isTextFieldEmpty()) {
+		if (isTextFieldEmptyRent()) {
 			if (libManager.addRentToLibrary(rentClientNameField.getText(), rentClientLastNameField.getText(),
 					rentTitleField.getText())) {
 				DialogsUtils.successAction();
 			} else
-				DialogsUtils.infoDialog("Nie uda³o siê zrealizowaæ tego wypo¿yczenia");
+				DialogsUtils.infoDialog("Nie uda³o siê zrealizowaæ tego wypo¿yczenia.");
 		} else
 			DialogsUtils.emptyFields();
 	}
