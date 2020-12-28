@@ -1,6 +1,7 @@
 package view;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -28,11 +29,11 @@ public class RentController implements Initializable {
 	// TODO wyszukiwanie wypozyczen poprzez ctrl+F
 	private FxmlUtils fxmlUtils = new FxmlUtils();
 	private InterfaceController interfaceController;
-	
+
 	// Glowny Pane
 	@FXML
 	private BorderPane rentBorderPane;
-	
+
 	// Zakladka Wypozycz ksiazke
 	@FXML
 	private TextField rentTitleField;
@@ -46,7 +47,7 @@ public class RentController implements Initializable {
 	private Button rentBackButton;
 	@FXML
 	private DatePicker remindCallendar;
-	
+
 	// Zakladka Zwroc ksiazke
 	@FXML
 	private TextField returnTitleField;
@@ -58,7 +59,7 @@ public class RentController implements Initializable {
 	private Button addReturnButton;
 	@FXML
 	private Button rentBackButton2;
-	
+
 	// Zakladka Pokaz wypozyczenia
 	@FXML
 	private TextField showTitle1Field;
@@ -71,21 +72,52 @@ public class RentController implements Initializable {
 	@FXML
 	private Button showAllButton;
 	@FXML
-	private Button rentBackButton3;	
+	private Button rentBackButton3;
 	@FXML
 	private ListView rentListView;
 
 	// Listy do wyswietlania wypozyczen
 	private LibraryManager libManager;
 	private ObservableList<RentalBook> rentList;
+	private ObservableList<RentalBook> tmpRentList;
 	private ListProperty<RentalBook> listProperty;
-	
+	private ArrayList<RentalBook> tmpList;
+
 	public void onShowSearchButton() {
+		// Czyszczenie listy wyswietlania
+		rentListView.getItems().removeAll(rentList);
 		
+		// Tymczasowa lista
+		tmpList = new ArrayList<RentalBook>();
+		tmpList.add(libManager.getRentByAuthor(showAuthorField.getText()));
+		tmpList.add(libManager.getRentByClient(showLastNameField.getText()));
+		tmpList.add(libManager.getRentByTitle(showTitle1Field.getText()));
+		
+		tmpRentList = FXCollections.observableArrayList(tmpList);
+		
+		rentListView.setItems(tmpRentList);
+	}
+	
+	public void prepareList() {
+List lista = libManager.getLibrary().getListOfRentals();
+		
+		listProperty = new SimpleListProperty<>();
+		rentList = FXCollections.observableArrayList(lista);
+		
+		listProperty.set(rentList);
 	}
 	
 	public void onshowAllButton() {
 		
+		List lista = libManager.getLibrary().getListOfRentals();
+
+		// Bindowanie list (listproperty obserwuje zmiany w rentList
+		listProperty = new SimpleListProperty<>();
+		rentList = FXCollections.observableArrayList(lista);
+		// Wypisanie listy wypozyczen
+		listProperty.set(rentList);
+		rentListView.itemsProperty().bindBidirectional(listProperty);
+
 	}
 
 	@Override
@@ -94,17 +126,10 @@ public class RentController implements Initializable {
 		LibraryHolder libHolder = LibraryHolder.getInstance();
 		libManager = libHolder.getLIbManager();
 		
-		// Wypisanie listy wypozyczen
-		List lista = libManager.getLibrary().getListOfRentals();
-		
-		// Bindowanie list (listproperty obserwuje zmiany w rentList
-		listProperty = new SimpleListProperty<>();
-		rentList = FXCollections.observableArrayList(lista);
-		listProperty.set(rentList);
-		
-		rentListView.itemsProperty().bindBidirectional(listProperty);		
+		prepareList();
+
 	}
-	
+
 	public boolean isTextFieldEmpty() {
 		// Sprawdza czy wszystkie pola sa uzupelnione
 		if (rentTitleField.getText().trim().isEmpty() || rentClientNameField.getText().trim().isEmpty()
@@ -118,9 +143,9 @@ public class RentController implements Initializable {
 
 		fxmlUtils.fxmlLoader(event, "../view/fxml/StackPaneWindow.fxml", rentBorderPane);
 	}
-	
+
 	public void onReturnRentButton() {
-		
+
 	}
 
 	public void onAddRentButton() {

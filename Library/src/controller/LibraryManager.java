@@ -12,7 +12,7 @@ public class LibraryManager {
 	}
 
 	public void addNewClient(String name, String surName, String email, String street, String number, String town,
-		String telNumber, String id) {
+			String telNumber, String id) {
 		Address address = new Address(street, number, town);
 		long telephoneNumber = Long.valueOf(telNumber);
 		long _id = Long.valueOf(id);
@@ -34,6 +34,16 @@ public class LibraryManager {
 		boolean result = false;
 		for (Client client : library.getClientList()) {
 			if (client.getName().equals(name) && client.getSurName().equals(lastName)) {
+				return result = true;
+			}
+		}
+		return result;
+	}
+
+	public boolean isClientInLibrary(String lastName) {
+		boolean result = false;
+		for (Client client : library.getClientList()) {
+			if (client.getSurName().equals(lastName)) {
 				return result = true;
 			}
 		}
@@ -75,7 +85,7 @@ public class LibraryManager {
 		}
 		return _book;
 	}
-	
+
 	public boolean isBookInLibrary(String title) {
 		boolean result = false;
 		for (Book book : library.getBooksList()) {
@@ -85,15 +95,53 @@ public class LibraryManager {
 		}
 		return result;
 	}
-	
+
 	public boolean addRentToLibrary(String name, String lastName, String title) {
-		if(isClientInLibrary(name, lastName) && isBookInLibrary(title)) {
+		if (isClientInLibrary(name, lastName) && isBookInLibrary(title)) {
 			Book book = getBookFromLibraryByTitle(title);
 			Client client = getClientFromLib(name, lastName);
 			RentalBook rent = new RentalBook(book, client);
 			library.addRent(rent);
 			return true;
+		} else
+			return false;
+	}
+
+	// Zmienic zeby wyszukiwalo w wypozyczeniach
+	public boolean isRentInLibrary(String bookTitle, String clientLastName) {
+		if (isBookInLibrary(bookTitle) && isClientInLibrary(clientLastName))
+			return true;
+		else
+			return false;
+	}
+
+	public RentalBook getRentByTitle(String title) {
+		if (isBookInLibrary(title)) {
+			for (RentalBook rent : library.getListOfRentals()) {
+				if (rent.getBook().getTitle().equals(title))
+					return rent;
+			}
 		}
-		else return false;
+		return null;
+	}
+
+	public RentalBook getRentByAuthor(String lastName) {
+		if (isAuthorInLibrary(lastName)) {
+			for (RentalBook rent : library.getListOfRentals()) {
+				if (rent.getBook().getAuthor().getSurName().equals(lastName))
+					return rent;
+			}
+		}
+		return null;
+	}
+
+	public RentalBook getRentByClient(String clientLastName) {
+		if (isClientInLibrary(clientLastName)) {
+			for (RentalBook rent : library.getListOfRentals()) {
+				if (rent.getClient().getSurName().equals(clientLastName))
+					return rent;
+			}
+		}
+		return null;
 	}
 }
