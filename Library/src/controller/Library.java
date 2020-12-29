@@ -1,5 +1,6 @@
 package controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -16,6 +17,7 @@ public class Library {
 	}
 
 	public void removeRent(RentalBook rent) {
+		rent.setEndRentDate(LocalDate.now());
 		listOfRentals.remove(rent);
 	}
 

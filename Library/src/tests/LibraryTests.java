@@ -85,18 +85,16 @@ class LibraryTests {
 		
 		library.removeRent(rent);
 		assertEquals(0, library.getListOfRentals().size());
+		assertEquals(true, rent.isOnTimeReturn());
 		
 		library.removeAuthor(author);
-		assertEquals(1, library.getAuthorList().size());
+		assertEquals(0, library.getAuthorList().size());
+		
+		library.removeBook(book);
+		assertEquals(0, library.getBooksList().size());
+		
+		library.removeClient(client);
+		assertEquals(0, library.getClientList().size());
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-
 }

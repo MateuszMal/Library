@@ -7,8 +7,13 @@ public class RentalBook {
 
 	private Book book;
 	private Client client;
+	// Data wypozyczenia
 	private LocalDate rentDateTime;
+	// Data przewidywanego zwrotu
 	private LocalDate endDateTime;
+	// Data rzyczywistego zwrotu ksiazki
+	private LocalDate endRentDate;
+	
 	int rentalLength;
 	
 	//public RentalBook() {}
@@ -42,6 +47,19 @@ public class RentalBook {
 
 	public int getRentalLength() {
 		return rentalLength;
+	}
+	
+	public LocalDate getEndRentDate() {
+		return endRentDate;
+	}
+
+	public void setEndRentDate(LocalDate endRentDate) {
+		this.endRentDate = endRentDate;
+	}
+	
+	public boolean isOnTimeReturn() {
+		if(endRentDate.isAfter(endDateTime)) return false;
+		else return true;
 	}
 
 	@Override
