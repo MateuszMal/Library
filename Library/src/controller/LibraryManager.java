@@ -1,5 +1,6 @@
 package controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class LibraryManager {
@@ -11,6 +12,21 @@ public class LibraryManager {
 
 	public LibraryManager() {
 		this.library = new Library();
+	}
+	
+	public boolean checkForReminders() {
+		for(Client client : library.getClientList()) {
+			if(client.isRemindSet()) {
+				if(client.getReminder() == LocalDate.now()) {
+					System.out.println("Je");
+
+					return true;
+				}
+			}
+		}
+		System.out.println("Ne");
+
+		return false;
 	}
 
 	public void addNewClient(String name, String surName, String email, String street, String number, String town,
@@ -122,6 +138,18 @@ public class LibraryManager {
 		if (isClientInLibrary(name, lastName) && isBookInLibrary(title)) {
 			Book book = getBookByTitle(title);
 			Client client = getClientFromLib(name, lastName);
+			RentalBook rent = new RentalBook(book, client);
+			library.addRent(rent);
+			return true;
+		} else
+			return false;
+	}
+	
+	public boolean addRentToLibrary(String name, String lastName, String title, LocalDate date) {
+		if (isClientInLibrary(name, lastName) && isBookInLibrary(title)) {
+			Book book = getBookByTitle(title);
+			Client client = getClientFromLib(name, lastName);
+			client.setReminder(date);
 			RentalBook rent = new RentalBook(book, client);
 			library.addRent(rent);
 			return true;

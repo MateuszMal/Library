@@ -18,10 +18,6 @@ public class InterfaceController implements Initializable {
 
 	private FxmlUtils fxmlUtils;
 	
-//	private LibraryController libraryController;
-//	@FXML
-//	// Wstrzyknieice controllera klasy potomnej
-//	private ClientController clientController;
 	@FXML
 	private BorderPane borderPane;
 	@FXML
@@ -85,11 +81,5 @@ public class InterfaceController implements Initializable {
 	public FxmlUtils getFxmlUtils() {
 		return fxmlUtils;
 	}
-
-//	public LibraryController getLibraryController() {
-//		return libraryController;
-//	}
-	
-	
 
 }

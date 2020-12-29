@@ -1,19 +1,20 @@
 package controller;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Book {
 
 	private String title;
 	private Author author;
 	private boolean available;
-	private Date rentalDate;
-	private Date returnDate;
+	private LocalDate rentalDate;
+	private LocalDate returnDate;
 	private String category;
 
 	public Book(String title, Author author) {
 		this.title = title;
 		this.author = author;
+		this.author.addBook(this);
 	}
 
 	public String getTitle() {
@@ -32,11 +33,11 @@ public class Book {
 		this.available = available;
 	}
 
-	public Date getRentalDate() {
+	public LocalDate getRentalDate() {
 		return rentalDate;
 	}
 
-	public void setRentalDate(Date rentalDate) {
+	public void setRentalDate(LocalDate rentalDate) {
 		this.rentalDate = rentalDate;
 	}
 
@@ -48,11 +49,11 @@ public class Book {
 		this.category = category;
 	}
 
-	public void setReturnDate(Date returnDate) {
+	public void setReturnDate(LocalDate returnDate) {
 		this.returnDate = returnDate;
 	}
 
-	public Date getReturnDate() {
+	public LocalDate getReturnDate() {
 		return returnDate;
 	}
 

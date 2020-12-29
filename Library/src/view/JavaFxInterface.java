@@ -1,22 +1,27 @@
 package view;
 
-import java.io.IOException;
+import java.io.File;
 
+import controller.LibraryHolder;
 import controller.LibraryManager;
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 public class JavaFxInterface extends Application {
 
-
+	private String music = "./src/Resource/beep-01a.mp3";
+	private LibraryManager libManager;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		
+		LibraryHolder libHolder = LibraryHolder.getInstance();
+		libManager = libHolder.getLIbManager();
 
 		// TODO czy ta klasa nie powinna miec LibraryController?
 		Stage stage = primaryStage;
@@ -30,6 +35,13 @@ public class JavaFxInterface extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Library");
 		primaryStage.show();
+		
+		// TODO nie dziala
+		if(libManager.checkForReminders()) {
+			Media sound = new Media(new File(music).toURI().toString());
+			MediaPlayer mediaPlayer = new MediaPlayer(sound);
+			mediaPlayer.play();
+		}
 	}
 	
 

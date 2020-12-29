@@ -1,5 +1,7 @@
 package main;
 
+import java.time.LocalDate;
+
 import controller.Address;
 import controller.Author;
 import controller.Book;
@@ -26,6 +28,8 @@ public class Main {
 		Book book = new Book("Jakas", autor);
 		Author autor1 = new Author("Artur1", "Nowak1");
 		Book book1 = new Book("Jakas1", autor);
+		
+		client.setReminder(LocalDate.now());
 		
 		libraryManager.getLibrary().addClient(client);
 		libraryManager.getLibrary().addAuthor(autor);

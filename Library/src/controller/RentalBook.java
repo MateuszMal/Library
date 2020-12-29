@@ -1,24 +1,26 @@
 package controller;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class RentalBook {
 
 	private Book book;
 	private Client client;
-	private Date rentDateTime;
-	private Date endDateTime;
+	private LocalDate rentDateTime;
+	private LocalDate endDateTime;
 	int rentalLength;
 	
-	public RentalBook() {}
+	//public RentalBook() {}
 
 	public RentalBook(Book book, Client client) {
 		this.book = book;
 		this.client = client;
 		this.client.addBook(book);
-		this.rentDateTime = new Date();
+		this.rentDateTime = LocalDate.now();
 		this.rentalLength = 0;
 		this.book.setRentalDate(this.rentDateTime);
+		this.endDateTime = rentDateTime.plusDays(30);
 		this.book.setAvailable(false);
 	}
 
@@ -30,11 +32,11 @@ public class RentalBook {
 		return client;
 	}
 
-	public Date getRentDateTime() {
+	public LocalDate getRentDateTime() {
 		return rentDateTime;
 	}
 
-	public Date getEndDateTime() {
+	public LocalDate getEndDateTime() {
 		return endDateTime;
 	}
 

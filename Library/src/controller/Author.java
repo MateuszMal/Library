@@ -11,6 +11,7 @@ public class Author {
 	public Author(String name, String sureName) {
 		this.name = name;
 		this.surName = sureName;
+		this.listOfBooks = new ArrayList<>();
 	}
 
 	public String getName() {
@@ -25,15 +26,15 @@ public class Author {
 		return listOfBooks;
 	}
 	
-	private void addBook(Book book) {
+	public void addBook(Book book) {
 		listOfBooks.add(book);
 	}
 	
-	private void removeBook(Book book) {
+	public void removeBook(Book book) {
 		listOfBooks.remove(book);
 	}
 	
-	private void removeBook(int i) {
+	public void removeBook(int i) {
 		listOfBooks.remove(i);
 	}
 

@@ -77,6 +77,11 @@ public class Client {
 	public void setReminder(LocalDate reminder) {
 		this.reminder = reminder;
 	}
+	
+	public boolean isRemindSet() {
+		if(reminder != null) return true;
+		return false;
+	}
 
 	@Override
 	public String toString() {

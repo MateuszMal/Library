@@ -11,5 +11,6 @@
 	<classpathentry kind="lib" path="C:/Users/mmate/Documents/Ftims/xstream-distribution-1.4.14-bin/xstream-1.4.14/lib/xstream-benchmark-1.4.14.jar"/>
 	<classpathentry kind="lib" path="C:/Users/mmate/Documents/Ftims/xstream-distribution-1.4.14-bin/xstream-1.4.14/lib/xstream-hibernate-1.4.14.jar"/>
 	<classpathentry kind="lib" path="C:/Users/mmate/Documents/Ftims/xstream-distribution-1.4.14-bin/xstream-1.4.14/lib/xstream-jmh-1.4.14.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

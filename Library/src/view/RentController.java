@@ -35,6 +35,7 @@ public class RentController implements Initializable {
 	private FxmlUtils fxmlUtils = new FxmlUtils();
 
 	private String music = "./src/Resource/beep-01a.mp3";
+	private LocalDate reminder;
 	// Glowny Pane
 	@FXML
 	private BorderPane rentBorderPane;
@@ -92,7 +93,6 @@ public class RentController implements Initializable {
 
 	public void onShowSearchButton() {
 
-		// TODO nie wyswietlac null jesli jest puste
 		// TODO Jesli rent == rent nie wyswietlac tych samych
 
 		// Czyszczenie listy wyswietlania
@@ -100,10 +100,7 @@ public class RentController implements Initializable {
 
 		// Tymczasowa lista
 		tmpList = libManager.getRentListByAuthor(showAuthorField.getText());
-//		tmpList.add(libManager.getRentByAuthor(showAuthorField.getText()));
-//		tmpList.add(libManager.getRentByClient(showLastNameField.getText()));
-//		tmpList.add(libManager.getRentByTitle(showTitle1Field.getText()));
-		
+
 		tmpList.addAll(libManager.getRentListByClient(showLastNameField.getText()));
 		tmpList.addAll(libManager.getRentListByTitle(showTitle1Field.getText()));
 
@@ -164,11 +161,12 @@ public class RentController implements Initializable {
 	}
 
 	public void onRentBackButton(ActionEvent event) {
-
+		// Powrot do porzedniego okna
 		fxmlUtils.fxmlLoader(event, "../view/fxml/StackPaneWindow.fxml", rentBorderPane);
 	}
 
 	public void onReturnRentButton() {
+		// Zwraca wypozyczenie
 		if (isTextFieldEmptyReturn()) {
 			if (libManager.returnRent(returnClientNameField.getText(), returnClientLastNameField.getText(),
 					returnTitleField.getText())) {
@@ -180,38 +178,37 @@ public class RentController implements Initializable {
 	}
 
 	public void onAddRentButton() {
+		// Dodaje wypozyczenie
 		if (isTextFieldEmptyRent()) {
-			if (libManager.addRentToLibrary(rentClientNameField.getText(), rentClientLastNameField.getText(),
-					rentTitleField.getText())) {
-				DialogsUtils.successAction();
-			} else
-				DialogsUtils.infoDialog("Nie uda³o siê zrealizowaæ tego wypo¿yczenia.");
+			// Jesli ustawiono przypomnienine
+			if (reminder != null) {
+				if (libManager.addRentToLibrary(rentClientNameField.getText(), rentClientLastNameField.getText(),
+						rentTitleField.getText(), reminder)) {
+					DialogsUtils.successAction();
+				} else
+					DialogsUtils.infoDialog("Nie uda³o siê zrealizowaæ tego wypo¿yczenia.");
+			} else {
+				// Jesli nie ma ustawionego przypomnienia
+				if (libManager.addRentToLibrary(rentClientNameField.getText(), rentClientLastNameField.getText(),
+						rentTitleField.getText())) {
+					DialogsUtils.successAction();
+				} else
+					DialogsUtils.infoDialog("Nie uda³o siê zrealizowaæ tego wypo¿yczenia.");
+			}
 		} else
 			DialogsUtils.emptyFields();
 	}
-	
+
 	public void onRemindButton() {
-		
+
 		// Dodac to do jakiegos pola u klienta
-		LocalDate now = LocalDate.now();
-		LocalDate date = remindCallendar.getValue();
+		reminder = remindCallendar.getValue();
 		// Wywalic stad!!
-		if(now.equals(date) ) { 
-			Media sound = new Media(new File(music).toURI().toString());
-			MediaPlayer mediaPlayer = new MediaPlayer(sound);
-			mediaPlayer.play();
-		}
+//		if(now.equals(date) ) { 
+//			Media sound = new Media(new File(music).toURI().toString());
+//			MediaPlayer mediaPlayer = new MediaPlayer(sound);
+//			mediaPlayer.play();
+//		}
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
