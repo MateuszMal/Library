@@ -99,10 +99,13 @@ public class RentController implements Initializable {
 		rentListView.getItems().removeAll(rentList);
 
 		// Tymczasowa lista
-		tmpList = new ArrayList<RentalBook>();
-		tmpList.add(libManager.getRentByAuthor(showAuthorField.getText()));
-		tmpList.add(libManager.getRentByClient(showLastNameField.getText()));
-		tmpList.add(libManager.getRentByTitle(showTitle1Field.getText()));
+		tmpList = libManager.getRentListByAuthor(showAuthorField.getText());
+//		tmpList.add(libManager.getRentByAuthor(showAuthorField.getText()));
+//		tmpList.add(libManager.getRentByClient(showLastNameField.getText()));
+//		tmpList.add(libManager.getRentByTitle(showTitle1Field.getText()));
+		
+		tmpList.addAll(libManager.getRentListByClient(showLastNameField.getText()));
+		tmpList.addAll(libManager.getRentListByTitle(showTitle1Field.getText()));
 
 		tmpRentList = FXCollections.observableArrayList(tmpList);
 

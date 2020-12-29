@@ -146,6 +146,17 @@ public class LibraryManager {
 		}
 		return null;
 	}
+	
+	public ArrayList<RentalBook> getRentListByTitle(String title) {
+		ArrayList<RentalBook> rentList = new ArrayList<>();
+		if (isBookInLibrary(title)) {
+			for (RentalBook rent : library.getListOfRentals()) {
+				if (rent.getBook().getTitle().equals(title))
+					rentList.add(rent);
+			}
+		}
+		return rentList;
+	}
 
 	public RentalBook getRentByAuthor(String lastName) {
 		if (isAuthorInLibrary(lastName)) {
@@ -156,6 +167,17 @@ public class LibraryManager {
 		}
 		return null;
 	}
+	
+	public ArrayList<RentalBook> getRentListByAuthor(String lastName) {
+		ArrayList<RentalBook> rentList = new ArrayList<>();
+		if (isAuthorInLibrary(lastName)) {
+			for (RentalBook rent : library.getListOfRentals()) {
+				if (rent.getBook().getAuthor().getSurName().equals(lastName))
+					rentList.add(rent);
+			}
+		}
+		return rentList;
+	}
 
 	public RentalBook getRentByClient(String clientLastName) {
 		if (isClientInLibrary(clientLastName)) {
@@ -165,6 +187,17 @@ public class LibraryManager {
 			}
 		}
 		return null;
+	}
+	
+	public ArrayList<RentalBook> getRentListByClient(String clientLastName) {
+		ArrayList<RentalBook> rentList = new ArrayList<>();
+		if (isClientInLibrary(clientLastName)) {
+			for (RentalBook rent : library.getListOfRentals()) {
+				if (rent.getClient().getSurName().equals(clientLastName))
+					rentList.add(rent);
+			}
+		}
+		return rentList;
 	}
 	
 	public RentalBook getRentByClient(String clientLastName, String title) {
