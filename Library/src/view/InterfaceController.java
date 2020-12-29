@@ -27,6 +27,8 @@ public class InterfaceController implements Initializable {
 	@FXML
 	private Button clientButton;
 	@FXML
+	private Button calendarButton;
+	@FXML
 	private Button settingsButton;
 	@FXML
 	private Button infoButton;
@@ -58,6 +60,11 @@ public class InterfaceController implements Initializable {
 	public void onclientButton(ActionEvent event) {
 
 		fxmlUtils.fxmlLoader(event, "../view/fxml/ClientBorderPane.fxml", borderPane);
+	}
+	
+	public void onCalendarButton(ActionEvent event) {
+
+		fxmlUtils.fxmlLoader(event, "../view/fxml/CalendarBorderPane.fxml", borderPane);
 	}
 	
 	public void onSettingsButton(ActionEvent event) {
