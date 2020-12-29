@@ -8,7 +8,6 @@ import controller.LibraryHolder;
 import controller.LibraryManager;
 import controller.RentalBook;
 import javafx.application.Application;
-import view.AddClientController;
 import view.JavaFxInterface;
 
 public class Main {

@@ -13,10 +13,11 @@ public class FxmlUtils {
 	public void fxmlLoader(ActionEvent event, String fxmlPath, Pane pane) {
 		try {
 			BorderPane newLoadedPane;
-			Button tempButton = (Button) event.getSource();
+			//Button tempButton = (Button) event.getSource();
 			newLoadedPane = FXMLLoader.load(getClass().getResource(fxmlPath));
 			pane.getChildren().clear();
 			pane.getChildren().add(newLoadedPane);
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

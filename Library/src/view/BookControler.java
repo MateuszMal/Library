@@ -20,6 +20,9 @@ import javafx.scene.layout.BorderPane;
 import utils.FxmlUtils;
 
 public class BookControler implements Initializable {
+	
+	// TODO dodac wyswietlanie wszytskich ksiazek danego autora i po tytule
+	// Niech funkcja zwraca liste ksiazek
 
 	private FxmlUtils fxmlUtils = new FxmlUtils();
 
@@ -70,9 +73,9 @@ public class BookControler implements Initializable {
 		bookListView.getItems().removeAll(bookList);
 		
 		// Tymczasowa lista
-		tmpBookList = new ArrayList<Book>();
-		tmpBookList.add(libManager.getBookFromLibraryByTitle(bookTitleTextField.getText()));
-		tmpBookList.add(libManager.getBookFromLibraryByAuthor(bookAuthorTextField.getText()));
+		tmpBookList = libManager.getBookListByTitle(bookTitleTextField.getText());
+		//tmpBookList.add(libManager.getBookFromLibraryByTitle(bookTitleTextField.getText()));
+		//tmpBookList.add(libManager.getBookFromLibraryByAuthor(bookAuthorTextField.getText()));
 		tmpObsBookList = FXCollections.observableArrayList(tmpBookList);
 		
 		//Wyswietlanie wynikow

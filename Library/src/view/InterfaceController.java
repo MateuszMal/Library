@@ -38,14 +38,13 @@ public class InterfaceController implements Initializable {
 	private Button exitButton;
 	
 	public InterfaceController() {
-//		this.libraryController = new LibraryController();
+
 		this.fxmlUtils = new FxmlUtils();
 	}
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
-		//clientController.setParentController(this);
 	}
 
 
@@ -63,6 +62,11 @@ public class InterfaceController implements Initializable {
 	public void onclientButton(ActionEvent event) {
 
 		fxmlUtils.fxmlLoader(event, "../view/fxml/ClientBorderPane.fxml", borderPane);
+	}
+	
+	public void onSettingsButton(ActionEvent event) {
+		
+		fxmlUtils.fxmlLoader(event, "../view/fxml/SettingsPane.fxml", borderPane);
 	}
 	
 	public void onInfoButton(ActionEvent event) {

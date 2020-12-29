@@ -39,7 +39,7 @@
               <tabs>
                 <Tab style="-fx-background-color: rgb(0,128,255);" text="Wypożycz książkę">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                    <AnchorPane fx:id="remindButton" minHeight="0.0" minWidth="0.0" onDragDetected="#onRemindButton" prefHeight="180.0" prefWidth="200.0">
                            <children>
                               <TextField fx:id="rentTitleField" layoutX="138.0" layoutY="21.0" />
                               <TextField fx:id="rentClientNameField" layoutX="138.0" layoutY="62.0" />
@@ -59,6 +59,11 @@
                               </Button>
                               <DatePicker fx:id="remindCallendar" layoutX="34.0" layoutY="188.0" />
                               <Label layoutX="37.0" layoutY="150.0" text="Dodaj przypomnienie o zwrocie" />
+                              <Button fx:id="remindButton1" layoutX="53.0" layoutY="235.0" mnemonicParsing="false" onAction="#onRemindButton" prefHeight="33.0" prefWidth="134.0" style="-fx-background-color: rgb(0,128,255);" text="Przypomnienie" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Button>
                            </children></AnchorPane>
                   </content>
                 </Tab>
@@ -87,7 +92,7 @@
                   </content>
                  
                 </Tab>
-                <Tab fx:id="showTitleField" style="-fx-background-color: rgb(0,128,255);" text="Pokaż wszystkie">
+                <Tab fx:id="showTitleField" style="-fx-background-color: rgb(0,128,255);" text="Pokaż wypożyczenia">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>

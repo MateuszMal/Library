@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.ArrayList;
+
 public class LibraryManager {
 	/*
 	 * Manager Biblioteki - ulatwia komunikacje z biblioteka pozostalym obiektom.
@@ -64,26 +66,46 @@ public class LibraryManager {
 		return result;
 	}
 
-	public Book getBookFromLibraryByTitle(String title) {
-		Book _book = null;
+	public ArrayList<Book> getBookListByTitle(String title) {
+		ArrayList<Book> bookList = new ArrayList<>();
 		for (Book book : library.getBooksList()) {
 			if (book.getTitle().equals(title)) {
-				_book = book;
+				bookList.add(book);
 			}
 		}
-		return _book;
+		return bookList;
+	}
+	
+	public Book getBookByTitle(String title) {
+		for (Book book : library.getBooksList()) {
+			if (book.getTitle().equals(title)) {
+				return book;
+			}
+		}
+		return null;
 	}
 
-	public Book getBookFromLibraryByAuthor(String lastName) {
-		Book _book = null;
+	public Book getBookByAuthor(String lastName) {
 		if (isAuthorInLibrary(lastName)) {
 			for (Book book : library.getBooksList()) {
 				if (book.getAuthor().getSurName().equals(lastName)) {
-					_book = book;
+					return book;
 				}
 			}
 		}
-		return _book;
+		return null;
+	}
+	
+	public ArrayList<Book> getBookListByAuthor(String lastName){
+		ArrayList<Book> bookList = new ArrayList<>();
+		if (isAuthorInLibrary(lastName)) {
+			for (Book book : library.getBooksList()) {
+				if (book.getAuthor().getSurName().equals(lastName)) {
+					bookList.add(book);
+				}
+			}
+		}
+		return bookList;
 	}
 
 	public boolean isBookInLibrary(String title) {
@@ -98,7 +120,7 @@ public class LibraryManager {
 
 	public boolean addRentToLibrary(String name, String lastName, String title) {
 		if (isClientInLibrary(name, lastName) && isBookInLibrary(title)) {
-			Book book = getBookFromLibraryByTitle(title);
+			Book book = getBookByTitle(title);
 			Client client = getClientFromLib(name, lastName);
 			RentalBook rent = new RentalBook(book, client);
 			library.addRent(rent);
@@ -160,7 +182,7 @@ public class LibraryManager {
 		if(isRentInLibrary(title, clientName, clientLastName)) {
 			// Znajdz klienta, ksiazke, wypo¿yczenie
 			Client client = getClientFromLib(clientName, clientLastName);
-			Book book = getBookFromLibraryByTitle(title);
+			Book book = getBookByTitle(title);
 			RentalBook rent = getRentByClient(clientLastName, title);
 			library.removeRent(rent);
 			return true;

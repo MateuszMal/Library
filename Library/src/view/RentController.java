@@ -1,9 +1,14 @@
 package view;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import java.io.File;
 
 import controller.LibraryHolder;
 import controller.LibraryManager;
@@ -16,7 +21,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -26,10 +30,11 @@ import utils.FxmlUtils;
 
 public class RentController implements Initializable {
 
+	// TODO Ustawienie powiadomienia !!!!
 	// TODO wyszukiwanie wypozyczen poprzez ctrl+F
 	private FxmlUtils fxmlUtils = new FxmlUtils();
-	private InterfaceController interfaceController;
 
+	private String music = "./src/Resource/beep-01a.mp3";
 	// Glowny Pane
 	@FXML
 	private BorderPane rentBorderPane;
@@ -45,6 +50,8 @@ public class RentController implements Initializable {
 	private Button addRentButton;
 	@FXML
 	private Button rentBackButton;
+	@FXML
+	private Button remindButton1;
 	@FXML
 	private DatePicker remindCallendar;
 
@@ -179,5 +186,29 @@ public class RentController implements Initializable {
 		} else
 			DialogsUtils.emptyFields();
 	}
+	
+	public void onRemindButton() {
+		
+		// Dodac to do jakiegos pola u klienta
+		LocalDate now = LocalDate.now();
+		LocalDate date = remindCallendar.getValue();
+		// Wywalic stad!!
+		if(now.equals(date) ) { 
+			Media sound = new Media(new File(music).toURI().toString());
+			MediaPlayer mediaPlayer = new MediaPlayer(sound);
+			mediaPlayer.play();
+		}
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
+

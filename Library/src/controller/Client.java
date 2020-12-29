@@ -1,5 +1,6 @@
 package controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Client {
@@ -11,6 +12,8 @@ public class Client {
 	private Address address;
 	private long telNumber;
 	private ArrayList<Book> listOfRentalBooks;
+	private LocalDate reminder;
+
 
 	public Client(String name, String surName, String email, Address address, long telNumber, long id) {
 		super();
@@ -65,6 +68,14 @@ public class Client {
 
 	public void removeBook(int i) {
 		listOfRentalBooks.remove(i);
+	}
+	
+	public LocalDate getReminder() {
+		return reminder;
+	}
+
+	public void setReminder(LocalDate reminder) {
+		this.reminder = reminder;
 	}
 
 	@Override
