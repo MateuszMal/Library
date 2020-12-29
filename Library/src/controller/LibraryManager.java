@@ -250,6 +250,14 @@ public class LibraryManager {
 		}		
 		return false;
 	}
+	
+	public ArrayList<LocalDate> getAllReturnDates(){
+		ArrayList<LocalDate> returnDates = new ArrayList<>();
+		for(RentalBook rent : library.getListOfRentals()) {
+			returnDates.add(rent.getEndDateTime());
+		}
+		return returnDates;
+	}
 }
 
 

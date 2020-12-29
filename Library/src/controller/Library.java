@@ -13,6 +13,7 @@ public class Library {
 	private ArrayList<RentalBook> listOfRentals = new ArrayList<RentalBook>();
 
 	public void addRent(RentalBook rent) {
+		
 		listOfRentals.add(rent);
 	}
 
