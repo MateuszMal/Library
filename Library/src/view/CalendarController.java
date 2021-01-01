@@ -82,11 +82,6 @@ public class CalendarController implements Initializable {
 
 	}
 	
-	public void writeText() {
-		calendarTextArea.setText("Jestem");
-	}
-	
-	
 	public void onCalendarReturnButton(ActionEvent event) {
 		fxmlUtils.fxmlLoader(event, "../view/fxml/StackPaneWindow.fxml", calendarPane);
 	}
