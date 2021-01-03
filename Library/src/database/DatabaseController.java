@@ -24,12 +24,11 @@ public class DatabaseController {
 		}
 	}
 
-	public List<Author> findAuthor(String lastName) {
-		List<Author> listAuthor = new ArrayList<Author>();
+	public List<Author> listAuthor() {
+		List<Author> listAuthors = new ArrayList<Author>();
 		try {
 			conn = DriverManager.getConnection(DB_URL, userName, pass);
 			stmt = conn.createStatement();
-			System.out.println("jestem");
 
 			String query = "SELECT * FROM Author"; //WHERE surName LIKE " + lastName;
 			ResultSet result = stmt.executeQuery(query);
@@ -37,13 +36,35 @@ public class DatabaseController {
 			while(result.next()) {
 				surName = result.getString("surName");
 				name = result.getString("name");
-				listAuthor.add(new Author(surName, name));
-			}
-			
-
+				listAuthors.add(new Author(name, surName));
+			}			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return listAuthor;
+		return listAuthors;
+	}
+	
+	public List<Book> listBook(){
+		List<Book> listBooks = new ArrayList<Book>();
+		try {
+		List<Author> listAuthors = listAuthor();
+		String query = "SELECT * FROM Book";
+		ResultSet result = stmt.executeQuery(query);
+		String title, authorSurName;
+		while(result.next()) {
+			title = result.getString("title");
+			authorSurName = result.getString("author");
+			System.out.println(authorSurName);
+			for(Author a : listAuthors) {
+				if(a.getSurName().equals(authorSurName)) {					
+					listBooks.add(new Book(title, a));
+				}
+			}
+			
+		}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return listBooks;
 	}
 }

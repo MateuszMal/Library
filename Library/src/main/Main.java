@@ -44,11 +44,14 @@ public class Main {
 		
 		DatabaseController db = new DatabaseController();
 		List<Author> au = new ArrayList<Author>();
-		au = (db.findAuthor("Tolkien"));
+		List<Book> bo = new ArrayList<Book>();
+		au = (db.listAuthor());
+		bo = db.listBook();
 		System.out.println(au);
+		System.out.println(bo);
 
 		//System.out.println("Hello, Library");
-		Application.launch(JavaFxInterface.class, args);
+		//Application.launch(JavaFxInterface.class, args);
 	    
 		
 		
