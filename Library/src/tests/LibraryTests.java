@@ -37,7 +37,8 @@ class LibraryTests {
 	void testCreateAuthor() {
 		assertEquals("Jacek", author.getName());
 		assertEquals("Nowak", author.getSurName());
-		assertEquals(1, author.getListOfBooks().size());	
+		assertEquals(1, author.getListOfBooks().size());
+	
 	}
 	
 	@Test

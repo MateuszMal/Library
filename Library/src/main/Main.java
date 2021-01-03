@@ -1,6 +1,8 @@
 package main;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import controller.Address;
 import controller.Author;
@@ -9,6 +11,7 @@ import controller.Client;
 import controller.LibraryHolder;
 import controller.LibraryManager;
 import controller.RentalBook;
+import database.DatabaseController;
 import javafx.application.Application;
 import view.JavaFxInterface;
 
@@ -38,6 +41,11 @@ public class Main {
 		libraryManager.getLibrary().addBook(book1);
 		RentalBook rent = new RentalBook(book, client);
 		libraryManager.getLibrary().addRent(rent);
+		
+		DatabaseController db = new DatabaseController();
+		List<Author> au = new ArrayList<Author>();
+		au = (db.findAuthor("Tolkien"));
+		System.out.println(au);
 
 		//System.out.println("Hello, Library");
 		Application.launch(JavaFxInterface.class, args);
