@@ -50,7 +50,8 @@ public class BookControler implements Initializable {
 	public void prepareList() {
 		
 		// Przypisanie listy ksiazek do bookListView
-		List lista = libManager.getLibrary().getBooksList();
+		//List lista = libManager.getLibrary().getBooksList();
+		List lista = libManager.getBookList();
 		bookList = FXCollections.observableArrayList(lista);
 		bookListView.setItems(bookList);
 	}

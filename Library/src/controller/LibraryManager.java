@@ -2,6 +2,7 @@ package controller;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import database.DatabaseController;
 
@@ -17,11 +18,11 @@ public class LibraryManager {
 		this.library = new Library();
 		this.database = new DatabaseController();
 	}
-	
+
 	public boolean checkForReminders() {
-		for(Client client : library.getClientList()) {
-			if(client.isRemindSet()) {
-				if(client.getReminder() == LocalDate.now()) {
+		for (Client client : library.getClientList()) {
+			if (client.isRemindSet()) {
+				if (client.getReminder() == LocalDate.now()) {
 					System.out.println("Je");
 
 					return true;
@@ -41,11 +42,14 @@ public class LibraryManager {
 //		long _id = Long.valueOf(id);
 //		Client client = new Client(name, surName, email, address, telephoneNumber, _id);
 //		library.addClient(client);
-			
-			return database.insertClient(name, surName, email, street, number, town, telNumber, id);
+
+		return database.insertClient(name, surName, email, street, number, town, telNumber, id);
 	}
-	
-	
+
+	public List<Book> getBookList() {
+		List<Book> list = database.listBook();
+		return list;
+	}
 
 	public Client getClientFromLib(String name, String lastName) {
 		Client _client = null;
@@ -57,7 +61,7 @@ public class LibraryManager {
 		_client = database.findClient(name, lastName);
 		return _client;
 	}
-	
+
 	public boolean removeClientFromLib(String name, String surName, int id) {
 		return database.deleteClient(name, surName, id);
 	}
@@ -98,14 +102,18 @@ public class LibraryManager {
 
 	public ArrayList<Book> getBookListByTitle(String title) {
 		ArrayList<Book> bookList = new ArrayList<>();
-		for (Book book : library.getBooksList()) {
-			if (book.getTitle().equals(title)) {
+//		for (Book book : library.getBooksList()) {
+//			if (book.getTitle().equals(title)) {
+//				bookList.add(book);
+//			}
+//		}
+		for (Book book : database.listBook()) {
+			if (book.getTitle().equals(title))
 				bookList.add(book);
-			}
 		}
 		return bookList;
 	}
-	
+
 	public Book getBookByTitle(String title) {
 		for (Book book : library.getBooksList()) {
 			if (book.getTitle().equals(title)) {
@@ -125,15 +133,18 @@ public class LibraryManager {
 		}
 		return null;
 	}
-	
-	public ArrayList<Book> getBookListByAuthor(String lastName){
+
+	public ArrayList<Book> getBookListByAuthor(String lastName) {
 		ArrayList<Book> bookList = new ArrayList<>();
-		if (isAuthorInLibrary(lastName)) {
-			for (Book book : library.getBooksList()) {
-				if (book.getAuthor().getSurName().equals(lastName)) {
-					bookList.add(book);
-				}
-			}
+//		if (isAuthorInLibrary(lastName)) {
+//			for (Book book : library.getBooksList()) {
+//				if (book.getAuthor().getSurName().equals(lastName)) {
+//					bookList.add(book);
+//				}
+//			}
+		for (Book book : database.listBook()) {
+			if (book.getAuthor().getSurName().equals(lastName))
+				bookList.add(book);
 		}
 		return bookList;
 	}
@@ -158,7 +169,7 @@ public class LibraryManager {
 		} else
 			return false;
 	}
-	
+
 	public boolean addRentToLibrary(String name, String lastName, String title, LocalDate date) {
 		if (isClientInLibrary(name, lastName) && isBookInLibrary(title)) {
 			Book book = getBookByTitle(title);
@@ -172,8 +183,8 @@ public class LibraryManager {
 	}
 
 	// Zmienic zeby wyszukiwalo w wypozyczeniach
-	public boolean isRentInLibrary(String bookTitle, String clientName,String clientLastName) {
-		if (isBookInLibrary(bookTitle) && isClientInLibrary(clientName ,clientLastName))
+	public boolean isRentInLibrary(String bookTitle, String clientName, String clientLastName) {
+		if (isBookInLibrary(bookTitle) && isClientInLibrary(clientName, clientLastName))
 			return true;
 		else
 			return false;
@@ -188,7 +199,7 @@ public class LibraryManager {
 		}
 		return null;
 	}
-	
+
 	public ArrayList<RentalBook> getRentListByTitle(String title) {
 		ArrayList<RentalBook> rentList = new ArrayList<>();
 		if (isBookInLibrary(title)) {
@@ -209,7 +220,7 @@ public class LibraryManager {
 		}
 		return null;
 	}
-	
+
 	public ArrayList<RentalBook> getRentListByAuthor(String lastName) {
 		ArrayList<RentalBook> rentList = new ArrayList<>();
 		if (isAuthorInLibrary(lastName)) {
@@ -230,7 +241,7 @@ public class LibraryManager {
 		}
 		return null;
 	}
-	
+
 	public ArrayList<RentalBook> getRentListByClient(String clientLastName) {
 		ArrayList<RentalBook> rentList = new ArrayList<>();
 		if (isClientInLibrary(clientLastName)) {
@@ -241,45 +252,34 @@ public class LibraryManager {
 		}
 		return rentList;
 	}
-	
+
 	public RentalBook getRentByClient(String clientLastName, String title) {
 		if (isClientInLibrary(clientLastName) && isBookInLibrary(title)) {
 			for (RentalBook rent : library.getListOfRentals()) {
-				if (rent.getClient().getSurName().equals(clientLastName)
-						&& rent.getBook().getTitle().equals(title))
+				if (rent.getClient().getSurName().equals(clientLastName) && rent.getBook().getTitle().equals(title))
 					return rent;
 			}
 		}
 		return null;
 	}
-	
+
 	public boolean returnRent(String clientName, String clientLastName, String title) {
-		if(isRentInLibrary(title, clientName, clientLastName)) {
+		if (isRentInLibrary(title, clientName, clientLastName)) {
 			// Znajdz klienta, ksiazke, wypo¿yczenie
 			Client client = getClientFromLib(clientName, clientLastName);
 			Book book = getBookByTitle(title);
 			RentalBook rent = getRentByClient(clientLastName, title);
 			library.removeRent(rent);
 			return true;
-		}		
+		}
 		return false;
 	}
-	
-	public ArrayList<LocalDate> getAllReturnDates(){
+
+	public ArrayList<LocalDate> getAllReturnDates() {
 		ArrayList<LocalDate> returnDates = new ArrayList<>();
-		for(RentalBook rent : library.getListOfRentals()) {
+		for (RentalBook rent : library.getListOfRentals()) {
 			returnDates.add(rent.getEndDateTime());
 		}
 		return returnDates;
 	}
 }
-
-
-
-
-
-
-
-
-
-
