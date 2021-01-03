@@ -50,9 +50,16 @@ public class DataBaseTests {
 		System.out.println(clientList);
 	}
 	
+//	@Test
+//	void testInsertClient() {
+//		//db.insertClient("Mateusz", "Matejko", "mm@com.pl", "D³uga", "14", "Kluki", "2343242", "5");
+//	}
+	
 	@Test
-	void testInsertClient() {
-		db.insertClient("Mateusz", "Matejko", "mm@com.pl", "D³uga", "14", "Kluki", "2343242", "5");
+	void testFindClient(){
+		Client client = db.findClient("Jan", "Nowak");
+		assertEquals("Jan", client.getName());
+		assertEquals("Nowak", client.getSurName());
 	}
 
 }

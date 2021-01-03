@@ -39,7 +39,7 @@ public class DatabaseController {
 			while (result.next()) {
 				surName = result.getString("surName");
 				name = result.getString("name");
-				
+
 				listAuthors.add(new Author(name, surName));
 			}
 		} catch (Exception e) {
@@ -63,7 +63,7 @@ public class DatabaseController {
 				title = result.getString("Book.title");
 				authorSurName = result.getString("Author.surName");
 				authorName = result.getString("Author.name");
-				
+
 				Author author = new Author(authorName, authorSurName);
 				listBooks.add(new Book(title, author));
 			}
@@ -86,7 +86,7 @@ public class DatabaseController {
 				street = result.getString("street");
 				number = result.getString("number");
 				town = result.getString("town");
-				
+
 				listAddress.add(new Address(street, number, town));
 			}
 		} catch (Exception e) {
@@ -118,7 +118,7 @@ public class DatabaseController {
 				street = result.getString("Address.street");
 				number = result.getString("Address.number");
 				town = result.getString("Address.town");
-				
+
 				Address address = new Address(street, number, town);
 				listClient.add(new Client(name, surName, email, address, telNumber, id));
 
@@ -128,27 +128,61 @@ public class DatabaseController {
 		}
 		return listClient;
 	}
+	
+	public Client findClient(String name, String surName) {
+		Client client = null;
+		try {
+			conn = DriverManager.getConnection(DB_URL, userName, pass);
+			stmt = conn.createStatement();
+			
+			String query = "SELECT * FROM Client JOIN Address ON Client.Address_street = Address.street "
+					+ "WHERE Client.name = '" + name + "' AND Client.surName = '" + surName + "';";
+			ResultSet result = stmt.executeQuery(query);
+			int telNumber;
+			long id;
+
+			String _name, _surName, email, clientAddress, street, number, town;
+			while (result.next()) {
+				id = result.getLong("Client.idClient");
+				telNumber = result.getInt("Client.telNumber");
+				_name = result.getString("Client.name");
+				_surName = result.getString("Client.surName");
+				email = result.getString("Client.email");
+				clientAddress = result.getString("Client.Address_street");
+				street = result.getString("Address.street");
+				number = result.getString("Address.number");
+				town = result.getString("Address.town");
+
+				Address address = new Address(street, number, town);
+				client = new Client(_name, _surName, email, address, telNumber, id);
+			}			
+
+		} catch (Exception e) {
+			e.getMessage();
+			
+		}
+		return client;
+	}
 
 	public List<RentalBook> listRent() {
-		
+
 		// Trzeba dokoñczyc.
 		List<RentalBook> listRents = new ArrayList<RentalBook>();
 		try {
 			conn = DriverManager.getConnection(DB_URL, userName, pass);
 			stmt = conn.createStatement();
-			
+
 			String query = "SELECT * FROM Rent INNER JOIN Book, Author "
 					+ "ON Rent.Book_idBook = Book.idBook AND Rent.Client_idClient = Client.idClient ";
 			ResultSet result = stmt.executeQuery(query);
-			
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 		return listRents;
 	}
-	
-	public void insertClient(String name, String surName, String email, String street, String number, String town,
+
+	public boolean insertClient(String name, String surName, String email, String street, String number, String town,
 			String telNumber, String id) {
 		try {
 			conn = DriverManager.getConnection(DB_URL, userName, pass);
@@ -157,11 +191,11 @@ public class DatabaseController {
 			prepAdd.setString(2, number);
 			prepAdd.setString(3, town);
 			prepAdd.execute();
-			
+
 			PreparedStatement prepStmt = conn.prepareStatement("INSERT INTO Client VALUES(?, ?, ?, ?, ?, ?, ?);");
 			int telN = Integer.valueOf(telNumber);
 			int _id = Integer.valueOf(id);
-			
+
 			prepStmt.setInt(1, _id);
 			prepStmt.setString(2, name);
 			prepStmt.setString(3, surName);
@@ -169,9 +203,13 @@ public class DatabaseController {
 			prepStmt.setString(5, null);
 			prepStmt.setInt(6, telN);
 			prepStmt.setString(7, street);
-			prepStmt.execute();			
+			prepStmt.execute();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+			return false;
 		}
+		return true;
 	}
+
+	
 }

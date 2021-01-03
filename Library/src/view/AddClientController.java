@@ -84,7 +84,7 @@ public class AddClientController implements Initializable {
 			if (result.get() == ButtonType.OK) {
 				libManager.addNewClient(nameTextField.getText(), lastNameTextField.getText(),
 						emailTextField.getText(), streetTextField.getText(), nrTextField.getText(),
-				
+				// TODO zrobic info jak addNewClient zwroci false
 				// czyszcenie pol tekstowych		
 				townTextField.getText(), telephoneTextField.getText(), idTextField.getText());
 				nameTextField.clear();

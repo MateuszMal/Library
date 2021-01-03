@@ -62,7 +62,7 @@ public class InfoClientPaneController implements Initializable {
 			LibraryManager libManager = libHolder.getLIbManager();
 
 			// Sprawdza czy dany u¿ytkownik jest w bibliotece
-			if (libManager.isClientInLibrary(infoNameTextField.getText(), infoLastNameTextField.getText()) == true) {
+//			if (libManager.isClientInLibrary(infoNameTextField.getText(), infoLastNameTextField.getText()) == true) {
 
 				// Pobieram klienta z biblioteki
 				Client client = libManager.getClientFromLib(infoNameTextField.getText(),
@@ -70,8 +70,8 @@ public class InfoClientPaneController implements Initializable {
 
 				// Wyswietla info o kliencie
 				DialogsUtils.infoDialog(client.toString());
-			} else
-				DialogsUtils.infoDialog("Nie ma takiego u¿ytkownika");
+//			} else
+//				DialogsUtils.infoDialog("Nie ma takiego u¿ytkownika");
 
 		} else
 			DialogsUtils.emptyFields();

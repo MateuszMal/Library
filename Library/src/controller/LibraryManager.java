@@ -33,26 +33,28 @@ public class LibraryManager {
 		return false;
 	}
 
-	public void addNewClient(String name, String surName, String email, String street, String number, String town,
+	public boolean addNewClient(String name, String surName, String email, String street, String number, String town,
 			String telNumber, String id) {
+
 //		Address address = new Address(street, number, town);
 //		long telephoneNumber = Long.valueOf(telNumber);
 //		long _id = Long.valueOf(id);
 //		Client client = new Client(name, surName, email, address, telephoneNumber, _id);
 //		library.addClient(client);
 			
-			database.insertClient(name, surName, email, street, number, town, telNumber, id);
+			return database.insertClient(name, surName, email, street, number, town, telNumber, id);
 	}
 	
 	
 
 	public Client getClientFromLib(String name, String lastName) {
 		Client _client = null;
-		for (Client client : library.getClientList()) {
-			if (client.getName().equals(name) && client.getSurName().equals(lastName)) {
-				_client = client;
-			}
-		}
+//		for (Client client : library.getClientList()) {
+//			if (client.getName().equals(name) && client.getSurName().equals(lastName)) {
+//				_client = client;
+//			}
+//		}
+		_client = database.findClient(name, lastName);
 		return _client;
 	}
 
