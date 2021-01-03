@@ -41,14 +41,15 @@ public class Main {
 		libraryManager.getLibrary().addBook(book1);
 		RentalBook rent = new RentalBook(book, client);
 		libraryManager.getLibrary().addRent(rent);
-		
-		DatabaseController db = new DatabaseController();
-		List<Author> au = new ArrayList<Author>();
-		List<Book> bo = new ArrayList<Book>();
-		au = (db.listAuthor());
-		bo = db.listBook();
-		System.out.println(au);
-		System.out.println(bo);
+//		
+//		DatabaseController db = new DatabaseController();
+//		List<Author> au = (db.listAuthor());
+//		List<Book> bo = db.listBook();
+//		List<Address> ad = db.listAddress();
+//	
+//		System.out.println(au);
+//		System.out.println(bo);
+//		System.out.println(ad);
 
 		//System.out.println("Hello, Library");
 		//Application.launch(JavaFxInterface.class, args);
