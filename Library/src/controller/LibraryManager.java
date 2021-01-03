@@ -57,6 +57,10 @@ public class LibraryManager {
 		_client = database.findClient(name, lastName);
 		return _client;
 	}
+	
+	public boolean removeClientFromLib(String name, String surName, int id) {
+		return database.deleteClient(name, surName, id);
+	}
 
 	public boolean isClientInLibrary(String name, String lastName) {
 		boolean result = false;

@@ -43,6 +43,9 @@ public class AddClientController implements Initializable {
 	private TextField streetTextField;
 	@FXML
 	private TextField nrTextField;
+	
+	private LibraryHolder libHolder;
+	private LibraryManager libManager;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -74,8 +77,8 @@ public class AddClientController implements Initializable {
 		if (isTextFieldsEmpty()) {
 
 			// Ustawia uniwersalnego singletona i pobiera jego instncje
-			LibraryHolder libHolder = LibraryHolder.getInstance();
-			LibraryManager libManager = libHolder.getLIbManager();
+			libHolder = LibraryHolder.getInstance();
+			libManager = libHolder.getLIbManager();
 			
 			// Przygotowanie okna dialogowego
 			Optional<ButtonType> result = DialogsUtils.addClientConfirmationDialog();

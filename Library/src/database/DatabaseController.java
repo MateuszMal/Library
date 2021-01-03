@@ -158,10 +158,29 @@ public class DatabaseController {
 			}			
 
 		} catch (Exception e) {
-			e.getMessage();
+			System.out.println(e.getMessage());
 			
 		}
 		return client;
+	}
+	
+	public boolean deleteClient(String name, String surName, int id) {
+		try {
+			System.out.println("Jestem");
+
+			conn = DriverManager.getConnection(DB_URL, userName, pass);
+			stmt = conn.createStatement();
+			
+			String query = "DELETE FROM Client WHERE Client.idClient = " + id + " AND Client.name = '"
+					+ name + "' AND Client.surName ='" + surName + "';";
+			stmt.executeUpdate(query);
+			System.out.println("Uda³o sie");
+			
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+		return true;
 	}
 
 	public List<RentalBook> listRent() {

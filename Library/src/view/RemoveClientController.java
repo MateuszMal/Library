@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import controller.LibraryHolder;
+import controller.LibraryManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -30,6 +32,9 @@ public class RemoveClientController implements Initializable {
 	private Button removeControllBackButton;
 	@FXML
 	private Button removeClientButton;
+
+	private LibraryHolder libHolder;
+	private LibraryManager libManager;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -58,17 +63,29 @@ public class RemoveClientController implements Initializable {
 
 	@FXML
 	public void onRemoveClientButton(ActionEvent event) {
+
+		libHolder = LibraryHolder.getInstance();
+		libManager = libHolder.getLIbManager();
+
 		// Jesli pola wpisu nie sa puste
-		if(isTetxtFieldsEmpty()) {
-		Optional<ButtonType> result = DialogsUtils.removeClientConfirmationDialog();
-		if (result.get() == ButtonType.OK) {
-			// TODO Dodac usuwanie klienta
-			removeNameTextField.clear();
-			removeLastNameTextField.clear();
-			removeIdTextField.clear();
-		}
-		}
-		else DialogsUtils.emptyFields();
+		if (isTetxtFieldsEmpty()) {
+			Optional<ButtonType> result = DialogsUtils.removeClientConfirmationDialog();
+			if (result.get() == ButtonType.OK) {
+				// TODO Dodac usuwanie klienta
+				int id = Integer.valueOf(removeIdTextField.getText());
+				if (libManager.removeClientFromLib(removeNameTextField.getText(), removeLastNameTextField.getText(),
+						id)) {
+					DialogsUtils.successAction();
+				} else {
+					DialogsUtils.infoDialog("Nie powiod³o siê");
+				}
+
+				removeNameTextField.clear();
+				removeLastNameTextField.clear();
+				removeIdTextField.clear();
+			}
+		} else
+			DialogsUtils.emptyFields();
 	}
 
 	@FXML
