@@ -32,7 +32,7 @@ public class DatabaseController {
 			conn = DriverManager.getConnection(DB_URL, userName, pass);
 			stmt = conn.createStatement();
 
-			String query = "SELECT * FROM Author"; // WHERE surName LIKE " + lastName;
+			String query = "SELECT * FROM Author"; 
 			ResultSet result = stmt.executeQuery(query);
 			String surName, name;
 			while (result.next()) {
@@ -53,18 +53,16 @@ public class DatabaseController {
 			stmt = conn.createStatement();
 
 			List<Author> listAuthors = listAuthor();
-			String query = "SELECT * FROM Book";
+			String query = "SELECT Book.title, Author.surName, Author.name FROM Book "
+					+ "INNER JOIN Author ON Book.Author_name = Author.surName";
 			ResultSet result = stmt.executeQuery(query);
-			String title, authorSurName;
+			String title, authorSurName, authorName;
 			while (result.next()) {
-				title = result.getString("title");
-				authorSurName = result.getString("author");
-				for (Author a : listAuthors) {
-					if (a.getSurName().equals(authorSurName)) {
-						listBooks.add(new Book(title, a));
-					}
-				}
-
+				title = result.getString("Book.title");
+				authorSurName = result.getString("Author.surName");
+				authorName = result.getString("Author.name");
+				Author author = new Author(authorName, authorSurName);
+				listBooks.add(new Book(title, author));
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -100,28 +98,35 @@ public class DatabaseController {
 			conn = DriverManager.getConnection(DB_URL, userName, pass);
 			stmt = conn.createStatement();
 
-			String query = "SELECT * FROM Client";
+			String query = "SELECT * FROM Client INNER JOIN Address ON Client.Address_street = Address.street";
 			ResultSet result = stmt.executeQuery(query);
 			int telNumber;
 			long id;
-			//Address address;
-			String name, surName, email, address;
-			while(result.next()) {
-				id = result.getLong("idClient");
-				telNumber = result.getInt("telNumber");
-				name = result.getString("name");
-				surName = result.getString("surName");
-				email = result.getString("email");
-				address = result.getString("Address_street");
-				for(Address ad : listAddress()) {
-					if(ad.getStreet().equals(address)) {
-						listClient.add(new Client(name, surName, email, ad, telNumber, id));
-					}
-				}
+
+			String name, surName, email, clientAddress, street, number, town;
+			while (result.next()) {
+				id = result.getLong("Client.idClient");
+				telNumber = result.getInt("Client.telNumber");
+				name = result.getString("Client.name");
+				surName = result.getString("Client.surName");
+				email = result.getString("Client.email");
+				clientAddress = result.getString("Client.Address_street");
+				street = result.getString("Address.street");
+				number = result.getString("Address.number");
+				town = result.getString("Address.town");
+				Address address = new Address(street, number, town);
+				listClient.add(new Client(name, surName, email, address, telNumber, id));
+//				for (Address ad : listAddress()) {
+//					if (ad.getStreet().equals(address)) {
+//						listClient.add(new Client(name, surName, email, ad, telNumber, id));
+//					}
+//				}
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 		return listClient;
 	}
+
+	
 }
