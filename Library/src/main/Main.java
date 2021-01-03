@@ -52,7 +52,7 @@ public class Main {
 //		System.out.println(ad);
 
 		//System.out.println("Hello, Library");
-		//Application.launch(JavaFxInterface.class, args);
+		Application.launch(JavaFxInterface.class, args);
 	    
 		
 		

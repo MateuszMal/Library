@@ -49,5 +49,10 @@ public class DataBaseTests {
 		clientList = db.listClient();
 		System.out.println(clientList);
 	}
+	
+	@Test
+	void testInsertClient() {
+		db.insertClient("Mateusz", "Matejko", "mm@com.pl", "D³uga", "14", "Kluki", "2343242", "5");
+	}
 
 }

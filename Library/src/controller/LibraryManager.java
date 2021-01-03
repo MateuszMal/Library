@@ -3,15 +3,19 @@ package controller;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import database.DatabaseController;
+
 public class LibraryManager {
 	/*
 	 * Manager Biblioteki - ulatwia komunikacje z biblioteka pozostalym obiektom.
 	 */
 
 	private Library library;
+	private DatabaseController database;
 
 	public LibraryManager() {
 		this.library = new Library();
+		this.database = new DatabaseController();
 	}
 	
 	public boolean checkForReminders() {
@@ -31,12 +35,16 @@ public class LibraryManager {
 
 	public void addNewClient(String name, String surName, String email, String street, String number, String town,
 			String telNumber, String id) {
-		Address address = new Address(street, number, town);
-		long telephoneNumber = Long.valueOf(telNumber);
-		long _id = Long.valueOf(id);
-		Client client = new Client(name, surName, email, address, telephoneNumber, _id);
-		library.addClient(client);
+//		Address address = new Address(street, number, town);
+//		long telephoneNumber = Long.valueOf(telNumber);
+//		long _id = Long.valueOf(id);
+//		Client client = new Client(name, surName, email, address, telephoneNumber, _id);
+//		library.addClient(client);
+			
+			database.insertClient(name, surName, email, street, number, town, telNumber, id);
 	}
+	
+	
 
 	public Client getClientFromLib(String name, String lastName) {
 		Client _client = null;
