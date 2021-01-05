@@ -121,7 +121,7 @@ public class RentController implements Initializable {
 
 	public void onshowAllButton() {
 
-		List lista = libManager.getLibrary().getListOfRentals();
+		List lista = libManager.getRentList();
 
 		// Bindowanie list (listproperty obserwuje zmiany w rentList
 		listProperty = new SimpleListProperty<>();
@@ -189,11 +189,8 @@ public class RentController implements Initializable {
 					DialogsUtils.infoDialog("Nie uda³o siê zrealizowaæ tego wypo¿yczenia.");
 			} else {
 				// Jesli nie ma ustawionego przypomnienia
-				if (libManager.addRentToLibrary(rentClientNameField.getText(), rentClientLastNameField.getText(),
-						rentTitleField.getText())) {
-					DialogsUtils.successAction();
-				} else
-					DialogsUtils.infoDialog("Nie uda³o siê zrealizowaæ tego wypo¿yczenia.");
+				DialogsUtils.emptyFields();
+
 			}
 		} else
 			DialogsUtils.emptyFields();

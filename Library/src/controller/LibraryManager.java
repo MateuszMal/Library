@@ -6,12 +6,22 @@ import java.util.List;
 
 import database.DatabaseController;
 
-public class LibraryManager {
-	/*
-	 * Manager Biblioteki - ulatwia komunikacje z biblioteka pozostalym obiektom.
-	 */
+/**
+ * Library manager - a class that manages the library
+ * 
+ * @author mmate
+ *
+ */
 
+public class LibraryManager {
+
+	/**
+	 * Stores Library instance
+	 */
 	private Library library;
+	/**
+	 * Stores DataBase controller instance
+	 */
 	private DatabaseController database;
 
 	public LibraryManager() {
@@ -34,6 +44,20 @@ public class LibraryManager {
 		return false;
 	}
 
+	/**
+	 * Adds a new client to the database
+	 * 
+	 * @param name
+	 * @param surName
+	 * @param email
+	 * @param street
+	 * @param number
+	 * @param town
+	 * @param telNumber
+	 * @param id
+	 * @return Returns true if the operation was successful, false if not
+	 */
+
 	public boolean addNewClient(String name, String surName, String email, String street, String number, String town,
 			String telNumber, String id) {
 
@@ -46,10 +70,35 @@ public class LibraryManager {
 		return database.insertClient(name, surName, email, street, number, town, telNumber, id);
 	}
 
+	/**
+	 * Returns a list of books store in database
+	 * 
+	 * @return
+	 */
+
 	public List<Book> getBookList() {
 		List<Book> list = database.listBook();
 		return list;
 	}
+
+	/**
+	 * Returns a list of rents store in database
+	 * 
+	 * @return
+	 */
+
+	public List<RentalBook> getRentList() {
+		List<RentalBook> list = database.listRent();
+		return list;
+	}
+
+	/**
+	 * Returns client from database
+	 * 
+	 * @param name     The client's name
+	 * @param lastName The client's last name
+	 * @return returns client
+	 */
 
 	public Client getClientFromLib(String name, String lastName) {
 		Client _client = null;
@@ -61,6 +110,15 @@ public class LibraryManager {
 		_client = database.findClient(name, lastName);
 		return _client;
 	}
+
+	/**
+	 * Removes client from database
+	 * 
+	 * @param name    The client's name
+	 * @param surName The client's last name
+	 * @param id      The client's id number
+	 * @return Returns true if the operation was successful, false if not
+	 */
 
 	public boolean removeClientFromLib(String name, String surName, int id) {
 		return database.deleteClient(name, surName, id);
@@ -86,6 +144,11 @@ public class LibraryManager {
 		return result;
 	}
 
+	/**
+	 * Returns library instance
+	 * 
+	 * @return Library
+	 */
 	public Library getLibrary() {
 		return library;
 	}
@@ -100,6 +163,13 @@ public class LibraryManager {
 		return result;
 	}
 
+	/**
+	 * Returns a list of books by title
+	 * 
+	 * @param title The book's title
+	 * @return List of books
+	 */
+
 	public ArrayList<Book> getBookListByTitle(String title) {
 		ArrayList<Book> bookList = new ArrayList<>();
 //		for (Book book : library.getBooksList()) {
@@ -111,8 +181,17 @@ public class LibraryManager {
 			if (book.getTitle().equals(title))
 				bookList.add(book);
 		}
-		return bookList;
+
+			return bookList;
+
 	}
+
+	/**
+	 * Returns a book by title
+	 * 
+	 * @param title Book's title
+	 * @return
+	 */
 
 	public Book getBookByTitle(String title) {
 		for (Book book : library.getBooksList()) {
@@ -122,6 +201,13 @@ public class LibraryManager {
 		}
 		return null;
 	}
+
+	/**
+	 * Returns a book by author
+	 * 
+	 * @param lastName Author's last name
+	 * @return
+	 */
 
 	public Book getBookByAuthor(String lastName) {
 		if (isAuthorInLibrary(lastName)) {
@@ -133,6 +219,13 @@ public class LibraryManager {
 		}
 		return null;
 	}
+
+	/**
+	 * Returns a list of books by author's last name
+	 * 
+	 * @param lastName The author's last name
+	 * @return List of books
+	 */
 
 	public ArrayList<Book> getBookListByAuthor(String lastName) {
 		ArrayList<Book> bookList = new ArrayList<>();
@@ -159,27 +252,26 @@ public class LibraryManager {
 		return result;
 	}
 
-	public boolean addRentToLibrary(String name, String lastName, String title) {
-		if (isClientInLibrary(name, lastName) && isBookInLibrary(title)) {
-			Book book = getBookByTitle(title);
-			Client client = getClientFromLib(name, lastName);
-			RentalBook rent = new RentalBook(book, client);
-			library.addRent(rent);
-			return true;
-		} else
-			return false;
-	}
-
 	public boolean addRentToLibrary(String name, String lastName, String title, LocalDate date) {
-		if (isClientInLibrary(name, lastName) && isBookInLibrary(title)) {
-			Book book = getBookByTitle(title);
-			Client client = getClientFromLib(name, lastName);
-			client.setReminder(date);
+		// TODO czy da sie tak aby sprawdzic czy lista nie jest pusta?
+		if (getBookListByTitle(title).size() != 0) {
+			Book book = getBookListByTitle(title).get(0);
+		
+		Client client = getClientFromLib(name, lastName);
+		client.setReminder(date);
+
+		if (client != null || book != null) {
 			RentalBook rent = new RentalBook(book, client);
-			library.addRent(rent);
-			return true;
+
+			int id = (int) (Math.random() * 1000);
+			if (database.insertRent(rent, id)) {
+				return true;
+			} else
+				return false;
 		} else
-			return false;
+			return false;}
+		 else
+				return false;
 	}
 
 	// Zmienic zeby wyszukiwalo w wypozyczeniach
@@ -200,14 +292,21 @@ public class LibraryManager {
 		return null;
 	}
 
+	/**
+	 * Returns list of rentals by book's title
+	 * 
+	 * @param title The book's title
+	 * @return RentalBook list
+	 */
+
 	public ArrayList<RentalBook> getRentListByTitle(String title) {
 		ArrayList<RentalBook> rentList = new ArrayList<>();
-		if (isBookInLibrary(title)) {
-			for (RentalBook rent : library.getListOfRentals()) {
-				if (rent.getBook().getTitle().equals(title))
-					rentList.add(rent);
-			}
+		// if (isBookInLibrary(title)) {
+		for (RentalBook rent : getRentList()) {
+			if (rent.getBook().getTitle().equals(title))
+				rentList.add(rent);
 		}
+		// }
 		return rentList;
 	}
 
@@ -221,14 +320,21 @@ public class LibraryManager {
 		return null;
 	}
 
+	/**
+	 * Returns rental list by author's last name
+	 * 
+	 * @param lastName The author's last name
+	 * @return RentalBook list
+	 */
+
 	public ArrayList<RentalBook> getRentListByAuthor(String lastName) {
 		ArrayList<RentalBook> rentList = new ArrayList<>();
-		if (isAuthorInLibrary(lastName)) {
-			for (RentalBook rent : library.getListOfRentals()) {
-				if (rent.getBook().getAuthor().getSurName().equals(lastName))
-					rentList.add(rent);
-			}
+		// if (isAuthorInLibrary(lastName)) {
+		for (RentalBook rent : getRentList()) {
+			if (rent.getBook().getAuthor().getSurName().equals(lastName))
+				rentList.add(rent);
 		}
+		// }
 		return rentList;
 	}
 
@@ -242,14 +348,21 @@ public class LibraryManager {
 		return null;
 	}
 
+	/**
+	 * Returns list of rentals by client's last name
+	 * 
+	 * @param clientLastName The client's last name
+	 * @return RentalBook list
+	 */
+
 	public ArrayList<RentalBook> getRentListByClient(String clientLastName) {
 		ArrayList<RentalBook> rentList = new ArrayList<>();
-		if (isClientInLibrary(clientLastName)) {
-			for (RentalBook rent : library.getListOfRentals()) {
-				if (rent.getClient().getSurName().equals(clientLastName))
-					rentList.add(rent);
-			}
+//		if (isClientInLibrary(clientLastName)) {
+		for (RentalBook rent : getRentList()) {
+			if (rent.getClient().getSurName().equals(clientLastName))
+				rentList.add(rent);
 		}
+//		}
 		return rentList;
 	}
 

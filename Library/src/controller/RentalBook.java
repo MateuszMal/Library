@@ -3,6 +3,11 @@ package controller;
 import java.time.LocalDate;
 import java.util.Date;
 
+	/**
+	 * Represents a rents
+	 * @author mmate
+	 *
+	 */
 public class RentalBook {
 
 	private Book book;
@@ -16,7 +21,7 @@ public class RentalBook {
 	
 	int rentalLength;
 	
-	//public RentalBook() {}
+
 
 	public RentalBook(Book book, Client client) {
 		this.book = book;

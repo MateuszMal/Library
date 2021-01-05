@@ -3,6 +3,12 @@ package controller;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Represents a Client
+ * @author mmate
+ *
+ */
+
 public class Client {
 
 	private String name;
@@ -14,6 +20,15 @@ public class Client {
 	private ArrayList<Book> listOfRentalBooks;
 	private LocalDate reminder;
 
+	/**
+	 * Create a client
+	 * @param name The client's name
+	 * @param surName The client's last name
+	 * @param email The client's email address
+	 * @param address The client's address
+	 * @param telNumber The client's telephone number
+	 * @param id The client's id number
+	 */
 
 	public Client(String name, String surName, String email, Address address, long telNumber, long id) {
 		super();
@@ -73,11 +88,14 @@ public class Client {
 	public LocalDate getReminder() {
 		return reminder;
 	}
-
+	/**
+	 * Method sets the date of the book return reminder
+	 * @param reminder
+	 */
 	public void setReminder(LocalDate reminder) {
 		this.reminder = reminder;
 	}
-	
+
 	public boolean isRemindSet() {
 		if(reminder != null) return true;
 		return false;

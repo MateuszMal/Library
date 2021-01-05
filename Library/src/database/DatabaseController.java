@@ -1,8 +1,10 @@
 package database;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 import controller.Address;
 import controller.Author;
@@ -55,17 +57,21 @@ public class DatabaseController {
 			stmt = conn.createStatement();
 
 			List<Author> listAuthors = listAuthor();
-			String query = "SELECT Book.title, Author.surName, Author.name FROM Book "
+			String query = "SELECT Book.idBook, Book.title, Author.surName, Author.name FROM Book "
 					+ "INNER JOIN Author ON Book.Author_name = Author.surName";
 			ResultSet result = stmt.executeQuery(query);
+			int idBook;
 			String title, authorSurName, authorName;
 			while (result.next()) {
 				title = result.getString("Book.title");
 				authorSurName = result.getString("Author.surName");
 				authorName = result.getString("Author.name");
+				idBook = result.getInt("Book.idBook");
 
 				Author author = new Author(authorName, authorSurName);
-				listBooks.add(new Book(title, author));
+				Book book = new Book(title, author);
+				book.setId(idBook);
+				listBooks.add(book);
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -128,13 +134,13 @@ public class DatabaseController {
 		}
 		return listClient;
 	}
-	
+
 	public Client findClient(String name, String surName) {
 		Client client = null;
 		try {
 			conn = DriverManager.getConnection(DB_URL, userName, pass);
 			stmt = conn.createStatement();
-			
+
 			String query = "SELECT * FROM Client JOIN Address ON Client.Address_street = Address.street "
 					+ "WHERE Client.name = '" + name + "' AND Client.surName = '" + surName + "';";
 			ResultSet result = stmt.executeQuery(query);
@@ -155,26 +161,52 @@ public class DatabaseController {
 
 				Address address = new Address(street, number, town);
 				client = new Client(_name, _surName, email, address, telNumber, id);
-			}			
+			}
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			
+
 		}
 		return client;
 	}
-	
+
+	public Book findBook(String title) {
+		Book book = null;
+		try {
+			conn = DriverManager.getConnection(DB_URL, userName, pass);
+			stmt = conn.createStatement();
+			
+			String query = "select * from Book JOIN Author ON Book.Author_name = Author.surName "
+					+ "Where Book.title = '" + title + "';";
+			ResultSet result = stmt.executeQuery(query);
+			
+			String _title, name, surName;
+			while (result.next()) {
+				_title = result.getString("Book.title");
+				name = result.getString("Author.name");
+				surName = result.getString("Author.surName");
+				
+				Author author = new Author(name, surName);
+				book = new Book(_title, author);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return book;
+	}
+
 	public boolean deleteClient(String name, String surName, int id) {
 		try {
 
 			conn = DriverManager.getConnection(DB_URL, userName, pass);
 			stmt = conn.createStatement();
-			
-			String query = "DELETE FROM Client WHERE Client.idClient = " + id + " AND Client.name = '"
-					+ name + "' AND Client.surName ='" + surName + "';";
+
+			String query = "DELETE FROM Client WHERE Client.idClient = " + id + " AND Client.name = '" + name
+					+ "' AND Client.surName ='" + surName + "';";
 			stmt.executeUpdate(query);
-			
-		}catch (Exception e) {
+
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return false;
 		}
@@ -183,15 +215,25 @@ public class DatabaseController {
 
 	public List<RentalBook> listRent() {
 
-		// Trzeba dokoñczyc.
 		List<RentalBook> listRents = new ArrayList<RentalBook>();
 		try {
 			conn = DriverManager.getConnection(DB_URL, userName, pass);
 			stmt = conn.createStatement();
 
-			String query = "SELECT * FROM Rent INNER JOIN Book, Author "
-					+ "ON Rent.Book_idBook = Book.idBook AND Rent.Client_idClient = Client.idClient ";
+			String query = "SELECT * FROM Rent "
+					+ "JOIN Client ON Rent.Client_idClient = Client.idClient "
+					+ "JOIN Book On Rent.Book_idBook = Book.idBook;";
 			ResultSet result = stmt.executeQuery(query);
+			while(result.next()) {
+				String ClientName = result.getString("Client.name");
+				String ClientSurName = result.getString("Client.surName");
+				String title = result.getString("Book.title");
+				Client client = findClient(ClientName, ClientSurName);
+				Book book = findBook(title);
+				
+				RentalBook rentalBook = new RentalBook(book, client);
+				listRents.add(rentalBook);
+			}		
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -228,5 +270,31 @@ public class DatabaseController {
 		return true;
 	}
 
-	
+	public boolean insertRent(RentalBook rent, int id) {
+		try {
+			// TODO Trzeba dokonczyc!!!
+			LocalDate date = LocalDate.now();
+			LocalDate endRentDay = date.plusDays(30);
+			conn = DriverManager.getConnection(DB_URL, userName, pass);
+			PreparedStatement prepAdd = conn.prepareStatement("INSERT INTO Rent VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+
+			prepAdd.setInt(1, id);
+			prepAdd.setString(2, rent.getBook().getTitle()); 
+			prepAdd.setString(3, rent.getClient().getSurName());
+			prepAdd.setDate(4, java.sql.Date.valueOf(rent.getRentDateTime()));
+			prepAdd.setDate(5, java.sql.Date.valueOf(rent.getEndDateTime()));
+			prepAdd.setDate(6,  null);
+			prepAdd.setInt(7, rent.getBook().getId());
+			prepAdd.setInt(8, (int) rent.getClient().getId());
+			prepAdd.execute();
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+
+		return true;
+	}
+
+	// TODO napidsac metode ktora ododaje przypomnienie clientowi
 }
