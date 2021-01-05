@@ -10,6 +10,8 @@ import java.util.Date;
 	 */
 public class RentalBook {
 
+	private int id;
+
 	private Book book;
 	private Client client;
 	// Data wypozyczenia
@@ -65,6 +67,35 @@ public class RentalBook {
 	public boolean isOnTimeReturn() {
 		if(endRentDate.isAfter(endDateTime)) return false;
 		else return true;
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+	public void setBook(Book book) {
+		this.book = book;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+	public void setRentDateTime(LocalDate rentDateTime) {
+		this.rentDateTime = rentDateTime;
+	}
+
+	public void setEndDateTime(LocalDate endDateTime) {
+		this.endDateTime = endDateTime;
+	}
+
+	public void setRentalLength(int rentalLength) {
+		this.rentalLength = rentalLength;
 	}
 
 	@Override

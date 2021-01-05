@@ -1,7 +1,9 @@
 package database;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
@@ -212,6 +214,22 @@ public class DatabaseController {
 		}
 		return true;
 	}
+	
+	public boolean deleteRent(RentalBook rent) {
+		try {
+		conn = DriverManager.getConnection(DB_URL, userName, pass);
+		stmt = conn.createStatement();
+		
+		String querry = "DELETE FROM Rent WHERE Rent.idRent = " + rent.getId() + ";";
+		stmt.executeUpdate(querry);
+		
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+		
+		return true;
+	}
 
 	public List<RentalBook> listRent() {
 
@@ -228,16 +246,33 @@ public class DatabaseController {
 				String ClientName = result.getString("Client.name");
 				String ClientSurName = result.getString("Client.surName");
 				String title = result.getString("Book.title");
+				int idRent = result.getInt("rent.idRent");
+				Date rentDateTime = result.getDate("Rent.rentDateTime");
+				Date endDateTime = result.getDate("Rent.endDateTime");
+
 				Client client = findClient(ClientName, ClientSurName);
 				Book book = findBook(title);
 				
 				RentalBook rentalBook = new RentalBook(book, client);
+
+				//Parsowanie dat
+				LocalDate rentDate = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(rentDateTime));
+				LocalDate endDate = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(endDateTime));
+
+				
+				rentalBook.setId(idRent);
+				rentalBook.setRentDateTime(rentDate);
+				rentalBook.setEndDateTime(endDate);
 				listRents.add(rentalBook);
+				System.out.println("wypo" + rentalBook);
+
 			}		
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		System.out.println(listRents);
+
 		return listRents;
 	}
 
@@ -270,7 +305,7 @@ public class DatabaseController {
 		return true;
 	}
 
-	public boolean insertRent(RentalBook rent, int id) {
+	public boolean insertRent(RentalBook rent) {
 		try {
 			// TODO Trzeba dokonczyc!!!
 			LocalDate date = LocalDate.now();
@@ -278,7 +313,7 @@ public class DatabaseController {
 			conn = DriverManager.getConnection(DB_URL, userName, pass);
 			PreparedStatement prepAdd = conn.prepareStatement("INSERT INTO Rent VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
 
-			prepAdd.setInt(1, id);
+			prepAdd.setInt(1, rent.getId());
 			prepAdd.setString(2, rent.getBook().getTitle()); 
 			prepAdd.setString(3, rent.getClient().getSurName());
 			prepAdd.setDate(4, java.sql.Date.valueOf(rent.getRentDateTime()));

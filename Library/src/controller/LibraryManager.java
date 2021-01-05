@@ -253,7 +253,7 @@ public class LibraryManager {
 	}
 
 	public boolean addRentToLibrary(String name, String lastName, String title, LocalDate date) {
-		// TODO czy da sie tak aby sprawdzic czy lista nie jest pusta?
+	
 		if (getBookListByTitle(title).size() != 0) {
 			Book book = getBookListByTitle(title).get(0);
 		
@@ -264,7 +264,8 @@ public class LibraryManager {
 			RentalBook rent = new RentalBook(book, client);
 
 			int id = (int) (Math.random() * 1000);
-			if (database.insertRent(rent, id)) {
+			rent.setId(id);
+			if (database.insertRent(rent)) {
 				return true;
 			} else
 				return false;
@@ -272,6 +273,23 @@ public class LibraryManager {
 			return false;}
 		 else
 				return false;
+	}
+	
+	public boolean returnRent(String clientName, String clientLastName, String title) {
+		List<RentalBook> rentList = getRentList();
+		System.out.println(rentList);
+
+		//RentalBook newRent;
+		for(RentalBook rent : rentList) {
+			if(rent.getBook().getTitle().equals(title) && rent.getClient().getSurName().equals(clientLastName)
+					&& rent.getClient().getName().equals(clientName)) {
+				System.out.println("Jestem");
+				//newRent = rent;
+				database.deleteRent(rent);
+				return true;
+			}
+		}
+		return false;
 	}
 
 	// Zmienic zeby wyszukiwalo w wypozyczeniach
@@ -376,17 +394,7 @@ public class LibraryManager {
 		return null;
 	}
 
-	public boolean returnRent(String clientName, String clientLastName, String title) {
-		if (isRentInLibrary(title, clientName, clientLastName)) {
-			// Znajdz klienta, ksiazke, wypo¿yczenie
-			Client client = getClientFromLib(clientName, clientLastName);
-			Book book = getBookByTitle(title);
-			RentalBook rent = getRentByClient(clientLastName, title);
-			library.removeRent(rent);
-			return true;
-		}
-		return false;
-	}
+
 
 	public ArrayList<LocalDate> getAllReturnDates() {
 		ArrayList<LocalDate> returnDates = new ArrayList<>();
