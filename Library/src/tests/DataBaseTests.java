@@ -57,9 +57,9 @@ public class DataBaseTests {
 	
 	@Test
 	void testFindClient(){
-		Client client = db.findClient("Jan", "Nowak");
-		assertEquals("Jan", client.getName());
-		assertEquals("Nowak", client.getSurName());
+		Client client = db.findClient("Wiktor", "Lewy");
+		assertEquals("Wiktor", client.getName());
+		assertEquals("Lewy", client.getSurName());
 	}
 
 }

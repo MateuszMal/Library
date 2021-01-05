@@ -126,9 +126,16 @@ public class DatabaseController {
 				street = result.getString("Address.street");
 				number = result.getString("Address.number");
 				town = result.getString("Address.town");
+				Date remindDate = result.getDate("Client.reminder");
 
 				Address address = new Address(street, number, town);
-				listClient.add(new Client(name, surName, email, address, telNumber, id));
+				Client client = new Client(name, surName, email, address, telNumber, id);
+				// Jesli ustawiono przypomnienie
+				if (remindDate != null) {
+					LocalDate reminder = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(remindDate));
+					client.setReminder(reminder);
+				}
+				listClient.add(client);
 
 			}
 		} catch (Exception e) {
@@ -160,9 +167,15 @@ public class DatabaseController {
 				street = result.getString("Address.street");
 				number = result.getString("Address.number");
 				town = result.getString("Address.town");
+				Date remindDate = result.getDate("Client.reminder");
 
 				Address address = new Address(street, number, town);
 				client = new Client(_name, _surName, email, address, telNumber, id);
+				// Jesli ustawiono przypomnienie
+				if (remindDate != null) {
+					LocalDate reminder = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(remindDate));
+					client.setReminder(reminder);
+				}
 			}
 
 		} catch (Exception e) {
@@ -177,17 +190,17 @@ public class DatabaseController {
 		try {
 			conn = DriverManager.getConnection(DB_URL, userName, pass);
 			stmt = conn.createStatement();
-			
+
 			String query = "select * from Book JOIN Author ON Book.Author_name = Author.surName "
 					+ "Where Book.title = '" + title + "';";
 			ResultSet result = stmt.executeQuery(query);
-			
+
 			String _title, name, surName;
 			while (result.next()) {
 				_title = result.getString("Book.title");
 				name = result.getString("Author.name");
 				surName = result.getString("Author.surName");
-				
+
 				Author author = new Author(name, surName);
 				book = new Book(_title, author);
 			}
@@ -214,20 +227,20 @@ public class DatabaseController {
 		}
 		return true;
 	}
-	
+
 	public boolean deleteRent(RentalBook rent) {
 		try {
-		conn = DriverManager.getConnection(DB_URL, userName, pass);
-		stmt = conn.createStatement();
-		
-		String querry = "DELETE FROM Rent WHERE Rent.idRent = " + rent.getId() + ";";
-		stmt.executeUpdate(querry);
-		
+			conn = DriverManager.getConnection(DB_URL, userName, pass);
+			stmt = conn.createStatement();
+
+			String querry = "DELETE FROM Rent WHERE Rent.idRent = " + rent.getId() + ";";
+			stmt.executeUpdate(querry);
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return false;
 		}
-		
+
 		return true;
 	}
 
@@ -238,11 +251,10 @@ public class DatabaseController {
 			conn = DriverManager.getConnection(DB_URL, userName, pass);
 			stmt = conn.createStatement();
 
-			String query = "SELECT * FROM Rent "
-					+ "JOIN Client ON Rent.Client_idClient = Client.idClient "
+			String query = "SELECT * FROM Rent " + "JOIN Client ON Rent.Client_idClient = Client.idClient "
 					+ "JOIN Book On Rent.Book_idBook = Book.idBook;";
 			ResultSet result = stmt.executeQuery(query);
-			while(result.next()) {
+			while (result.next()) {
 				String ClientName = result.getString("Client.name");
 				String ClientSurName = result.getString("Client.surName");
 				String title = result.getString("Book.title");
@@ -252,26 +264,23 @@ public class DatabaseController {
 
 				Client client = findClient(ClientName, ClientSurName);
 				Book book = findBook(title);
-				
+
 				RentalBook rentalBook = new RentalBook(book, client);
 
-				//Parsowanie dat
+				// Parsowanie dat
 				LocalDate rentDate = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(rentDateTime));
 				LocalDate endDate = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(endDateTime));
 
-				
 				rentalBook.setId(idRent);
 				rentalBook.setRentDateTime(rentDate);
 				rentalBook.setEndDateTime(endDate);
 				listRents.add(rentalBook);
-				System.out.println("wypo" + rentalBook);
 
-			}		
+			}
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		System.out.println(listRents);
 
 		return listRents;
 	}
@@ -314,11 +323,11 @@ public class DatabaseController {
 			PreparedStatement prepAdd = conn.prepareStatement("INSERT INTO Rent VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
 
 			prepAdd.setInt(1, rent.getId());
-			prepAdd.setString(2, rent.getBook().getTitle()); 
+			prepAdd.setString(2, rent.getBook().getTitle());
 			prepAdd.setString(3, rent.getClient().getSurName());
 			prepAdd.setDate(4, java.sql.Date.valueOf(rent.getRentDateTime()));
 			prepAdd.setDate(5, java.sql.Date.valueOf(rent.getEndDateTime()));
-			prepAdd.setDate(6,  null);
+			prepAdd.setDate(6, null);
 			prepAdd.setInt(7, rent.getBook().getId());
 			prepAdd.setInt(8, (int) rent.getClient().getId());
 			prepAdd.execute();

@@ -30,16 +30,13 @@ public class LibraryManager {
 	}
 
 	public boolean checkForReminders() {
-		for (Client client : library.getClientList()) {
-			if (client.isRemindSet()) {
-				if (client.getReminder() == LocalDate.now()) {
-					System.out.println("Je");
-
+		for (Client client : database.listClient()) {
+			if (client.getReminder() != null) {
+				if (client.getReminder().compareTo(LocalDate.now()) == 0) {
 					return true;
 				}
 			}
 		}
-		System.out.println("Ne");
 
 		return false;
 	}
@@ -277,14 +274,10 @@ public class LibraryManager {
 	
 	public boolean returnRent(String clientName, String clientLastName, String title) {
 		List<RentalBook> rentList = getRentList();
-		System.out.println(rentList);
 
-		//RentalBook newRent;
 		for(RentalBook rent : rentList) {
 			if(rent.getBook().getTitle().equals(title) && rent.getClient().getSurName().equals(clientLastName)
 					&& rent.getClient().getName().equals(clientName)) {
-				System.out.println("Jestem");
-				//newRent = rent;
 				database.deleteRent(rent);
 				return true;
 			}
@@ -398,7 +391,7 @@ public class LibraryManager {
 
 	public ArrayList<LocalDate> getAllReturnDates() {
 		ArrayList<LocalDate> returnDates = new ArrayList<>();
-		for (RentalBook rent : library.getListOfRentals()) {
+		for (RentalBook rent : getRentList()) {
 			returnDates.add(rent.getEndDateTime());
 		}
 		return returnDates;
