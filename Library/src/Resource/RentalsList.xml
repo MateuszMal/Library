@@ -1,0 +1,107 @@
+<list>
+  <controller.RentalBook>
+    <id>420</id>
+    <book>
+      <id>0</id>
+      <title>Dwie Wie¿e</title>
+      <author>
+        <name>John</name>
+        <surName>Tolkien</surName>
+        <listOfBooks>
+          <controller.Book reference="../../.."/>
+        </listOfBooks>
+      </author>
+      <available>false</available>
+      <rentalDate>2021-01-06</rentalDate>
+    </book>
+    <client>
+      <name>Wiktor</name>
+      <surName>Wektor</surName>
+      <email>ww@mail.com</email>
+      <id>8</id>
+      <address>
+        <street>£ódzka</street>
+        <number>21</number>
+        <town>Warszawa</town>
+      </address>
+      <telNumber>2343243</telNumber>
+      <listOfRentalBooks>
+        <controller.Book reference="../../../book"/>
+      </listOfRentalBooks>
+      <reminder>2021-01-06</reminder>
+    </client>
+    <rentDateTime>2021-01-05</rentDateTime>
+    <endDateTime>2021-02-04</endDateTime>
+    <rentalLength>0</rentalLength>
+  </controller.RentalBook>
+  <controller.RentalBook>
+    <id>440</id>
+    <book>
+      <id>0</id>
+      <title>Czarownica</title>
+      <author>
+        <name>Camilla</name>
+        <surName>Lackberg</surName>
+        <listOfBooks>
+          <controller.Book reference="../../.."/>
+        </listOfBooks>
+      </author>
+      <available>false</available>
+      <rentalDate>2021-01-06</rentalDate>
+    </book>
+    <client>
+      <name>Wiktor</name>
+      <surName>Wektor</surName>
+      <email>ww@mail.com</email>
+      <id>8</id>
+      <address>
+        <street>£ódzka</street>
+        <number>21</number>
+        <town>Warszawa</town>
+      </address>
+      <telNumber>2343243</telNumber>
+      <listOfRentalBooks>
+        <controller.Book reference="../../../book"/>
+      </listOfRentalBooks>
+      <reminder>2021-01-06</reminder>
+    </client>
+    <rentDateTime>2021-01-05</rentDateTime>
+    <endDateTime>2021-02-04</endDateTime>
+    <rentalLength>0</rentalLength>
+  </controller.RentalBook>
+  <controller.RentalBook>
+    <id>588</id>
+    <book>
+      <id>0</id>
+      <title>Koralina</title>
+      <author>
+        <name>Neil</name>
+        <surName>Gailman</surName>
+        <listOfBooks>
+          <controller.Book reference="../../.."/>
+        </listOfBooks>
+      </author>
+      <available>false</available>
+      <rentalDate>2021-01-06</rentalDate>
+    </book>
+    <client>
+      <name>Wiktor</name>
+      <surName>Lewy</surName>
+      <email>wl@com.pl</email>
+      <id>4</id>
+      <address>
+        <street>Pi³sudskiego</street>
+        <number>54</number>
+        <town>£ódz</town>
+      </address>
+      <telNumber>345355</telNumber>
+      <listOfRentalBooks>
+        <controller.Book reference="../../../book"/>
+      </listOfRentalBooks>
+      <reminder>2021-01-29</reminder>
+    </client>
+    <rentDateTime>2021-01-05</rentDateTime>
+    <endDateTime>2021-02-05</endDateTime>
+    <rentalLength>0</rentalLength>
+  </controller.RentalBook>
+</list>
