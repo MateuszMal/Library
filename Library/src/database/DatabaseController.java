@@ -285,27 +285,30 @@ public class DatabaseController {
 		return listRents;
 	}
 
-	public boolean insertClient(String name, String surName, String email, String street, String number, String town,
-			String telNumber, String id) {
+	public boolean insertClient(Client client) {
 		try {
 			conn = DriverManager.getConnection(DB_URL, userName, pass);
 			PreparedStatement prepAdd = conn.prepareStatement("INSERT INTO Address VALUES(?, ?, ?);");
-			prepAdd.setString(1, street);
-			prepAdd.setString(2, number);
-			prepAdd.setString(3, town);
+			prepAdd.setString(1, client.getAddress().getStreet());
+			prepAdd.setString(2, client.getAddress().getNumber());
+			prepAdd.setString(3, client.getAddress().getTown());
 			prepAdd.execute();
 
-			PreparedStatement prepStmt = conn.prepareStatement("INSERT INTO Client VALUES(?, ?, ?, ?, ?, ?, ?);");
-			int telN = Integer.valueOf(telNumber);
-			int _id = Integer.valueOf(id);
+			PreparedStatement prepStmt = conn.prepareStatement("INSERT INTO Client VALUES(?, ?, ?, ?, ?, ?, ?, ?);");
+			int telN = (int) client.getTelNumber();
+			int _id = (int) client.getId();
 
 			prepStmt.setInt(1, _id);
-			prepStmt.setString(2, name);
-			prepStmt.setString(3, surName);
-			prepStmt.setString(4, email);
+			prepStmt.setString(2, client.getName());
+			prepStmt.setString(3, client.getSurName());
+			prepStmt.setString(4, client.getEmail());
 			prepStmt.setString(5, null);
 			prepStmt.setInt(6, telN);
-			prepStmt.setString(7, street);
+			prepStmt.setString(7, client.getAddress().getStreet());
+			if (client.getReminder() != null) {
+				prepStmt.setDate(8, java.sql.Date.valueOf(client.getReminder()));
+			} else
+				prepStmt.setDate(8, null);
 			prepStmt.execute();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -316,7 +319,6 @@ public class DatabaseController {
 
 	public boolean insertRent(RentalBook rent) {
 		try {
-			// TODO Trzeba dokonczyc!!!
 			LocalDate date = LocalDate.now();
 			LocalDate endRentDay = date.plusDays(30);
 			conn = DriverManager.getConnection(DB_URL, userName, pass);

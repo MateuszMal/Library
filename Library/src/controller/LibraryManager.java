@@ -63,8 +63,11 @@ public class LibraryManager {
 //		long _id = Long.valueOf(id);
 //		Client client = new Client(name, surName, email, address, telephoneNumber, _id);
 //		library.addClient(client);
-
-		return database.insertClient(name, surName, email, street, number, town, telNumber, id);
+		long _telNumber = Long.valueOf(telNumber);
+		long _id = Long.valueOf(id);
+		Address address = new Address(street, number, town);
+		Client  client = new Client(name, surName, email, address, _telNumber, _id);
+		return database.insertClient(client);
 	}
 
 	/**

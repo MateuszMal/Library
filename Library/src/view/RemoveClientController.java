@@ -17,7 +17,6 @@ import utils.DialogsUtils;
 
 public class RemoveClientController implements Initializable {
 
-	// TODO dodac usuwanie klienta z listy biblioteki
 	@FXML
 	private ClientController clientController;
 	@FXML
@@ -71,7 +70,6 @@ public class RemoveClientController implements Initializable {
 		if (isTetxtFieldsEmpty()) {
 			Optional<ButtonType> result = DialogsUtils.removeClientConfirmationDialog();
 			if (result.get() == ButtonType.OK) {
-				// TODO Dodac usuwanie klienta
 				int id = Integer.valueOf(removeIdTextField.getText());
 				if (libManager.removeClientFromLib(removeNameTextField.getText(), removeLastNameTextField.getText(),
 						id)) {

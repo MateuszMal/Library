@@ -31,7 +31,6 @@ import utils.FxmlUtils;
 public class RentController implements Initializable {
 
 	// TODO Ustawienie powiadomienia !!!!
-	// TODO wyszukiwanie wypozyczen poprzez ctrl+F
 	private FxmlUtils fxmlUtils = new FxmlUtils();
 
 	private String music = "./src/Resource/beep-01a.mp3";
@@ -93,7 +92,6 @@ public class RentController implements Initializable {
 
 	public void onShowSearchButton() {
 
-		// TODO Jesli rent == rent nie wyswietlac tych samych
 
 		// Czyszczenie listy wyswietlania
 		rentListView.getItems().removeAll(rentList);

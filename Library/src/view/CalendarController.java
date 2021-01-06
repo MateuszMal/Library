@@ -71,7 +71,8 @@ public class CalendarController implements Initializable {
 						String name = rent.getClient().getName();
 						String lastname = rent.getClient().getSurName();
 						String book = rent.getBook().getTitle();
-						text += "Klient: " + name + " " + lastname + " powinien dziœ oddaæ ksiazkê o tytule '" + book
+						String date = rent.getEndDateTime().toString();
+						text += date + " Klient: " + name + " " + lastname + " powinien dziœ oddaæ ksiazkê o tytule '" + book
 								+ "'.\n";
 					}
 					calendarTextArea.setText(text);
