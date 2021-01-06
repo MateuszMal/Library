@@ -1,10 +1,14 @@
 package controller;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import database.DatabaseController;
+import database.Serialization;
+import database.WriteFile;
 
 /**
  * Library manager - a class that manages the library
@@ -371,12 +375,10 @@ public class LibraryManager {
 
 	public ArrayList<RentalBook> getRentListByClient(String clientLastName) {
 		ArrayList<RentalBook> rentList = new ArrayList<>();
-//		if (isClientInLibrary(clientLastName)) {
 		for (RentalBook rent : getRentList()) {
 			if (rent.getClient().getSurName().equals(clientLastName))
 				rentList.add(rent);
 		}
-//		}
 		return rentList;
 	}
 
@@ -388,6 +390,14 @@ public class LibraryManager {
 			}
 		}
 		return null;
+	}
+	
+	public boolean writeToXml() {
+		File file = new File("./src/Resource/RentalsList.xml");
+		Serialization serial = new Serialization();
+		ArrayList<RentalBook> list = (ArrayList<RentalBook>) database.listRent();
+		boolean result = serial.toXstream(list, file);
+		return result;
 	}
 
 

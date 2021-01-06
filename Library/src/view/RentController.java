@@ -81,6 +81,8 @@ public class RentController implements Initializable {
 	@FXML
 	private Button rentBackButton3;
 	@FXML
+	private Button writteButton;
+	@FXML
 	private ListView rentListView;
 
 	// Listy do wyswietlania wypozyczen
@@ -192,6 +194,14 @@ public class RentController implements Initializable {
 			}
 		} else
 			DialogsUtils.emptyFields();
+	}
+	
+	public void onWriteButton() {
+		if(libManager.writeToXml())
+			DialogsUtils.successAction();
+		else
+			DialogsUtils.infoDialog("Ups. Coœ posz³o nie tak");
+
 	}
 
 	public void onRemindButton() {

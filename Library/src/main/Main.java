@@ -14,6 +14,7 @@ public class Main {
 		LibraryHolder libHolder = LibraryHolder.getInstance();
 		libHolder.setLibManager(libraryManager);
 		
+		libraryManager.writeToXml();
 
 		Application.launch(JavaFxInterface.class, args);
 	    

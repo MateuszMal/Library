@@ -5,13 +5,7 @@ import java.time.LocalDate;
 public class Book {
 
 	private int id;
-	public int getId() {
-		return id;
-	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	private String title;
 	private Author author;
@@ -71,5 +65,13 @@ public class Book {
 		return "Book [title=" + title + ", author=" + author.getSurName() + ", availability=" + available + ", rentalDate="
 				+ rentalDate + ", returnDate=" + returnDate + ", category=" + category + " id=" + id +"]";
 	};
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 }

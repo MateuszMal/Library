@@ -23,7 +23,6 @@ public class JavaFxInterface extends Application {
 		LibraryHolder libHolder = LibraryHolder.getInstance();
 		libManager = libHolder.getLIbManager();
 
-		// TODO czy ta klasa nie powinna miec LibraryController?
 		Stage stage = primaryStage;
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(this.getClass().getResource("./fxml/StackPaneWindow.fxml"));
@@ -36,7 +35,6 @@ public class JavaFxInterface extends Application {
 		primaryStage.setTitle("Library");
 		primaryStage.show();
 		
-		// TODO nie dziala
 		if(libManager.checkForReminders()) {
 			Media sound = new Media(new File(music).toURI().toString());
 			MediaPlayer mediaPlayer = new MediaPlayer(sound);

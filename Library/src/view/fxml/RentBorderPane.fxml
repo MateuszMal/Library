@@ -121,6 +121,11 @@
                                                 <Font name="System Bold" size="12.0" />
                                              </font>
                                           </Button>
+                                          <Button fx:id="writeButton" layoutX="482.0" layoutY="14.0" mnemonicParsing="false" onAction="#onWriteButton" style="-fx-background-color: rgb(0,128,255);" text="Zapis do pliku" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Button>
                                        </children>
                                     </AnchorPane>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: rgb(204,229,255);">

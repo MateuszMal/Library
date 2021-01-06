@@ -7,9 +7,11 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import utils.FxmlUtils;
 
 public class SettingsController implements Initializable {
@@ -26,7 +28,6 @@ public class SettingsController implements Initializable {
 	private ComboBox<String> coloursComboBox;
 
 	public void onChangeColour() throws IOException {
-		// TODO jesli nie wybrano koloru rzuca bledem
 		// TODO dodac zapis do pliku
 		// TODO dodac globalne ustawienia kolorow !!!!
 		if (coloursComboBox.getValue() != null) {
@@ -58,7 +59,6 @@ public class SettingsController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
 		coloursComboBox.getItems().addAll("Niebieski", "Zielony", "Koralowy");
 
 	}
