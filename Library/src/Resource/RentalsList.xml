@@ -12,7 +12,7 @@
         </listOfBooks>
       </author>
       <available>false</available>
-      <rentalDate>2021-01-06</rentalDate>
+      <rentalDate>2021-01-10</rentalDate>
     </book>
     <client>
       <name>Wiktor</name>
@@ -47,7 +47,7 @@
         </listOfBooks>
       </author>
       <available>false</available>
-      <rentalDate>2021-01-06</rentalDate>
+      <rentalDate>2021-01-10</rentalDate>
     </book>
     <client>
       <name>Wiktor</name>
@@ -82,7 +82,7 @@
         </listOfBooks>
       </author>
       <available>false</available>
-      <rentalDate>2021-01-06</rentalDate>
+      <rentalDate>2021-01-10</rentalDate>
     </book>
     <client>
       <name>Wiktor</name>

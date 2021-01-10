@@ -233,12 +233,6 @@ public class LibraryManager {
 
 	public ArrayList<Book> getBookListByAuthor(String lastName) {
 		ArrayList<Book> bookList = new ArrayList<>();
-//		if (isAuthorInLibrary(lastName)) {
-//			for (Book book : library.getBooksList()) {
-//				if (book.getAuthor().getSurName().equals(lastName)) {
-//					bookList.add(book);
-//				}
-//			}
 		for (Book book : database.listBook()) {
 			if (book.getAuthor().getSurName().equals(lastName))
 				bookList.add(book);

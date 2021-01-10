@@ -3,6 +3,7 @@ package main;
 import controller.LibraryHolder;
 import controller.LibraryManager;
 import javafx.application.Application;
+import textVersion.MainMenu;
 import view.JavaFxInterface;
 
 public class Main {
@@ -14,9 +15,12 @@ public class Main {
 		LibraryHolder libHolder = LibraryHolder.getInstance();
 		libHolder.setLibManager(libraryManager);
 		
-		libraryManager.writeToXml();
+		//Proba menu tekstowego
+		MainMenu mainMenu = new MainMenu();
+		mainMenu.showTitle();
+		mainMenu.showMenu();
 
-		Application.launch(JavaFxInterface.class, args);
+		//Application.launch(JavaFxInterface.class, args);
 	    
 		
 		
