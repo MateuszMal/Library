@@ -16,11 +16,11 @@ public class Main {
 		libHolder.setLibManager(libraryManager);
 		
 		//Proba menu tekstowego
-		MainMenu mainMenu = new MainMenu();
-		mainMenu.showTitle();
-		mainMenu.showMenu();
+//		MainMenu mainMenu = new MainMenu();
+//		mainMenu.showTitle();
+//		mainMenu.showMenu();
 
-//		Application.launch(JavaFxInterface.class, args);
+		Application.launch(JavaFxInterface.class, args);
 	    
 		
 		

@@ -8,12 +8,12 @@ import java.util.Scanner;
 import controller.Book;
 import controller.LibraryManager;
 
-public class BookMenu {
+public class BookMenu implements MenuInterface {
 
 	private LibraryManager libraryManager = new LibraryManager();
 	private Scanner in;
 
-	public void showBooktMenu() {
+	public void showMenuItems() {
 
 		in = new Scanner(System.in);
 
@@ -44,29 +44,16 @@ public class BookMenu {
 		if (option == 3) {
 			System.out.println("Podaj tytu³ ksi¹¿ki: ");
 			in = new Scanner(System.in);
-			String title = in.next();
+			String title = in.nextLine();
 			showBookByTitle(title);
 		}
-		
-		if(option == 4) {
+		if (option == 4) {
 			backToMainMenu();
 		}
 
 	}
 
-	public void backToMenu() {
-		System.out.println("\nWcisnij dowolny klawisz, aby wróciæ do Menu.");
-
-		try {
-			int in = System.in.read();
-			showBooktMenu();
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		}
-	}
-
 	public void showAllBooks() {
-		// TODO powrot do menu powyzej
 		List<Book> listBook = libraryManager.getBookList();
 		for (Book book : listBook) {
 			System.out.println(book);
@@ -75,13 +62,11 @@ public class BookMenu {
 	}
 
 	public void showBookByAuthor(String name) {
-		// TODO powrot do menu powyzej
 		ArrayList<Book> listBook = libraryManager.getBookListByAuthor(name);
 		for (Book book : listBook) {
 			System.out.println(book);
 		}
 		backToMenu();
-
 	}
 
 	public void showBookByTitle(String title) {
@@ -92,11 +77,6 @@ public class BookMenu {
 			}
 		}
 		backToMenu();
+	}
 
-	}
-	
-	public void backToMainMenu() {
-		MainMenu menu = new MainMenu();
-		menu.showMenu();
-	}
 }
