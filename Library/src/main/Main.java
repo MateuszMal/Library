@@ -20,7 +20,7 @@ public class Main {
 		mainMenu.showTitle();
 		mainMenu.showMenu();
 
-		//Application.launch(JavaFxInterface.class, args);
+//		Application.launch(JavaFxInterface.class, args);
 	    
 		
 		

@@ -22,7 +22,7 @@ public class BookMenu {
 		System.out.println("1. Poka¿ wszystkie ksi¹¿ki");
 		System.out.println("2. Szukaj ksi¹¿ki wg autora");
 		System.out.println("3. Szukaj ksi¹¿ki wg tytu³u");
-		System.out.println("4. Powrót");
+		System.out.println("\n4. Powrót do menu glównego");
 
 		int option = in.nextInt();
 
@@ -40,14 +40,29 @@ public class BookMenu {
 			String name = in.next();
 			showBookByAuthor(name);
 		}
-		
+
 		if (option == 3) {
 			System.out.println("Podaj tytu³ ksi¹¿ki: ");
 			in = new Scanner(System.in);
 			String title = in.next();
-			showBookByAuthor(title);
+			showBookByTitle(title);
 		}
 		
+		if(option == 4) {
+			backToMainMenu();
+		}
+
+	}
+
+	public void backToMenu() {
+		System.out.println("\nWcisnij dowolny klawisz, aby wróciæ do Menu.");
+
+		try {
+			int in = System.in.read();
+			showBooktMenu();
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	public void showAllBooks() {
@@ -56,7 +71,7 @@ public class BookMenu {
 		for (Book book : listBook) {
 			System.out.println(book);
 		}
-
+		backToMenu();
 	}
 
 	public void showBookByAuthor(String name) {
@@ -65,6 +80,8 @@ public class BookMenu {
 		for (Book book : listBook) {
 			System.out.println(book);
 		}
+		backToMenu();
+
 	}
 
 	public void showBookByTitle(String title) {
@@ -74,5 +91,12 @@ public class BookMenu {
 				System.out.println(book);
 			}
 		}
+		backToMenu();
+
+	}
+	
+	public void backToMainMenu() {
+		MainMenu menu = new MainMenu();
+		menu.showMenu();
 	}
 }

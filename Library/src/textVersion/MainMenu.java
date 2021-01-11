@@ -19,14 +19,16 @@ public class MainMenu {
 		
 		Scanner in = new Scanner(System.in);
 		
-		System.out.println("Wybierz:");
-		System.out.println();
-		System.out.println("1. Ksi¹¿ka");
-		System.out.println("2. Wypo¿yczenia");
-		System.out.println("3. Klient");
-		System.out.println("4. Info");
-		System.out.println("5. Wyjœcie");
-		
+		System.out.println("************************************");		
+		System.out.println("**            Wybierz:            **");
+		System.out.println("**                                **");
+		System.out.println("**          1. Ksi¹¿ka            **");
+		System.out.println("**       2. Wypo¿yczenia          **");
+		System.out.println("**          3. Klient             **");
+		System.out.println("**           4. Info              **");
+		System.out.println("**         5. Wyjœcie             **");
+		System.out.println("************************************");
+
 		int option = in.nextInt();
 		
 		while (option != 1 && option != 2 && option != 3 && option !=4 && option != 5) {
