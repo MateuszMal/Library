@@ -34,20 +34,44 @@ public class MainMenu {
 			option = in.nextInt();
 		}
 
-		if (option == 1) {
+		switch (option) {
+		case 1: {
 			BookMenu bookMenu = new BookMenu();
 			bookMenu.showMenuItems();
+			break;
 		}
-
-		if (option == 2) {
+		case 2: {
 			RentMenu rentMenu = new RentMenu();
 			rentMenu.showMenuItems();
+			break;
 		}
-
-		if (option == 5) {
+		case 3: {
+			ClientMenu clientMenu = new ClientMenu();
+			clientMenu.showMenuItems();
+			break;
+		}
+		case 5: {
 			System.out.println("Good Bye");
 			System.exit(0);
 		}
+		}
+
+//		if (option == 1) {
+//			BookMenu bookMenu = new BookMenu();
+//			bookMenu.showMenuItems();
+//		}
+//
+//		if (option == 2) {
+//			RentMenu rentMenu = new RentMenu();
+//			rentMenu.showMenuItems();
+//		}
+//		
+//		if ()
+//
+//		if (option == 5) {
+//			System.out.println("Good Bye");
+//			System.exit(0);
+//		}
 	}
 
 }

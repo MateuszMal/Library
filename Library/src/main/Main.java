@@ -1,5 +1,7 @@
 package main;
 
+import org.hamcrest.core.IsInstanceOf;
+
 import controller.Author;
 import controller.LibraryHolder;
 import controller.LibraryManager;
@@ -21,10 +23,8 @@ public class Main {
 //		MainMenu mainMenu = new MainMenu();
 //		mainMenu.showTitle();
 //		mainMenu.showMenu();
-		
 
-
-		Application.launch(JavaFxInterface.class, args);
+//		Application.launch(JavaFxInterface.class, args);
 	    
 		
 		
