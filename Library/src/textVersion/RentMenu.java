@@ -19,7 +19,11 @@ public class RentMenu implements MenuInterface {
 		System.out.println("1. Poka¿ wszystkie wypo¿yczenia");
 		System.out.println("2. Szukaj wypo¿yczenia wg nazwiska klienta");
 		System.out.println("3. Szukaj wypo¿yczenia wg tytu³u ksia¿ki");
-		System.out.println("\n4. Powrót do menu glównego");
+		// TODO do zrobienia
+		System.out.println("4. Utwórz wypo¿yczenie");
+		System.out.println("5. Oddaj ksi¹¿kê");
+
+		System.out.println("\n6. Powrót do menu glównego");
 
 		int option = in.nextInt();
 
@@ -46,7 +50,7 @@ public class RentMenu implements MenuInterface {
 			showRentsBook(title);
 		}
 		
-		if (option == 4) {
+		if (option == 6) {
 			backToMainMenu();
 		}
 

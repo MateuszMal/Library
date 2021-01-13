@@ -62,16 +62,15 @@ public class LibraryManager {
 	public boolean addNewClient(String name, String surName, String email, String street, String number, String town,
 			String telNumber, String id) {
 
-//		Address address = new Address(street, number, town);
-//		long telephoneNumber = Long.valueOf(telNumber);
-//		long _id = Long.valueOf(id);
-//		Client client = new Client(name, surName, email, address, telephoneNumber, _id);
-//		library.addClient(client);
 		long _telNumber = Long.valueOf(telNumber);
 		long _id = Long.valueOf(id);
 		Address address = new Address(street, number, town);
 		Client  client = new Client(name, surName, email, address, _telNumber, _id);
 		return database.insertClient(client);
+	}
+	
+	public boolean addBook(Book book) {
+		return database.insertBook(book);
 	}
 
 	/**
@@ -106,11 +105,7 @@ public class LibraryManager {
 
 	public Client getClientFromLib(String name, String lastName) {
 		Client _client = null;
-//		for (Client client : library.getClientList()) {
-//			if (client.getName().equals(name) && client.getSurName().equals(lastName)) {
-//				_client = client;
-//			}
-//		}
+
 		_client = database.findClient(name, lastName);
 		return _client;
 	}
@@ -176,11 +171,7 @@ public class LibraryManager {
 
 	public ArrayList<Book> getBookListByTitle(String title) {
 		ArrayList<Book> bookList = new ArrayList<>();
-//		for (Book book : library.getBooksList()) {
-//			if (book.getTitle().equals(title)) {
-//				bookList.add(book);
-//			}
-//		}
+
 		for (Book book : database.listBook()) {
 			if (book.getTitle().equals(title))
 				bookList.add(book);
@@ -302,6 +293,15 @@ public class LibraryManager {
 			}
 		}
 		return null;
+	}
+	
+	public ArrayList<Author> getAuthorsList(){
+		ArrayList<Author> listAuthor = (ArrayList<Author>) database.listAuthor(); 
+		return listAuthor;
+	}
+	
+	public boolean addNewAuthor(Author author) {
+		return database.insertAuthor(author);
 	}
 
 	/**

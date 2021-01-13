@@ -325,7 +325,7 @@ public class DatabaseController {
 			LocalDate date = LocalDate.now();
 			LocalDate endRentDay = date.plusDays(30);
 			conn = DriverManager.getConnection(DB_URL, userName, pass);
-			PreparedStatement prepAdd = conn.prepareStatement("INSERT INTO Rent VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+			PreparedStatement prepAdd = conn.prepareStatement("INSERT INTO Rent VALUES(?, ?, ?, ?, ?, ?, ?, ?);");
 
 			prepAdd.setInt(1, rent.getId());
 			prepAdd.setString(2, rent.getBook().getTitle());
@@ -342,6 +342,47 @@ public class DatabaseController {
 			return false;
 		}
 
+		return true;
+	}
+	
+	public boolean insertAuthor(Author author) {
+		try {
+			conn = DriverManager.getConnection(DB_URL, userName, pass);
+			PreparedStatement prepAdd = conn.prepareStatement("INSERT INTO Author VALUES(?, ?, ?);");
+			
+			prepAdd.setString(1, author.getSurName());
+			prepAdd.setString(2, author.getName());
+			prepAdd.setString(3, null);
+			prepAdd.execute();
+			
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public boolean insertBook(Book book) {
+		try {
+			conn = DriverManager.getConnection(DB_URL, userName, pass);
+			PreparedStatement prepAdd = conn.prepareStatement("INSERT INTO Book VALUES(?, ?, ?, ?, ?, ?, ?, ?);");
+			
+			prepAdd.setInt(1, book.getId());
+			prepAdd.setString(2, book.getTitle());
+			prepAdd.setString(3, book.getAuthor().getSurName());
+			prepAdd.setBoolean(4, true);
+			prepAdd.setDate(5, null);
+			prepAdd.setDate(6, null);
+			prepAdd.setString(7, null);
+			prepAdd.setString(8, book.getAuthor().getSurName());
+			prepAdd.execute();
+			
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+		
 		return true;
 	}
 

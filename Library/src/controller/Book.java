@@ -17,6 +17,7 @@ public class Book {
 	public Book(String title, Author author) {
 		this.title = title;
 		this.author = author;
+		this.id = (int) (Math.random() * 1000);
 		this.author.addBook(this);
 	}
 
