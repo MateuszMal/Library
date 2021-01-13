@@ -1,8 +1,10 @@
 package textVersion;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
+import controller.Client;
 import controller.LibraryManager;
 import controller.RentalBook;
 
@@ -50,10 +52,42 @@ public class RentMenu implements MenuInterface {
 			showRentsBook(title);
 		}
 		
+		if(option == 4) {
+			createRent();
+		}
+		
 		if (option == 6) {
 			backToMainMenu();
 		}
 
+	}
+	
+	public void createRent() {
+		in = new Scanner(System.in);
+		
+		System.out.println("** Dodawanie wypo¿yczenia **");
+		System.out.println("\nPodaj nazwisko klienta:");
+		String clientSurName = in.nextLine();
+		
+		System.out.println("Podaj imê klienta:");
+		String clientName = in.nextLine();
+		
+		System.out.println("Podaj tytu³ ksia¿ki:");
+		String title = in.nextLine();
+
+		
+		for(Client cli : libraryManager.getClientList()) {
+			if(cli.getSurName().equals(clientSurName) && cli.getName().equals(clientName)) {
+				LocalDate date = LocalDate.now();
+				if(libraryManager.addRentToLibrary(cli.getName(), cli.getSurName(), title, date)) {
+					System.out.println("Uda³o siê!");
+				}
+				else {
+					System.out.println("Ups. Coœ posz³o nie tak.");
+				}
+			}
+		}
+		backToMenu();
 	}
 
 	public void showAllRents() {

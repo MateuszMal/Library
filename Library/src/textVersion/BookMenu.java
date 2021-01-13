@@ -12,7 +12,7 @@ import controller.LibraryManager;
 public class BookMenu implements MenuInterface {
 
 	private LibraryManager libraryManager = new LibraryManager();
-	private Scanner in = new Scanner(System.in);
+	private Scanner in;
 
 	public void showMenuItems() {
 
@@ -42,14 +42,14 @@ public class BookMenu implements MenuInterface {
 		}
 		case 2: {
 			System.out.println("Podaj nazwisko autora: ");
-			//in = new Scanner(System.in);
+			in = new Scanner(System.in);
 			String name = in.next();
 			showBookByAuthor(name);
 			break;
 		}
 		case 3: {
 			System.out.println("Podaj tytu³ ksi¹¿ki: ");
-			//in = new Scanner(System.in);
+			in = new Scanner(System.in);
 			String title = in.nextLine();
 			showBookByTitle(title);
 			break;
@@ -58,6 +58,11 @@ public class BookMenu implements MenuInterface {
 			addBook();
 			break;
 		}
+		case 5:{
+			deleteBook();
+			break;
+		}
+		
 		case 6: {
 			backToMainMenu();
 			break;
@@ -71,7 +76,7 @@ public class BookMenu implements MenuInterface {
 	public void addBook() {
 		in = new Scanner(System.in);
 		System.out.println("**Dodawanie ksi¹¿ki.**");
-		System.out.println("Podaj imiê autora: ");
+		System.out.println("\nPodaj imiê autora: ");
 		String authorName = in.nextLine();
 		
 		System.out.println("Podaj nazwisko autora: ");
@@ -96,8 +101,22 @@ public class BookMenu implements MenuInterface {
 
 			}
 		}		
-			//System.out.println("Ups. Coœ posz³o nie tak.");
-		
+		backToMenu();
+	}
+	
+	public void deleteBook() {
+		in = new Scanner(System.in);
+		System.out.println("**Usuwanie ksi¹¿ki.**");
+
+		System.out.println("\nPodaj tytu³ ksia¿ki: ");
+		String title = in.nextLine();
+
+		for(Book book : libraryManager.getBookList()) {
+			if(book.getTitle().equals(title)) {
+				libraryManager.removeBookFromLib(book);
+				System.out.println("Ksia¿ka zosta³a usuniêta.");
+			}
+		}
 		backToMenu();
 	}
 

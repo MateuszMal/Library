@@ -246,6 +246,23 @@ public class DatabaseController {
 
 		return true;
 	}
+	
+	public boolean deleteBook(Book book) {
+		try {
+			conn = DriverManager.getConnection(DB_URL, userName, pass);
+			stmt = conn.createStatement();
+			
+			String querry = "DELETE FROM Book WHERE Book.idBook = " + book.getId() + ";";
+			stmt.executeUpdate(querry);
+
+			
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+		
+		return true;
+	}
 
 	public List<RentalBook> listRent() {
 

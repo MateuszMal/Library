@@ -65,10 +65,10 @@ public class LibraryManager {
 		long _telNumber = Long.valueOf(telNumber);
 		long _id = Long.valueOf(id);
 		Address address = new Address(street, number, town);
-		Client  client = new Client(name, surName, email, address, _telNumber, _id);
+		Client client = new Client(name, surName, email, address, _telNumber, _id);
 		return database.insertClient(client);
 	}
-	
+
 	public boolean addBook(Book book) {
 		return database.insertBook(book);
 	}
@@ -92,6 +92,11 @@ public class LibraryManager {
 
 	public List<RentalBook> getRentList() {
 		List<RentalBook> list = database.listRent();
+		return list;
+	}
+	
+	public List<Client> getClientList(){
+		List<Client> list = database.listClient();
 		return list;
 	}
 
@@ -121,6 +126,10 @@ public class LibraryManager {
 
 	public boolean removeClientFromLib(String name, String surName, int id) {
 		return database.deleteClient(name, surName, id);
+	}
+
+	public boolean removeBookFromLib(Book book) {
+		return database.deleteBook(book);
 	}
 
 	public boolean isClientInLibrary(String name, String lastName) {
@@ -177,7 +186,7 @@ public class LibraryManager {
 				bookList.add(book);
 		}
 
-			return bookList;
+		return bookList;
 
 	}
 
@@ -242,33 +251,33 @@ public class LibraryManager {
 	}
 
 	public boolean addRentToLibrary(String name, String lastName, String title, LocalDate date) {
-	
+
 		if (getBookListByTitle(title).size() != 0) {
 			Book book = getBookListByTitle(title).get(0);
-		
-		Client client = getClientFromLib(name, lastName);
-		client.setReminder(date);
 
-		if (client != null || book != null) {
-			RentalBook rent = new RentalBook(book, client);
+			Client client = getClientFromLib(name, lastName);
+			client.setReminder(date);
 
-			int id = (int) (Math.random() * 1000);
-			rent.setId(id);
-			if (database.insertRent(rent)) {
-				return true;
+			if (client != null || book != null) {
+				RentalBook rent = new RentalBook(book, client);
+
+				int id = (int) (Math.random() * 1000);
+				rent.setId(id);
+				if (database.insertRent(rent)) {
+					return true;
+				} else
+					return false;
 			} else
 				return false;
 		} else
-			return false;}
-		 else
-				return false;
+			return false;
 	}
-	
+
 	public boolean returnRent(String clientName, String clientLastName, String title) {
 		List<RentalBook> rentList = getRentList();
 
-		for(RentalBook rent : rentList) {
-			if(rent.getBook().getTitle().equals(title) && rent.getClient().getSurName().equals(clientLastName)
+		for (RentalBook rent : rentList) {
+			if (rent.getBook().getTitle().equals(title) && rent.getClient().getSurName().equals(clientLastName)
 					&& rent.getClient().getName().equals(clientName)) {
 				database.deleteRent(rent);
 				return true;
@@ -294,12 +303,12 @@ public class LibraryManager {
 		}
 		return null;
 	}
-	
-	public ArrayList<Author> getAuthorsList(){
-		ArrayList<Author> listAuthor = (ArrayList<Author>) database.listAuthor(); 
+
+	public ArrayList<Author> getAuthorsList() {
+		ArrayList<Author> listAuthor = (ArrayList<Author>) database.listAuthor();
 		return listAuthor;
 	}
-	
+
 	public boolean addNewAuthor(Author author) {
 		return database.insertAuthor(author);
 	}
@@ -385,7 +394,7 @@ public class LibraryManager {
 		}
 		return null;
 	}
-	
+
 	public boolean writeToXml() {
 		File file = new File("./src/Resource/RentalsList.xml");
 		Serialization serial = new Serialization();
@@ -393,8 +402,6 @@ public class LibraryManager {
 		boolean result = serial.toXstream(list, file);
 		return result;
 	}
-
-
 
 	public ArrayList<LocalDate> getAllReturnDates() {
 		ArrayList<LocalDate> returnDates = new ArrayList<>();
