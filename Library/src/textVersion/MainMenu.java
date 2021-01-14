@@ -14,6 +14,7 @@ public class MainMenu {
 	}
 
 	public void showMenu() {
+		
 
 		Scanner in = new Scanner(System.in);
 
@@ -50,28 +51,16 @@ public class MainMenu {
 			clientMenu.showMenuItems();
 			break;
 		}
+		case 4: {
+			InfoMenu info = new InfoMenu();
+			info.showMenuItems();
+		}
 		case 5: {
 			System.out.println("Good Bye");
 			System.exit(0);
 		}
 		}
 
-//		if (option == 1) {
-//			BookMenu bookMenu = new BookMenu();
-//			bookMenu.showMenuItems();
-//		}
-//
-//		if (option == 2) {
-//			RentMenu rentMenu = new RentMenu();
-//			rentMenu.showMenuItems();
-//		}
-//		
-//		if ()
-//
-//		if (option == 5) {
-//			System.out.println("Good Bye");
-//			System.exit(0);
-//		}
 	}
 
 }

@@ -1,6 +1,5 @@
 package textVersion;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -15,6 +14,8 @@ public class BookMenu implements MenuInterface {
 	private Scanner in;
 
 	public void showMenuItems() {
+		
+		clrscr();
 
 		in = new Scanner(System.in);
 
@@ -64,6 +65,7 @@ public class BookMenu implements MenuInterface {
 		}
 		
 		case 6: {
+			clrscr();
 			backToMainMenu();
 			break;
 		}
@@ -75,7 +77,7 @@ public class BookMenu implements MenuInterface {
 	
 	public void addBook() {
 		in = new Scanner(System.in);
-		System.out.println("**Dodawanie ksi¹¿ki.**");
+		System.out.println("** Dodawanie ksi¹¿ki. **");
 		System.out.println("\nPodaj imiê autora: ");
 		String authorName = in.nextLine();
 		

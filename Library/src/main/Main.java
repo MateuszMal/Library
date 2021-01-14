@@ -19,15 +19,20 @@ public class Main {
 		LibraryHolder libHolder = LibraryHolder.getInstance();
 		libHolder.setLibManager(libraryManager);
 		
-		//Proba menu tekstowego
-//		MainMenu mainMenu = new MainMenu();
-//		mainMenu.showTitle();
-//		mainMenu.showMenu();
-
-//		Application.launch(JavaFxInterface.class, args);
-	    
-		
-		
+		if(args.length == 0) {
+			Application.launch(JavaFxInterface.class, args);
+		}
+		else {
+			if(args[0].equals("text")) {
+				MainMenu mainMenu = new MainMenu();
+				mainMenu.showTitle();
+				mainMenu.showMenu();
+			}
+			else {
+				System.out.println("Nieprawid³owy argument!");
+			}
+		}
+			
 		Runtime.getRuntime().halt(0);	
 	    }
 }

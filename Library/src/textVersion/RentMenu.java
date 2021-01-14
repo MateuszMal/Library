@@ -14,6 +14,7 @@ public class RentMenu implements MenuInterface {
 	private Scanner in;
 
 	public void showMenuItems() {
+		clrscr();
 		in = new Scanner(System.in);
 
 		System.out.println("Wybierz:");
@@ -22,7 +23,6 @@ public class RentMenu implements MenuInterface {
 		System.out.println("2. Szukaj wypo¿yczenia wg nazwiska klienta");
 		System.out.println("3. Szukaj wypo¿yczenia wg tytu³u ksia¿ki");
 		System.out.println("4. Utwórz wypo¿yczenie");
-		// TODO do zrobienia
 		System.out.println("5. Zwrot wypo¿yczenia");
 
 		System.out.println("\n6. Powrót do menu glównego");
@@ -62,6 +62,7 @@ public class RentMenu implements MenuInterface {
 		}
 
 		if (option == 6) {
+			clrscr();
 			backToMainMenu();
 		}
 
