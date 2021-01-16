@@ -1,21 +1,23 @@
 package view;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import controller.Client;
+import controller.LibraryManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import utils.DialogsUtils;
 import utils.FxmlUtils;
 
 public class ClientController implements Initializable {
 
 	private FxmlUtils fxmlUtils;
-	
-//	@FXML
-//	private InterfaceController interfaceController;
 		
 	@FXML
 	// Wstrzykniecie controllera klasy potomnej
@@ -41,6 +43,8 @@ public class ClientController implements Initializable {
 	@FXML
 	private Button clientBackButton;
 	
+	private LibraryManager libManager = new LibraryManager();
+	
 	
 	
 	public ClientController() {
@@ -51,7 +55,7 @@ public class ClientController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// Ustawienie tego controllera jako rodzica 
-		
+		showReminders();
 		addClientController.setParentController(this);
 		removeClientController.setParentController(this);
 		infoClientController.setParentController(this);
@@ -61,12 +65,16 @@ public class ClientController implements Initializable {
 
 		fxmlUtils.fxmlLoader(event, "../view/fxml/StackPaneWindow.fxml", clientBorderPane);
 	}
-//	public void setParentController(InterfaceController interfaceController) {
-//		// Ustawienie controlera rodzica
-//		this.interfaceController = interfaceController;
-//	}
-//	
-//	public InterfaceController getInterfaceController() {
-//		return interfaceController;
-//	}
+
+	public void showReminders() {
+		LocalDate date = LocalDate.now();
+		String text = "";
+		for(Client client : libManager.clientWithReminders()) {
+			if(client.getReminder().isEqual(date))
+			text = client.getName() + " " + client.getSurName() + " ma dziœ do zwrotu ksi¹¿kê " 
+			+ client.getListOfRentalBooks();
+		}
+		if(!text.isEmpty())
+			DialogsUtils.infoDialog(text);		
+	}
 }

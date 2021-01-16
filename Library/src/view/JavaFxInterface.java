@@ -35,12 +35,10 @@ public class JavaFxInterface extends Application {
 		primaryStage.setTitle("Library");
 		primaryStage.show();
 		
-		if(libManager.checkForReminders()) {
-			Media sound = new Media(new File(music).toURI().toString());
-			MediaPlayer mediaPlayer = new MediaPlayer(sound);
-			mediaPlayer.play();
-		}
+//		if(libManager.checkForReminders()) {
+//			Media sound = new Media(new File(music).toURI().toString());
+//			MediaPlayer mediaPlayer = new MediaPlayer(sound);
+//			mediaPlayer.play();
+//		}
 	}
-	
-
 }

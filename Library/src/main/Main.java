@@ -1,11 +1,7 @@
 package main;
 
-import org.hamcrest.core.IsInstanceOf;
-
-import controller.Author;
 import controller.LibraryHolder;
 import controller.LibraryManager;
-import database.DatabaseController;
 import javafx.application.Application;
 import textVersion.MainMenu;
 import view.JavaFxInterface;
@@ -31,8 +27,7 @@ public class Main {
 			else {
 				System.out.println("Nieprawid³owy argument!");
 			}
-		}
-			
+		}			
 		Runtime.getRuntime().halt(0);	
 	    }
 }

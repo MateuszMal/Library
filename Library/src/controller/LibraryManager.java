@@ -1,14 +1,12 @@
 package controller;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import database.DatabaseController;
 import database.Serialization;
-import database.WriteFile;
 
 /**
  * Library manager - a class that manages the library
@@ -33,16 +31,27 @@ public class LibraryManager {
 		this.database = new DatabaseController();
 	}
 
-	public boolean checkForReminders() {
-		for (Client client : database.listClient()) {
+//	public boolean checkForReminders() {
+//		for (Client client : database.listClient()) {
+//			if (client.getReminder() != null) {
+//				if (client.getReminder().compareTo(LocalDate.now()) == 0) {
+//					return true;
+//				}
+//			}
+//		}
+//		return false;
+//	}
+	
+	public ArrayList<Client> clientWithReminders() {
+		ArrayList<Client> clientList = new ArrayList<Client>();
+		for(Client client : getClientList()) {
 			if (client.getReminder() != null) {
 				if (client.getReminder().compareTo(LocalDate.now()) == 0) {
-					return true;
+					clientList.add(client);
 				}
 			}
 		}
-
-		return false;
+		return clientList;
 	}
 
 	/**
