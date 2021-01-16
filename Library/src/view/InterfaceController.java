@@ -49,27 +49,27 @@ public class InterfaceController implements Initializable {
 	@FXML
 	public void onBookButton(ActionEvent event) {
 
-		fxmlUtils.fxmlLoader(event, "../view/fxml/BookBorderpane.fxml", borderPane);
+		fxmlUtils.fxmlLoader(event, "/view/fxml/BookBorderpane.fxml", borderPane);
 	}
 	
 	public void onRentButton(ActionEvent event) {
 
-		fxmlUtils.fxmlLoader(event, "../view/fxml/RentBorderPane.fxml", borderPane);
+		fxmlUtils.fxmlLoader(event, "/view/fxml/RentBorderPane.fxml", borderPane);
 	}
 	
 	public void onclientButton(ActionEvent event) {
 
-		fxmlUtils.fxmlLoader(event, "../view/fxml/ClientBorderPane.fxml", borderPane);
+		fxmlUtils.fxmlLoader(event, "/view/fxml/ClientBorderPane.fxml", borderPane);
 	}
 	
 	public void onCalendarButton(ActionEvent event) {
 
-		fxmlUtils.fxmlLoader(event, "../view/fxml/CalendarBorderPane.fxml", borderPane);
+		fxmlUtils.fxmlLoader(event, "/view/fxml/CalendarBorderPane.fxml", borderPane);
 	}
 	
 	public void onSettingsButton(ActionEvent event) {
 		
-		fxmlUtils.fxmlLoader(event, "../view/fxml/SettingsPane.fxml", borderPane);
+		fxmlUtils.fxmlLoader(event, "/view/fxml/SettingsPane.fxml", borderPane);
 	}
 	
 	public void onInfoButton(ActionEvent event) {

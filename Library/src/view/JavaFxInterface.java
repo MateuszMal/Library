@@ -14,31 +14,26 @@ import javafx.stage.Stage;
 
 public class JavaFxInterface extends Application {
 
-	private String music = "./src/Resource/beep-01a.mp3";
+
 	private LibraryManager libManager;
-	
+
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		
+
 		LibraryHolder libHolder = LibraryHolder.getInstance();
 		libManager = libHolder.getLIbManager();
 
 		Stage stage = primaryStage;
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(this.getClass().getResource("./fxml/StackPaneWindow.fxml"));
-	
+		loader.setLocation(this.getClass().getResource("/view/fxml/StackPaneWindow.fxml"));
+
 		BorderPane borderPane = loader.load();
-		
+
 		Scene scene = new Scene(borderPane);
 
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Library");
 		primaryStage.show();
-		
-//		if(libManager.checkForReminders()) {
-//			Media sound = new Media(new File(music).toURI().toString());
-//			MediaPlayer mediaPlayer = new MediaPlayer(sound);
-//			mediaPlayer.play();
-//		}
+
 	}
 }

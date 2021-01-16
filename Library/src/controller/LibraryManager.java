@@ -31,16 +31,6 @@ public class LibraryManager {
 		this.database = new DatabaseController();
 	}
 
-//	public boolean checkForReminders() {
-//		for (Client client : database.listClient()) {
-//			if (client.getReminder() != null) {
-//				if (client.getReminder().compareTo(LocalDate.now()) == 0) {
-//					return true;
-//				}
-//			}
-//		}
-//		return false;
-//	}
 	
 	public ArrayList<Client> clientWithReminders() {
 		ArrayList<Client> clientList = new ArrayList<Client>();
@@ -295,7 +285,6 @@ public class LibraryManager {
 		return false;
 	}
 
-	// Zmienic zeby wyszukiwalo w wypozyczeniach
 	public boolean isRentInLibrary(String bookTitle, String clientName, String clientLastName) {
 		if (isBookInLibrary(bookTitle) && isClientInLibrary(clientName, clientLastName))
 			return true;
@@ -331,12 +320,12 @@ public class LibraryManager {
 
 	public ArrayList<RentalBook> getRentListByTitle(String title) {
 		ArrayList<RentalBook> rentList = new ArrayList<>();
-		// if (isBookInLibrary(title)) {
+
 		for (RentalBook rent : getRentList()) {
 			if (rent.getBook().getTitle().equals(title))
 				rentList.add(rent);
 		}
-		// }
+
 		return rentList;
 	}
 
@@ -359,12 +348,12 @@ public class LibraryManager {
 
 	public ArrayList<RentalBook> getRentListByAuthor(String lastName) {
 		ArrayList<RentalBook> rentList = new ArrayList<>();
-		// if (isAuthorInLibrary(lastName)) {
+
 		for (RentalBook rent : getRentList()) {
 			if (rent.getBook().getAuthor().getSurName().equals(lastName))
 				rentList.add(rent);
 		}
-		// }
+
 		return rentList;
 	}
 

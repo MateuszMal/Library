@@ -1,7 +1,6 @@
 package controller;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 	/**
 	 * Represents a rents
@@ -23,8 +22,6 @@ public class RentalBook {
 	
 	int rentalLength;
 	
-
-
 	public RentalBook(Book book, Client client) {
 		this.book = book;
 		this.client = client;

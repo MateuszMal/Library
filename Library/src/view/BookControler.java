@@ -48,7 +48,6 @@ public class BookControler implements Initializable {
 	public void prepareList() {
 		
 		// Przypisanie listy ksiazek do bookListView
-		//List lista = libManager.getLibrary().getBooksList();
 		List lista = libManager.getBookList();
 		bookList = FXCollections.observableArrayList(lista);
 		bookListView.setItems(bookList);
@@ -77,7 +76,7 @@ public class BookControler implements Initializable {
 	}
 
 	public void onBackButton(ActionEvent event) {
-		fxmlUtils.fxmlLoader(event, "../view/fxml/StackPaneWindow.fxml", bookBorderPane);
+		fxmlUtils.fxmlLoader(event, "/view/fxml/StackPaneWindow.fxml", bookBorderPane);
 	}
 	
 	public void onAllBookButton(ActionEvent event) {

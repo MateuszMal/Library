@@ -44,7 +44,7 @@ public class CalendarController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
+
 		LibraryHolder libHolder = LibraryHolder.getInstance();
 		libManager = libHolder.getLIbManager();
 

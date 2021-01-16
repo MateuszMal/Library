@@ -2,7 +2,6 @@ package view;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import controller.Client;
@@ -71,8 +70,7 @@ public class ClientController implements Initializable {
 		String text = "";
 		for(Client client : libManager.clientWithReminders()) {
 			if(client.getReminder().isEqual(date))
-			text = client.getName() + " " + client.getSurName() + " ma dziœ do zwrotu ksi¹¿kê " 
-			+ client.getListOfRentalBooks();
+			text = client.getName() + " " + client.getSurName() + " ma dziœ do zwrotu ksi¹¿kê ";
 		}
 		if(!text.isEmpty())
 			DialogsUtils.infoDialog(text);		

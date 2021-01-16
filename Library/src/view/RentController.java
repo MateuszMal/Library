@@ -30,7 +30,7 @@ import utils.FxmlUtils;
 
 public class RentController implements Initializable {
 
-	// TODO Ustawienie powiadomienia !!!!
+
 	private FxmlUtils fxmlUtils = new FxmlUtils();
 
 	private String music = "./src/Resource/beep-01a.mp3";
@@ -206,14 +206,8 @@ public class RentController implements Initializable {
 
 	public void onRemindButton() {
 
-		// Dodac to do jakiegos pola u klienta
 		reminder = remindCallendar.getValue();
-		// Wywalic stad!!
-//		if(now.equals(date) ) { 
-//			Media sound = new Media(new File(music).toURI().toString());
-//			MediaPlayer mediaPlayer = new MediaPlayer(sound);
-//			mediaPlayer.play();
-//		}
+
 	}
 
 }

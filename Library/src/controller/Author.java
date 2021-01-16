@@ -40,8 +40,7 @@ public class Author {
 
 	@Override
 	public String toString() {
-		return "Author [name=" + name + ", surName=" + surName + "]";//", listOfBooks=" + "]"; //listOfBooks + "]";
+		return "Author [name=" + name + ", surName=" + surName + "]";
 	}
-	
 	
 }

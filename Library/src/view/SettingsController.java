@@ -28,8 +28,7 @@ public class SettingsController implements Initializable {
 	private ComboBox<String> coloursComboBox;
 
 	public void onChangeColour() throws IOException {
-		// TODO dodac zapis do pliku
-		// TODO dodac globalne ustawienia kolorow !!!!
+
 		if (coloursComboBox.getValue() != null) {
 			String colour = coloursComboBox.getValue();
 			switch (colour) {
