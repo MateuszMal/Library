@@ -1,5 +1,6 @@
 package view;
 
+import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -11,6 +12,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import utils.DialogsUtils;
 import utils.FxmlUtils;
 
@@ -43,7 +46,7 @@ public class ClientController implements Initializable {
 	private Button clientBackButton;
 	
 	private LibraryManager libManager = new LibraryManager();
-	
+	private String musicFile = "./src/Resource/beep-01a.mp3";
 	
 	
 	public ClientController() {
@@ -72,7 +75,11 @@ public class ClientController implements Initializable {
 			if(client.getReminder().isEqual(date))
 			text = client.getName() + " " + client.getSurName() + " ma dziœ do zwrotu ksi¹¿kê ";
 		}
-		if(!text.isEmpty())
-			DialogsUtils.infoDialog(text);		
+		if(!text.isEmpty()) {
+			Media sound = new Media(new File(musicFile).toURI().toString());
+			MediaPlayer mediaPlayer = new MediaPlayer(sound);
+			mediaPlayer.play();
+			DialogsUtils.infoDialog(text);	
+		}
 	}
 }
