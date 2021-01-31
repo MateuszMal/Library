@@ -4,3 +4,4 @@ Warstwa logigi - controller.
 Warstwa interfejsu - view.
 Warstwa danych - database.
 Do interfejsu została użyta biblioteka JavaFx.
+Cały projekt w gałęzi master
