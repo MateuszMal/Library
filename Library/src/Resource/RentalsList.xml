@@ -2,7 +2,7 @@
   <controller.RentalBook>
     <id>420</id>
     <book>
-      <id>871</id>
+      <id>849</id>
       <title>Dwie Wie¿e</title>
       <author>
         <name>John</name>
@@ -12,7 +12,7 @@
         </listOfBooks>
       </author>
       <available>false</available>
-      <rentalDate>2021-01-16</rentalDate>
+      <rentalDate>2021-01-17</rentalDate>
     </book>
     <client>
       <name>Wiktor</name>
@@ -37,7 +37,7 @@
   <controller.RentalBook>
     <id>440</id>
     <book>
-      <id>464</id>
+      <id>31</id>
       <title>Czarownica</title>
       <author>
         <name>Camilla</name>
@@ -47,7 +47,7 @@
         </listOfBooks>
       </author>
       <available>false</available>
-      <rentalDate>2021-01-16</rentalDate>
+      <rentalDate>2021-01-17</rentalDate>
     </book>
     <client>
       <name>Wiktor</name>
@@ -72,7 +72,7 @@
   <controller.RentalBook>
     <id>588</id>
     <book>
-      <id>841</id>
+      <id>835</id>
       <title>Koralina</title>
       <author>
         <name>Neil</name>
@@ -82,7 +82,7 @@
         </listOfBooks>
       </author>
       <available>false</available>
-      <rentalDate>2021-01-16</rentalDate>
+      <rentalDate>2021-01-17</rentalDate>
     </book>
     <client>
       <name>Wiktor</name>
