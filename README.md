@@ -1,4 +1,5 @@
 # Library
+Główny projekt w branchu master.
 Aplikacja biblioteki wykonana na przedmiocie Programowanie Komponentowe. Zrobiona w modelu trójwarstwowym.
 Warstwa logigi - controller.
 Warstwa interfejsu - view.
