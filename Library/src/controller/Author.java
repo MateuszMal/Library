@@ -2,25 +2,26 @@ package controller;
 
 import java.util.ArrayList;
 
-public class Author {
+public class Author extends Person{
 
-	private String name;
-	private String surName;
+//	private String name;
+//	private String surName;
 	private ArrayList<Book> listOfBooks;
 	
 	public Author(String name, String sureName) {
-		this.name = name;
-		this.surName = sureName;
+//		this.name = name;
+//		this.surName = sureName;
+		super(name, sureName);
 		this.listOfBooks = new ArrayList<>();
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public String getSurName() {
-		return surName;
-	}
+//	public String getName() {
+//		return name;
+//	}
+//
+//	public String getSurName() {
+//		return surName;
+//	}
 
 	public ArrayList<Book> getListOfBooks() {
 		return listOfBooks;
@@ -40,7 +41,7 @@ public class Author {
 
 	@Override
 	public String toString() {
-		return "Author [name=" + name + ", surName=" + surName + "]";
+		return "Author [name=" + getName() + ", surName=" + getSurName() + "]";
 	}
 	
 }

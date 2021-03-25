@@ -9,10 +9,10 @@ import java.util.ArrayList;
  *
  */
 
-public class Client {
+public class Client extends Person {
 
-	private String name;
-	private String surName;
+//	private String name;
+//	private String surName;
 	private String email;
 	private long id;
 	private Address address;
@@ -31,9 +31,9 @@ public class Client {
 	 */
 
 	public Client(String name, String surName, String email, Address address, long telNumber, long id) {
-		super();
-		this.name = name;
-		this.surName = surName;
+		super(name, surName);
+//		this.name = name;
+//		this.surName = surName;
 		this.email = email;
 		this.address = address;
 		this.telNumber = telNumber;
@@ -41,13 +41,13 @@ public class Client {
 		listOfRentalBooks = new ArrayList<>();
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public String getSurName() {
-		return surName;
-	}
+//	public String getName() {
+//		return name;
+//	}
+//
+//	public String getSurName() {
+//		return surName;
+//	}
 
 	public long getId() {
 		return id;
@@ -103,7 +103,7 @@ public class Client {
 
 	@Override
 	public String toString() {
-		return "Client [name=" + name + ", surName=" + surName + ", email=" + email + ", address=" + address
+		return "Client [name=" + getName() + ", surName=" + getSurName() + ", email=" + email + ", address=" + address
 				+ ", telNumber=" + telNumber + ", listOfRentalBooks=" + listOfRentalBooks + ", id= " + id  
 				+ ", reminder= " + reminder + "]";
 	}
