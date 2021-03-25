@@ -11,8 +11,7 @@ import java.util.ArrayList;
 
 public class Client extends Person {
 
-//	private String name;
-//	private String surName;
+
 	private String email;
 	private long id;
 	private Address address;
@@ -40,14 +39,6 @@ public class Client extends Person {
 		this.id = id;
 		listOfRentalBooks = new ArrayList<>();
 	}
-
-//	public String getName() {
-//		return name;
-//	}
-//
-//	public String getSurName() {
-//		return surName;
-//	}
 
 	public long getId() {
 		return id;

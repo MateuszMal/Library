@@ -4,18 +4,14 @@ import java.util.ArrayList;
 
 public class Tabloid extends Newspaper {
 	
-	
+	private String advertisement;
+	private ArrayList<String> advertisementList;
 
 	public Tabloid(String title, Author author, int numberOfPages) {
 		super(title, author, numberOfPages);
 		// TODO Auto-generated constructor stub
 	}
 
-	private String advertisement;
-	private ArrayList<String> advertisementList;
-	
-
-	
 	public void addAdvertisement(String advertString) {
 		advertisementList.add(advertString);
 	}
